@@ -43,7 +43,6 @@ const completed = events.filter((e: any) => e.status === 'completed');
                   <div class="p-6">
                     <p class="text-sm text-gray-600 mb-2">
                       {new Date(event.date).toLocaleDateString('en-US', {
-                        weekday: 'long',
                         year: 'numeric',
                         month: 'long',
                         day: 'numeric'
