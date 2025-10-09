@@ -9,7 +9,9 @@
   }
 
   body {
-    @apply bg-[--parchment] text-[--charcoal] font-sans antialiased;
+    background-color: #F5F1E8;
+    color: #2C2C2C;
+    @apply font-sans antialiased;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -31,18 +33,26 @@
 
 @layer utilities {
   .text-bourbon {
-    color: var(--bourbon-red);
+    color: #7B2E2E;
   }
 
   .bg-bourbon {
-    background-color: var(--bourbon-red);
+    background-color: #7B2E2E;
   }
 
   .bg-bourbon-dark {
-    background-color: var(--bourbon-dark);
+    background-color: #4A1B1B;
+  }
+
+  .bg-parchment {
+    background-color: #F5F1E8;
+  }
+
+  .text-parchment {
+    color: #F5F1E8;
   }
 
   .border-bourbon {
-    border-color: var(--bourbon-red);
+    border-color: #7B2E2E;
   }
 }
