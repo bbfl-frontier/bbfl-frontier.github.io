@@ -35,7 +35,7 @@ const completed = events.filter((e: any) => e.status === 'completed');
               return (
                 <a
                   href={`/events/${event.slug}/`}
-                  class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:scale-105"
+                  class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:scale-105 border-2 border-bourbon"
                 >
                   <div class="bg-gradient-to-br from-bourbon to-bourbon-dark h-40 flex items-center justify-center text-white p-6">
                     <h3 class="text-2xl font-black text-center">{event.title}</h3>
@@ -71,7 +71,7 @@ const completed = events.filter((e: any) => e.status === 'completed');
               return (
                 <a
                   href={`/events/${event.slug}/`}
-                  class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition"
+                  class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition border-2 border-bourbon"
                 >
                   <div class="bg-gradient-to-br from-gray-600 to-gray-800 h-40 flex items-center justify-center text-white p-6">
                     <h3 class="text-2xl font-black text-center">{event.title}</h3>
