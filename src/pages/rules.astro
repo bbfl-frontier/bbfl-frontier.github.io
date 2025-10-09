@@ -21,7 +21,9 @@ const settings = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/setti
               <li><strong>Schedule:</strong> Events every other Saturday at 9:00 PM ET</li>
               <li><strong>Card Structure:</strong> 3-5 preliminary bouts, 2-3 main card bouts, 1 title fight (optional)</li>
               <li><strong>Rounds:</strong> Non-title bouts are 3 rounds, title bouts are 5 rounds</li>
-              <li><strong>Round Duration:</strong> Each round is 5 minutes with 1 minute rest between rounds</li>
+              <li><strong>Round Duration:</strong> Each round is 30 seconds with 1 minute rest between rounds</li>
+              <li><strong>Corner Time:</strong> Coaches may enter the ring between rounds to tend to fighters</li>
+              <li><strong>Medical Items:</strong> Fighters may use either 1 bandage OR 1 cigarette between rounds (not both)</li>
             </ul>
           </div>
         </div>
@@ -97,7 +99,7 @@ const settings = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/setti
             <ul class="space-y-2 text-gray-700">
               <li>All fighters must pass medical examination before competing</li>
               <li>Referee has authority to stop fight at any time for fighter safety</li>
-              <li>Illegal strikes: groin strikes, eye pokes, back of head, spine attacks</li>
+              <li><strong>Illegal strikes:</strong> groin strikes, eye pokes, back of head, spine attacks, kicking downed opponents</li>
               <li>Unsportsmanlike conduct will result in disqualification</li>
               <li>Weight cuts must be done safely under medical supervision</li>
             </ul>
