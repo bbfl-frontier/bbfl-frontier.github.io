@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://bbfl-frontier.github.io',
-  base: '/bbfl-website',
+  base: '/',
   output: 'static',
   vite: {
     plugins: [tailwindcss()]
