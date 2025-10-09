@@ -34,7 +34,7 @@ const completed = events.filter((e: any) => e.status === 'completed');
               const venue = venuesMap.get(event.venueId);
               return (
                 <a
-                  href={`${baseUrl}events/${event.slug}/`}
+                  href={`/events/${event.slug}/`}
                   class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:scale-105"
                 >
                   <div class="bg-gradient-to-br from-bourbon to-bourbon-dark h-40 flex items-center justify-center text-white p-6">
@@ -71,7 +71,7 @@ const completed = events.filter((e: any) => e.status === 'completed');
               const venue = venuesMap.get(event.venueId);
               return (
                 <a
-                  href={`${baseUrl}events/${event.slug}/`}
+                  href={`/events/${event.slug}/`}
                   class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition"
                 >
                   <div class="bg-gradient-to-br from-gray-600 to-gray-800 h-40 flex items-center justify-center text-white p-6">
