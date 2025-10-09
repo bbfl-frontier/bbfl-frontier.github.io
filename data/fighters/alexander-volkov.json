@@ -1,0 +1,17 @@
+{
+  "id": "alexander-volkov",
+  "firstName": "Alexander",
+  "lastName": "Volkov",
+  "nickname": "The Russian Bear",
+  "divisionId": "heavy",
+  "weight": 220,
+  "height": "6'4\"",
+  "reach": "80\"",
+  "stance": "Orthodox",
+  "nationality": "Russian",
+  "age": 33,
+  "bioFile": "alexander-volkov.md",
+  "photo": "/images/fighters/alexander-volkov.jpg",
+  "active": true,
+  "debut": "1912-10-24"
+}

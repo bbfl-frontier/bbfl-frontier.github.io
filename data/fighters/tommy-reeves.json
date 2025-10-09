@@ -1,0 +1,17 @@
+{
+  "id": "tommy-reeves",
+  "firstName": "Tommy",
+  "lastName": "Reeves",
+  "nickname": "Lightning",
+  "divisionId": "feather",
+  "weight": 148,
+  "height": "5'8\"",
+  "reach": "68\"",
+  "stance": "Southpaw",
+  "nationality": "American",
+  "age": 23,
+  "bioFile": "tommy-reeves.md",
+  "photo": "/images/fighters/tommy-reeves.jpg",
+  "active": true,
+  "debut": "1912-10-24"
+}

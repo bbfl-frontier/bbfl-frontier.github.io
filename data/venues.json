@@ -15,9 +15,9 @@
   },
   {
     "id": "warehouse",
-    "name": "Dockside Warehouse",
+    "name": "Saint Denis Underground Fight Arena",
     "location": "Saint Denis",
-    "description": "Waterfront warehouse converted to fighting arena",
+    "description": "Hidden beneath the city streets, this legendary underground arena hosts the most brutal fights in the frontier",
     "capacity": 300
   }
 ]

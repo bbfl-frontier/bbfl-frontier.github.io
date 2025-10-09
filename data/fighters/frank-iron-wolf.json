@@ -1,0 +1,17 @@
+{
+  "id": "frank-iron-wolf",
+  "firstName": "Frank",
+  "lastName": "Iron Wolf",
+  "nickname": "The Wapiti Warrior",
+  "divisionId": "heavy",
+  "weight": 208,
+  "height": "6'1\"",
+  "reach": "77\"",
+  "stance": "Southpaw",
+  "nationality": "Native American",
+  "age": 27,
+  "bioFile": "frank-iron-wolf.md",
+  "photo": "/images/fighters/frank-iron-wolf.jpg",
+  "active": true,
+  "debut": "1912-10-24"
+}
