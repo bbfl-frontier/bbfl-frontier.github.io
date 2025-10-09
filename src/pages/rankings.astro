@@ -37,12 +37,28 @@ const baseUrl = import.meta.env.BASE_URL;
   <section class="py-16">
     <div class="container mx-auto px-4">
       {divisions.map((division: any) => {
-        const divisionRankings = rankings
+        // Get rankings if they exist, otherwise list all fighters in division alphabetically
+        let divisionRankings = rankings
           .filter((r: any) => r.divisionId === division.id)
           .sort((a: any, b: any) => a.rank - b.rank)
           .slice(0, 10);
 
-        if (divisionRankings.length === 0) return null;
+        // If no rankings exist, show all fighters in this division
+        if (divisionRankings.length === 0) {
+          const divisionFighters = fighters.filter((f: any) => f.divisionId === division.id && f.active);
+          if (divisionFighters.length === 0) return null;
+
+          divisionRankings = divisionFighters
+            .sort((a: any, b: any) => `${a.lastName}${a.firstName}`.localeCompare(`${b.lastName}${b.firstName}`))
+            .map((f: any, index: number) => ({
+              fighterId: f.id,
+              divisionId: division.id,
+              rank: index + 1,
+              points: 0,
+              delta: 0,
+              isChampion: false
+            }));
+        }
 
         return (
           <div class="mb-12 last:mb-0">
