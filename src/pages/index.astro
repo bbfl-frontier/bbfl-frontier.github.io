@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Countdown from '../components/Countdown.astro';
+import DivisionChip from '../components/DivisionChip.astro';
+import fs from 'fs';
+import path from 'path';
+
+// Load next event data
+const nextEventPath = path.join(process.cwd(), 'generated/next-event.json');
+const nextEvent = fs.existsSync(nextEventPath)
+  ? JSON.parse(fs.readFileSync(nextEventPath, 'utf-8'))
+  : null;
+
+// Load divisions
+const divisionsPath = path.join(process.cwd(), 'data/divisions.json');
+const divisions = JSON.parse(fs.readFileSync(divisionsPath, 'utf-8'));
+
+// Load settings
+const settingsPath = path.join(process.cwd(), 'data/settings.json');
+const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf-8'));
+
+// Load sponsors
+const sponsorsPath = path.join(process.cwd(), 'data/sponsors.json');
+const sponsors = JSON.parse(fs.readFileSync(sponsorsPath, 'utf-8'));
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Home">
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-[--bourbon-dark] via-[--bourbon-red] to-[--bourbon-dark] text-white py-20 md:py-32">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-5xl md:text-7xl font-black tracking-tighter mb-4">
+        {settings.leagueName}
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-200 mb-8 italic">
+        "{settings.tagline}"
+      </p>
+
+      {nextEvent && (
+        <div class="max-w-3xl mx-auto bg-white/10 backdrop-blur-sm rounded-2xl p-8 mt-12">
+          <h2 class="text-2xl md:text-3xl font-bold mb-2">Next Event</h2>
+          <p class="text-lg mb-6">{nextEvent.formatted}</p>
+          <Countdown
+            targetDate={nextEvent.date}
+            targetTime={nextEvent.time}
+            timezone={nextEvent.timezone}
+          />
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Divisions Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-4xl font-black text-center mb-12">Fight Divisions</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        {divisions.map((division: any) => (
+          <div class="bg-gradient-to-br from-[--parchment] to-white rounded-2xl shadow-lg p-8 text-center hover:shadow-xl transition">
+            <h3 class="text-2xl font-black text-bourbon mb-2">{division.name}</h3>
+            <p class="text-lg font-semibold text-gray-600 mb-4">"{division.nickname}"</p>
+            <p class="text-3xl font-bold text-[--charcoal]">{division.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Actions -->
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <a href={`${baseUrl}events/`} class="group bg-bourbon hover:bg-bourbon-dark text-white rounded-2xl shadow-lg p-8 text-center transition transform hover:scale-105">
+          <h3 class="text-2xl font-black mb-2">View Events</h3>
+          <p class="text-gray-200">Check out upcoming and past fight cards</p>
+        </a>
+        <a href={`${baseUrl}fighters/`} class="group bg-[--charcoal] hover:bg-[--bourbon-dark] text-white rounded-2xl shadow-lg p-8 text-center transition transform hover:scale-105">
+          <h3 class="text-2xl font-black mb-2">Browse Fighters</h3>
+          <p class="text-gray-200">Meet our roster of warriors</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sponsors Section -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-black text-center mb-12">Our Sponsors</h2>
+      <div class="flex flex-wrap justify-center items-center gap-8">
+        {sponsors.map((sponsor: any) => (
+          <div class="bg-[--parchment] rounded-xl shadow p-6 hover:shadow-lg transition">
+            <p class="font-bold text-lg text-center">{sponsor.name}</p>
+            <p class="text-sm text-gray-500 text-center mt-1 capitalize">{sponsor.tier}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

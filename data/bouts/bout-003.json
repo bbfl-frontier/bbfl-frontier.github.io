@@ -1,0 +1,11 @@
+{
+  "id": "bout-003",
+  "eventId": "bbfl-001",
+  "fighter1Id": "sarah-cole",
+  "fighter2Id": "marcus-stone",
+  "divisionId": "feather",
+  "cardPosition": "title",
+  "scheduledRounds": 5,
+  "titleFight": true,
+  "order": 3
+}

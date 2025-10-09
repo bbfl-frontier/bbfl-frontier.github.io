@@ -1,0 +1,122 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import DivisionChip from '../../components/DivisionChip.astro';
+import RecordBadge from '../../components/RecordBadge.astro';
+import fs from 'fs';
+import path from 'path';
+
+export function getStaticPaths() {
+  const fightersDir = path.join(process.cwd(), 'data/fighters');
+  const fighterFiles = fs.readdirSync(fightersDir).filter(f => f.endsWith('.json'));
+
+  return fighterFiles.map(file => {
+    const fighter = JSON.parse(fs.readFileSync(path.join(fightersDir, file), 'utf-8'));
+    return {
+      params: { slug: fighter.id },
+      props: { fighter }
+    };
+  });
+}
+
+const { fighter } = Astro.props;
+
+// Load division
+const divisions = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/divisions.json'), 'utf-8'));
+const division = divisions.find((d: any) => d.id === fighter.divisionId);
+
+// Load record
+const recordsPath = path.join(process.cwd(), 'generated/records.json');
+const records = fs.existsSync(recordsPath)
+  ? JSON.parse(fs.readFileSync(recordsPath, 'utf-8'))
+  : [];
+const record = records.find((r: any) => r.fighterId === fighter.id) || { wins: 0, losses: 0, draws: 0, koWins: 0, subWins: 0 };
+
+// Load bio
+let bio = '';
+if (fighter.bioFile) {
+  const bioPath = path.join(process.cwd(), 'data/fighters/bios', fighter.bioFile);
+  if (fs.existsSync(bioPath)) {
+    bio = fs.readFileSync(bioPath, 'utf-8');
+  }
+}
+---
+
+<BaseLayout title={`${fighter.firstName} ${fighter.lastName}`} description={`Fighter profile for ${fighter.firstName} ${fighter.lastName}`}>
+  <PageHeader title={`${fighter.firstName} ${fighter.lastName}`} subtitle={fighter.nickname ? `"${fighter.nickname}"` : undefined} />
+
+  <section class="py-16">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <!-- Stats Header -->
+        <div class="bg-gradient-to-r from-bourbon to-bourbon-dark text-white p-8">
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <RecordBadge wins={record.wins} losses={record.losses} draws={record.draws} />
+              <div class="mt-2 text-sm text-gray-200">
+                {record.koWins} KO/TKO • {record.subWins} Submissions
+              </div>
+            </div>
+            <DivisionChip division={division?.name || fighter.divisionId} size="lg" />
+          </div>
+        </div>
+
+        <!-- Fighter Details -->
+        <div class="p-8">
+          <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <div>
+              <h3 class="text-lg font-bold text-bourbon mb-4">Physical Stats</h3>
+              <dl class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                  <dt class="text-gray-600">Weight:</dt>
+                  <dd class="font-semibold">{fighter.weight} lbs</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-gray-600">Height:</dt>
+                  <dd class="font-semibold">{fighter.height}</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-gray-600">Reach:</dt>
+                  <dd class="font-semibold">{fighter.reach}</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-gray-600">Stance:</dt>
+                  <dd class="font-semibold">{fighter.stance}</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div>
+              <h3 class="text-lg font-bold text-bourbon mb-4">Info</h3>
+              <dl class="space-y-2 text-sm">
+                <div class="flex justify-between">
+                  <dt class="text-gray-600">Age:</dt>
+                  <dd class="font-semibold">{fighter.age}</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-gray-600">Nationality:</dt>
+                  <dd class="font-semibold">{fighter.nationality}</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-gray-600">Debut:</dt>
+                  <dd class="font-semibold">{new Date(fighter.debut).toLocaleDateString()}</dd>
+                </div>
+                <div class="flex justify-between">
+                  <dt class="text-gray-600">Status:</dt>
+                  <dd class="font-semibold">{fighter.active ? 'Active' : 'Inactive'}</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+
+          <!-- Bio -->
+          {bio && (
+            <div class="prose prose-sm max-w-none">
+              <div set:html={bio} class="text-gray-700 leading-relaxed whitespace-pre-wrap" />
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

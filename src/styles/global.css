@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bourbon-red: #7B2E2E;
+    --bourbon-dark: #4A1B1B;
+    --parchment: #F5F1E8;
+    --charcoal: #2C2C2C;
+  }
+
+  body {
+    @apply bg-[--parchment] text-[--charcoal] font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl md:text-6xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-5xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-4xl;
+  }
+}
+
+@layer utilities {
+  .text-bourbon {
+    color: var(--bourbon-red);
+  }
+
+  .bg-bourbon {
+    background-color: var(--bourbon-red);
+  }
+
+  .bg-bourbon-dark {
+    background-color: var(--bourbon-dark);
+  }
+
+  .border-bourbon {
+    border-color: var(--bourbon-red);
+  }
+}

@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import DivisionChip from '../../components/DivisionChip.astro';
+import RecordBadge from '../../components/RecordBadge.astro';
+import fs from 'fs';
+import path from 'path';
+
+// Load fighters
+const fightersDir = path.join(process.cwd(), 'data/fighters');
+const fighterFiles = fs.readdirSync(fightersDir).filter(f => f.endsWith('.json'));
+const fighters = fighterFiles.map(f =>
+  JSON.parse(fs.readFileSync(path.join(fightersDir, f), 'utf-8'))
+);
+
+// Load divisions
+const divisions = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/divisions.json'), 'utf-8'));
+
+// Load records
+const recordsPath = path.join(process.cwd(), 'generated/records.json');
+const records = fs.existsSync(recordsPath)
+  ? JSON.parse(fs.readFileSync(recordsPath, 'utf-8'))
+  : [];
+
+const recordsMap = new Map(records.map((r: any) => [r.fighterId, r]));
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Fighters" description="Browse all fighters in the Blood & Bourbon Fight League">
+  <PageHeader title="Fighters" subtitle="Meet the warriors of BBFL" />
+
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {fighters.map((fighter: any) => {
+          const record = recordsMap.get(fighter.id) || { wins: 0, losses: 0, draws: 0 };
+          const division = divisions.find((d: any) => d.id === fighter.divisionId);
+
+          return (
+            <a
+              href={`${baseUrl}fighters/${fighter.id}/`}
+              class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:scale-105"
+            >
+              <div class="bg-gradient-to-br from-bourbon to-bourbon-dark h-48 flex items-center justify-center text-white">
+                <div class="text-6xl font-black opacity-20">
+                  {fighter.firstName[0]}{fighter.lastName[0]}
+                </div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-start justify-between mb-2">
+                  <div>
+                    <h3 class="text-2xl font-black text-bourbon group-hover:text-bourbon-dark transition">
+                      {fighter.firstName} {fighter.lastName}
+                    </h3>
+                    {fighter.nickname && (
+                      <p class="text-sm text-gray-600 italic">"{fighter.nickname}"</p>
+                    )}
+                  </div>
+                  <RecordBadge wins={record.wins} losses={record.losses} draws={record.draws} />
+                </div>
+
+                <div class="mt-4 flex items-center justify-between">
+                  <DivisionChip division={division?.name || fighter.divisionId} />
+                  <span class="text-sm text-gray-500">{fighter.weight} lbs</span>
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

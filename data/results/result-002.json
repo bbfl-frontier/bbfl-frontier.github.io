@@ -1,0 +1,12 @@
+{
+  "id": "result-002",
+  "boutId": "bout-002",
+  "winnerId": "marcus-stone",
+  "loserId": "jack-morgan",
+  "method": "KO",
+  "methodDetail": "Punch",
+  "round": 2,
+  "time": "3:47",
+  "finish": true,
+  "notes": "Devastating right hook ends the fight"
+}

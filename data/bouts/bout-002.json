@@ -1,0 +1,11 @@
+{
+  "id": "bout-002",
+  "eventId": "bbfl-001",
+  "fighter1Id": "marcus-stone",
+  "fighter2Id": "jack-morgan",
+  "divisionId": "heavy",
+  "cardPosition": "main",
+  "scheduledRounds": 3,
+  "titleFight": false,
+  "order": 2
+}

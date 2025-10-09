@@ -1,0 +1,72 @@
+---
+interface Props {
+  targetDate: string;
+  targetTime: string;
+  timezone: string;
+}
+
+const { targetDate, targetTime, timezone } = Astro.props;
+const targetISO = `${targetDate}T${targetTime}:00`;
+---
+
+<div class="countdown-container text-center" data-target={targetISO} data-timezone={timezone}>
+  <div class="grid grid-cols-4 gap-4 max-w-lg mx-auto">
+    <div class="bg-white rounded-xl shadow-lg p-4">
+      <div class="text-3xl md:text-4xl font-black text-bourbon countdown-days">00</div>
+      <div class="text-xs md:text-sm text-gray-500 uppercase mt-1">Days</div>
+    </div>
+    <div class="bg-white rounded-xl shadow-lg p-4">
+      <div class="text-3xl md:text-4xl font-black text-bourbon countdown-hours">00</div>
+      <div class="text-xs md:text-sm text-gray-500 uppercase mt-1">Hours</div>
+    </div>
+    <div class="bg-white rounded-xl shadow-lg p-4">
+      <div class="text-3xl md:text-4xl font-black text-bourbon countdown-minutes">00</div>
+      <div class="text-xs md:text-sm text-gray-500 uppercase mt-1">Minutes</div>
+    </div>
+    <div class="bg-white rounded-xl shadow-lg p-4">
+      <div class="text-3xl md:text-4xl font-black text-bourbon countdown-seconds">00</div>
+      <div class="text-xs md:text-sm text-gray-500 uppercase mt-1">Seconds</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function updateCountdown() {
+    const containers = document.querySelectorAll('.countdown-container');
+
+    containers.forEach(container => {
+      const target = (container as HTMLElement).dataset.target;
+      if (!target) return;
+
+      const targetDate = new Date(target);
+      const now = new Date();
+      const diff = targetDate.getTime() - now.getTime();
+
+      if (diff <= 0) {
+        container.querySelectorAll('[class*="countdown-"]').forEach(el => {
+          el.textContent = '00';
+        });
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      const daysEl = container.querySelector('.countdown-days');
+      const hoursEl = container.querySelector('.countdown-hours');
+      const minutesEl = container.querySelector('.countdown-minutes');
+      const secondsEl = container.querySelector('.countdown-seconds');
+
+      if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+      if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+      if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+      if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+    });
+  }
+
+  // Update immediately and then every second
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+</script>

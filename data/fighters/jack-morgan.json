@@ -1,0 +1,17 @@
+{
+  "id": "jack-morgan",
+  "firstName": "Jack",
+  "lastName": "Morgan",
+  "nickname": "The Bayou Brawler",
+  "divisionId": "middle",
+  "weight": 175,
+  "height": "5'11\"",
+  "reach": "74\"",
+  "stance": "Orthodox",
+  "nationality": "American",
+  "age": 28,
+  "bioFile": "jack-morgan.md",
+  "photo": "/images/fighters/jack-morgan.jpg",
+  "active": true,
+  "debut": "2025-01-18"
+}

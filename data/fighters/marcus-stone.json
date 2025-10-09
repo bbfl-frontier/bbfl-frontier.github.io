@@ -1,0 +1,17 @@
+{
+  "id": "marcus-stone",
+  "firstName": "Marcus",
+  "lastName": "Stone",
+  "nickname": "The Mountain",
+  "divisionId": "heavy",
+  "weight": 215,
+  "height": "6'3\"",
+  "reach": "78\"",
+  "stance": "Orthodox",
+  "nationality": "American",
+  "age": 32,
+  "bioFile": "marcus-stone.md",
+  "photo": "/images/fighters/marcus-stone.jpg",
+  "active": true,
+  "debut": "2025-01-18"
+}

@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import fs from 'fs';
+import path from 'path';
+
+const mediaPath = path.join(process.cwd(), 'data/media.json');
+const media = JSON.parse(fs.readFileSync(mediaPath, 'utf-8'));
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Media" description="Photos and videos from BBFL events">
+  <PageHeader title="Media Gallery" subtitle="Moments from the octagon" />
+
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      {media.length > 0 ? (
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {media.map((item: any) => (
+            <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition">
+              <div class="aspect-video bg-gradient-to-br from-bourbon to-bourbon-dark flex items-center justify-center text-white">
+                <div class="text-center p-8">
+                  <div class="text-4xl mb-2">📸</div>
+                  <p class="text-sm">Image placeholder</p>
+                </div>
+              </div>
+              <div class="p-4">
+                <p class="font-semibold text-sm text-gray-800">{item.caption}</p>
+                {item.date && (
+                  <p class="text-xs text-gray-500 mt-1">
+                    {new Date(item.date).toLocaleDateString()}
+                  </p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-12">
+          <p class="text-gray-500 text-lg">No media available yet. Check back after our first event!</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

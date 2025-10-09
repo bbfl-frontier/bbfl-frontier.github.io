@@ -1,0 +1,11 @@
+{
+  "id": "bout-001",
+  "eventId": "bbfl-001",
+  "fighter1Id": "jack-morgan",
+  "fighter2Id": "sarah-cole",
+  "divisionId": "middle",
+  "cardPosition": "prelim",
+  "scheduledRounds": 3,
+  "titleFight": false,
+  "order": 1
+}

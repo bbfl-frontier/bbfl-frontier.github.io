@@ -1,0 +1,106 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import fs from 'fs';
+import path from 'path';
+
+// Load events
+const eventsDir = path.join(process.cwd(), 'data/events');
+const eventFiles = fs.existsSync(eventsDir) ? fs.readdirSync(eventsDir).filter(f => f.endsWith('.json')) : [];
+const events = eventFiles.map(f =>
+  JSON.parse(fs.readFileSync(path.join(eventsDir, f), 'utf-8'))
+).sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+// Load venues
+const venues = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/venues.json'), 'utf-8'));
+const venuesMap = new Map(venues.map((v: any) => [v.id, v]));
+
+const baseUrl = import.meta.env.BASE_URL;
+
+const upcoming = events.filter((e: any) => e.status === 'upcoming');
+const completed = events.filter((e: any) => e.status === 'completed');
+---
+
+<BaseLayout title="Events" description="View all BBFL fight events">
+  <PageHeader title="Events" subtitle="All BBFL fight cards" />
+
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      {upcoming.length > 0 && (
+        <div class="mb-16">
+          <h2 class="text-3xl font-black text-bourbon mb-8">Upcoming Events</h2>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {upcoming.map((event: any) => {
+              const venue = venuesMap.get(event.venueId);
+              return (
+                <a
+                  href={`${baseUrl}events/${event.slug}/`}
+                  class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:scale-105"
+                >
+                  <div class="bg-gradient-to-br from-bourbon to-bourbon-dark h-40 flex items-center justify-center text-white p-6">
+                    <h3 class="text-2xl font-black text-center">{event.title}</h3>
+                  </div>
+                  <div class="p-6">
+                    <p class="text-sm text-gray-600 mb-2">
+                      {new Date(event.date).toLocaleDateString('en-US', {
+                        weekday: 'long',
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </p>
+                    <p class="text-sm text-gray-600">
+                      📍 {venue?.name || event.venueId}
+                    </p>
+                    {event.subtitle && (
+                      <p class="text-xs text-gray-500 mt-3 italic">{event.subtitle}</p>
+                    )}
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {completed.length > 0 && (
+        <div>
+          <h2 class="text-3xl font-black text-bourbon mb-8">Past Events</h2>
+          <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {completed.map((event: any) => {
+              const venue = venuesMap.get(event.venueId);
+              return (
+                <a
+                  href={`${baseUrl}events/${event.slug}/`}
+                  class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition"
+                >
+                  <div class="bg-gradient-to-br from-gray-600 to-gray-800 h-40 flex items-center justify-center text-white p-6">
+                    <h3 class="text-2xl font-black text-center">{event.title}</h3>
+                  </div>
+                  <div class="p-6">
+                    <p class="text-sm text-gray-600 mb-2">
+                      {new Date(event.date).toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                      })}
+                    </p>
+                    <p class="text-sm text-gray-600">
+                      📍 {venue?.name || event.venueId}
+                    </p>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {events.length === 0 && (
+        <div class="text-center py-12">
+          <p class="text-gray-500 text-lg">No events scheduled yet.</p>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>

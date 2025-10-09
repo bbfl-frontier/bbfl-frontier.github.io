@@ -1,0 +1,23 @@
+{
+  "leagueName": "Blood & Bourbon Fight League",
+  "abbreviation": "BBFL",
+  "tagline": "Where honor meets the dirt.",
+  "schedule": {
+    "frequency": "biweekly",
+    "dayOfWeek": 6,
+    "hour": 21,
+    "minute": 0,
+    "timezone": "America/New_York"
+  },
+  "purses": {
+    "prelim": 20,
+    "mainCard": 50,
+    "title": 100,
+    "koBonus": 25
+  },
+  "championDefenseRequired": 3,
+  "contact": {
+    "discord": "https://discord.gg/bbfl",
+    "email": "contact@bbfl.com"
+  }
+}

@@ -1,0 +1,23 @@
+[
+  {
+    "id": "bourbon-co",
+    "name": "Bayou Bourbon Co.",
+    "logo": "/images/sponsors/bourbon-co.png",
+    "website": "https://example.com/bourbon",
+    "tier": "platinum"
+  },
+  {
+    "id": "blacksmith",
+    "name": "Forge & Iron Blacksmith",
+    "logo": "/images/sponsors/blacksmith.png",
+    "website": "https://example.com/forge",
+    "tier": "gold"
+  },
+  {
+    "id": "ranch",
+    "name": "Red River Ranch Supply",
+    "logo": "/images/sponsors/ranch.png",
+    "website": "https://example.com/ranch",
+    "tier": "silver"
+  }
+]

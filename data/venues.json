@@ -1,0 +1,23 @@
+[
+  {
+    "id": "saloon",
+    "name": "The Rusty Spur Saloon",
+    "location": "Saint Denis",
+    "description": "Historic saloon with a makeshift fighting pit",
+    "capacity": 150
+  },
+  {
+    "id": "barn",
+    "name": "McCready's Barn",
+    "location": "Valentine",
+    "description": "Converted barn hosting underground fights",
+    "capacity": 200
+  },
+  {
+    "id": "warehouse",
+    "name": "Dockside Warehouse",
+    "location": "Saint Denis",
+    "description": "Waterfront warehouse converted to fighting arena",
+    "capacity": 300
+  }
+]

@@ -1,0 +1,17 @@
+{
+  "id": "sarah-cole",
+  "firstName": "Sarah",
+  "lastName": "Cole",
+  "nickname": "Steel Magnolia",
+  "divisionId": "feather",
+  "weight": 145,
+  "height": "5'6\"",
+  "reach": "66\"",
+  "stance": "Southpaw",
+  "nationality": "American",
+  "age": 25,
+  "bioFile": "sarah-cole.md",
+  "photo": "/images/fighters/sarah-cole.jpg",
+  "active": true,
+  "debut": "2025-01-18"
+}

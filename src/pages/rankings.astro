@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import RecordBadge from '../components/RecordBadge.astro';
+import fs from 'fs';
+import path from 'path';
+
+// Load data
+const divisions = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/divisions.json'), 'utf-8'));
+
+const rankingsPath = path.join(process.cwd(), 'generated/rankings.json');
+const rankings = fs.existsSync(rankingsPath)
+  ? JSON.parse(fs.readFileSync(rankingsPath, 'utf-8'))
+  : [];
+
+const recordsPath = path.join(process.cwd(), 'generated/records.json');
+const records = fs.existsSync(recordsPath)
+  ? JSON.parse(fs.readFileSync(recordsPath, 'utf-8'))
+  : [];
+
+// Load fighters
+const fightersDir = path.join(process.cwd(), 'data/fighters');
+const fighterFiles = fs.readdirSync(fightersDir).filter(f => f.endsWith('.json'));
+const fighters = fighterFiles.map(f =>
+  JSON.parse(fs.readFileSync(path.join(fightersDir, f), 'utf-8'))
+);
+
+const fightersMap = new Map(fighters.map((f: any) => [f.id, f]));
+const recordsMap = new Map(records.map((r: any) => [r.fighterId, r]));
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Rankings" description="Official fighter rankings for all BBFL divisions">
+  <PageHeader title="Rankings" subtitle="Top fighters in each division" />
+
+  <section class="py-16">
+    <div class="container mx-auto px-4">
+      {divisions.map((division: any) => {
+        const divisionRankings = rankings
+          .filter((r: any) => r.divisionId === division.id)
+          .sort((a: any, b: any) => a.rank - b.rank)
+          .slice(0, 10);
+
+        if (divisionRankings.length === 0) return null;
+
+        return (
+          <div class="mb-12 last:mb-0">
+            <div class="bg-bourbon text-white rounded-t-2xl p-6">
+              <h2 class="text-3xl font-black">{division.name}</h2>
+              <p class="text-gray-200 text-sm mt-1">"{division.nickname}" • {division.description}</p>
+            </div>
+
+            <div class="bg-white rounded-b-2xl shadow-lg overflow-hidden">
+              <table class="w-full">
+                <thead class="bg-gray-100 border-b">
+                  <tr>
+                    <th class="text-left p-4 text-sm font-bold text-gray-700">Rank</th>
+                    <th class="text-left p-4 text-sm font-bold text-gray-700">Fighter</th>
+                    <th class="text-left p-4 text-sm font-bold text-gray-700">Record</th>
+                    <th class="text-right p-4 text-sm font-bold text-gray-700">Points</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {divisionRankings.map((ranking: any) => {
+                    const fighter = fightersMap.get(ranking.fighterId);
+                    const record = recordsMap.get(ranking.fighterId) || { wins: 0, losses: 0, draws: 0 };
+
+                    if (!fighter) return null;
+
+                    return (
+                      <tr class="border-b hover:bg-gray-50 transition">
+                        <td class="p-4">
+                          <span class="text-2xl font-black text-bourbon">
+                            {ranking.isChampion ? '🏆' : `#${ranking.rank}`}
+                          </span>
+                        </td>
+                        <td class="p-4">
+                          <a href={`${baseUrl}fighters/${fighter.id}/`} class="hover:text-bourbon transition">
+                            <div class="font-bold">{fighter.firstName} {fighter.lastName}</div>
+                            {fighter.nickname && (
+                              <div class="text-xs text-gray-500 italic">"{fighter.nickname}"</div>
+                            )}
+                          </a>
+                        </td>
+                        <td class="p-4">
+                          <RecordBadge wins={record.wins} losses={record.losses} draws={record.draws} />
+                        </td>
+                        <td class="p-4 text-right">
+                          <span class="font-bold text-lg">{ranking.points}</span>
+                          <span class="text-xs text-gray-500 ml-1">pts</span>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+
+              {divisionRankings.length === 0 && (
+                <div class="p-8 text-center text-gray-500">
+                  No rankings available for this division yet.
+                </div>
+              )}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+</BaseLayout>

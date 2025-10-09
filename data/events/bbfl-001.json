@@ -1,0 +1,18 @@
+{
+  "id": "bbfl-001",
+  "slug": "bbfl-001-genesis",
+  "title": "BBFL 001: Genesis",
+  "subtitle": "The Beginning of Blood & Bourbon",
+  "date": "2025-01-18",
+  "time": "21:00",
+  "timezone": "America/New_York",
+  "venueId": "saloon",
+  "status": "completed",
+  "posterImage": "/images/events/bbfl-001-poster.jpg",
+  "description": "The inaugural event of Blood & Bourbon Fight League featuring the crowning of our first champions.",
+  "bouts": [
+    "bout-001",
+    "bout-002",
+    "bout-003"
+  ]
+}

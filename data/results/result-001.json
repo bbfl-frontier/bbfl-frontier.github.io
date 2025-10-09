@@ -1,0 +1,12 @@
+{
+  "id": "result-001",
+  "boutId": "bout-001",
+  "winnerId": "jack-morgan",
+  "loserId": "sarah-cole",
+  "method": "Decision",
+  "methodDetail": "Unanimous",
+  "round": 3,
+  "time": "5:00",
+  "finish": false,
+  "notes": "Dominant wrestling performance by Morgan"
+}
