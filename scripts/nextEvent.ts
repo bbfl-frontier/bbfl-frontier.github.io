@@ -12,19 +12,25 @@ export function computeNextEvent() {
 
   const { hour, minute, timezone } = settings.schedule;
 
-  // Set specific next event: Friday, October 24, 1912 at 9 PM EST
-  const nextEvent = DateTime.fromObject(
+  // Actual event date: October 24, 2025 at 9 PM EST (for countdown)
+  const actualEvent = DateTime.fromObject(
+    { year: 2025, month: 10, day: 24, hour, minute, second: 0, millisecond: 0 },
+    { zone: timezone }
+  );
+
+  // Display date: October 24, 1912 (for roleplay/in-character display)
+  const displayEvent = DateTime.fromObject(
     { year: 1912, month: 10, day: 24, hour, minute, second: 0, millisecond: 0 },
     { zone: timezone }
   );
 
   const nextEventData = {
-    date: nextEvent.toISODate(),
-    time: nextEvent.toFormat('HH:mm'),
+    date: actualEvent.toISODate(),
+    time: actualEvent.toFormat('HH:mm'),
     timezone,
-    iso: nextEvent.toISO(),
-    unix: nextEvent.toSeconds(),
-    formatted: nextEvent.toFormat('EEEE, MMMM d, yyyy \'at\' h:mm a ZZZZ'),
+    iso: actualEvent.toISO(),
+    unix: actualEvent.toSeconds(),
+    formatted: displayEvent.toFormat('MMMM d, yyyy'),
   };
 
   // Write to generated folder
