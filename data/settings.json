@@ -4,7 +4,7 @@
   "tagline": "Where honor meets the dirt.",
   "schedule": {
     "frequency": "biweekly",
-    "dayOfWeek": 6,
+    "dayOfWeek": 5,
     "hour": 21,
     "minute": 0,
     "timezone": "America/New_York"

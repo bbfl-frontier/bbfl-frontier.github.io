@@ -1,23 +1,23 @@
 [
   {
-    "id": "bourbon-co",
-    "name": "Bayou Bourbon Co.",
-    "logo": "/images/sponsors/bourbon-co.png",
-    "website": "https://example.com/bourbon",
+    "id": "red-dragon",
+    "name": "The Red Dragon Saloon",
+    "logo": "/images/sponsors/red-dragon.png",
+    "website": "https://example.com/red-dragon",
     "tier": "platinum"
   },
   {
-    "id": "blacksmith",
-    "name": "Forge & Iron Blacksmith",
-    "logo": "/images/sponsors/blacksmith.png",
-    "website": "https://example.com/forge",
+    "id": "tartan-arms",
+    "name": "Tartan Arms Dealer",
+    "logo": "/images/sponsors/tartan-arms.png",
+    "website": "https://example.com/tartan",
     "tier": "gold"
   },
   {
-    "id": "ranch",
-    "name": "Red River Ranch Supply",
-    "logo": "/images/sponsors/ranch.png",
-    "website": "https://example.com/ranch",
+    "id": "rhodes-gunsmith",
+    "name": "Rhodes Gunsmith",
+    "logo": "/images/sponsors/rhodes-gunsmith.png",
+    "website": "https://example.com/rhodes",
     "tier": "silver"
   }
 ]
