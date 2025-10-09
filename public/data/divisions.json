@@ -1,0 +1,24 @@
+[
+  {
+    "id": "feather",
+    "name": "Featherweight",
+    "nickname": "Light Hands",
+    "weightLimit": 150,
+    "description": "≤150 lbs"
+  },
+  {
+    "id": "middle",
+    "name": "Middleweight",
+    "nickname": "Roughnecks",
+    "weightLimit": 180,
+    "minWeight": 151,
+    "description": "151–180 lbs"
+  },
+  {
+    "id": "heavy",
+    "name": "Heavyweight",
+    "nickname": "Bone Crushers",
+    "minWeight": 181,
+    "description": "181+ lbs"
+  }
+]

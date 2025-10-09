@@ -1,0 +1,16 @@
+[
+  {
+    "id": "bbfl-001",
+    "slug": "bbfl-001-beginnings",
+    "title": "BBFL 001: Beginnings",
+    "subtitle": "The Birth of a New Era",
+    "date": "1912-10-24",
+    "time": "21:00",
+    "timezone": "Eastern Standard Time",
+    "venueId": "warehouse",
+    "status": "upcoming",
+    "posterImage": "/images/events/bbfl-001-poster.jpg",
+    "description": "The inaugural Blood & Bourbon Fight League event. Deep beneath the cobblestone streets of Saint Denis lies the Underground Fight Arena - a place where the city's finest warriors test their mettle in brutal combat. This historic night marks the beginning of organized fighting in the frontier, where honor, blood, and bourbon flow in equal measure.",
+    "bouts": []
+  }
+]

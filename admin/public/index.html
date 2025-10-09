@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BBFL Admin Portal</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #F5F1E8;
+      color: #2C2C2C;
+    }
+    .header {
+      background: #7B2E2E;
+      color: white;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .header h1 { font-size: 2rem; font-weight: 900; }
+    .header p { opacity: 0.9; margin-top: 0.25rem; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      border-bottom: 2px solid #ddd;
+    }
+    .tab {
+      padding: 0.75rem 1.5rem;
+      background: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      border-radius: 8px 8px 0 0;
+      transition: all 0.2s;
+    }
+    .tab:hover { background: #f0f0f0; }
+    .tab.active {
+      background: #7B2E2E;
+      color: white;
+    }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    .card h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #7B2E2E;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #555;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: #7B2E2E;
+    }
+    textarea { min-height: 100px; resize: vertical; }
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: #7B2E2E;
+      color: white;
+    }
+    .btn-primary:hover { background: #5a2222; }
+    .btn-secondary {
+      background: #6c757d;
+      color: white;
+    }
+    .btn-secondary:hover { background: #545b62; }
+    .btn-danger {
+      background: #dc3545;
+      color: white;
+    }
+    .btn-danger:hover { background: #c82333; }
+    .grid { display: grid; gap: 1.5rem; }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .fighter-list, .event-list {
+      display: grid;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .fighter-item, .event-item, .bout-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 8px;
+      border: 2px solid #e9ecef;
+    }
+    .fighter-info strong { color: #7B2E2E; font-size: 1.1rem; }
+    .fighter-meta { font-size: 0.9rem; color: #666; margin-top: 0.25rem; }
+    .actions { display: flex; gap: 0.5rem; }
+    .btn-sm {
+      padding: 0.5rem 1rem;
+      font-size: 0.875rem;
+    }
+    .image-preview {
+      max-width: 200px;
+      max-height: 200px;
+      margin-top: 1rem;
+      border-radius: 8px;
+      border: 2px solid #ddd;
+    }
+    .success-message {
+      background: #d4edda;
+      color: #155724;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      border: 1px solid #c3e6cb;
+    }
+    .error-message {
+      background: #f8d7da;
+      color: #721c24;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      border: 1px solid #f5c6cb;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🥊 BBFL Admin Portal</h1>
+    <p>Manage fighters, events, bouts, and results</p>
+  </div>
+
+  <div class="container">
+    <div class="tabs">
+      <button class="tab active" data-tab="fighters">Fighters</button>
+      <button class="tab" data-tab="events">Events</button>
+      <button class="tab" data-tab="bouts">Fight Card</button>
+      <button class="tab" data-tab="results">Results</button>
+    </div>
+
+    <!-- FIGHTERS TAB -->
+    <div class="tab-content active" id="fighters">
+      <div class="card">
+        <h2 id="fighter-form-title">Add New Fighter</h2>
+        <div id="fighter-message"></div>
+        <form id="fighter-form">
+          <input type="hidden" id="fighter-edit-id">
+
+          <div class="grid grid-2">
+            <div class="form-group">
+              <label>Fighter ID *</label>
+              <input type="text" id="fighter-id" required placeholder="e.g., john-doe">
+            </div>
+            <div class="form-group">
+              <label>Active Status *</label>
+              <select id="fighter-active">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-2">
+            <div class="form-group">
+              <label>First Name *</label>
+              <input type="text" id="fighter-firstname" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name *</label>
+              <input type="text" id="fighter-lastname" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Nickname</label>
+            <input type="text" id="fighter-nickname" placeholder="e.g., The Hammer">
+          </div>
+
+          <div class="grid grid-3">
+            <div class="form-group">
+              <label>Weight (lbs) *</label>
+              <input type="number" id="fighter-weight" required>
+            </div>
+            <div class="form-group">
+              <label>Height</label>
+              <input type="text" id="fighter-height" placeholder="e.g., 6'2\"">
+            </div>
+            <div class="form-group">
+              <label>Division *</label>
+              <select id="fighter-division" required>
+                <option value="">Select Division</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Fighting Style</label>
+            <input type="text" id="fighter-style" placeholder="e.g., Brawler, Boxer, Grappler">
+          </div>
+
+          <div class="form-group">
+            <label>Country</label>
+            <input type="text" id="fighter-country" placeholder="e.g., USA">
+          </div>
+
+          <div class="form-group">
+            <label>Biography</label>
+            <textarea id="fighter-bio" placeholder="Fighter's background and story..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Fighter Image</label>
+            <input type="file" id="fighter-image-upload" accept="image/*">
+            <img id="fighter-image-preview" class="image-preview hidden">
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn btn-primary" id="fighter-submit-btn">Add Fighter</button>
+            <button type="button" class="btn btn-secondary" id="fighter-cancel-btn" style="display:none;">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>All Fighters</h2>
+        <div class="fighter-list" id="fighter-list">
+          <p>Loading fighters...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- EVENTS TAB -->
+    <div class="tab-content" id="events">
+      <div class="card">
+        <h2 id="event-form-title">Create New Event</h2>
+        <div id="event-message"></div>
+        <form id="event-form">
+          <input type="hidden" id="event-edit-id">
+
+          <div class="grid grid-2">
+            <div class="form-group">
+              <label>Event ID *</label>
+              <input type="text" id="event-id" required placeholder="e.g., bbfl-002">
+            </div>
+            <div class="form-group">
+              <label>Slug *</label>
+              <input type="text" id="event-slug" required placeholder="e.g., bbfl-002-rising-stars">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Title *</label>
+            <input type="text" id="event-title" required placeholder="e.g., BBFL 002: Rising Stars">
+          </div>
+
+          <div class="form-group">
+            <label>Subtitle</label>
+            <input type="text" id="event-subtitle" placeholder="e.g., The Next Generation">
+          </div>
+
+          <div class="grid grid-3">
+            <div class="form-group">
+              <label>Date *</label>
+              <input type="date" id="event-date" required>
+            </div>
+            <div class="form-group">
+              <label>Time *</label>
+              <input type="time" id="event-time" required value="21:00">
+            </div>
+            <div class="form-group">
+              <label>Venue *</label>
+              <select id="event-venue" required>
+                <option value="">Select Venue</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Status *</label>
+            <select id="event-status" required>
+              <option value="upcoming">Upcoming</option>
+              <option value="live">Live</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="event-description" placeholder="Event description..."></textarea>
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn btn-primary" id="event-submit-btn">Create Event</button>
+            <button type="button" class="btn btn-secondary" id="event-cancel-btn" style="display:none;">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>All Events</h2>
+        <div class="event-list" id="event-list">
+          <p>Loading events...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOUTS TAB -->
+    <div class="tab-content" id="bouts">
+      <div class="card">
+        <h2>Add Bout to Fight Card</h2>
+        <div id="bout-message"></div>
+        <form id="bout-form">
+          <div class="form-group">
+            <label>Event *</label>
+            <select id="bout-event" required>
+              <option value="">Select Event</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Bout ID *</label>
+            <input type="text" id="bout-id" required placeholder="e.g., bbfl-002-bout-1">
+          </div>
+
+          <div class="grid grid-2">
+            <div class="form-group">
+              <label>Fighter 1 *</label>
+              <select id="bout-fighter1" required>
+                <option value="">Select Fighter</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Fighter 2 *</label>
+              <select id="bout-fighter2" required>
+                <option value="">Select Fighter</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-3">
+            <div class="form-group">
+              <label>Division *</label>
+              <select id="bout-division" required>
+                <option value="">Select Division</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Rounds *</label>
+              <input type="number" id="bout-rounds" required value="3" min="1" max="5">
+            </div>
+            <div class="form-group">
+              <label>Bout Order *</label>
+              <input type="number" id="bout-order" required value="1" min="1">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Championship Bout?</label>
+            <select id="bout-championship">
+              <option value="false">No</option>
+              <option value="true">Yes</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Add Bout to Card</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Fight Card</h2>
+        <div id="bout-list">
+          <p>Loading bouts...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS TAB -->
+    <div class="tab-content" id="results">
+      <div class="card">
+        <h2>Add Fight Result</h2>
+        <div id="result-message"></div>
+        <form id="result-form">
+          <div class="form-group">
+            <label>Select Bout *</label>
+            <select id="result-bout" required>
+              <option value="">Select Bout</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Winner *</label>
+            <select id="result-winner" required>
+              <option value="">Select Winner</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Method *</label>
+            <select id="result-method" required>
+              <option value="KO">KO (Knockout)</option>
+              <option value="TKO">TKO (Technical Knockout)</option>
+              <option value="Submission">Submission</option>
+              <option value="Decision">Decision (Judges' Scorecard)</option>
+              <option value="Draw">Draw</option>
+              <option value="No Contest">No Contest</option>
+            </select>
+          </div>
+
+          <div class="grid grid-2">
+            <div class="form-group">
+              <label>Round</label>
+              <input type="number" id="result-round" min="1" max="5">
+            </div>
+            <div class="form-group">
+              <label>Time (e.g., 2:45)</label>
+              <input type="text" id="result-time" placeholder="0:00">
+            </div>
+          </div>
+
+          <div id="scorecard-section" style="display:none;">
+            <h3 style="margin: 1.5rem 0 1rem; color: #7B2E2E;">Judges' Scorecard</h3>
+
+            <div class="form-group">
+              <label>Judge 1 Scores (comma-separated by round, e.g., 10-9,10-9,10-8)</label>
+              <input type="text" id="result-judge1" placeholder="10-9,10-9,10-9">
+            </div>
+
+            <div class="form-group">
+              <label>Judge 2 Scores</label>
+              <input type="text" id="result-judge2" placeholder="10-9,10-9,10-9">
+            </div>
+
+            <div class="form-group">
+              <label>Judge 3 Scores</label>
+              <input type="text" id="result-judge3" placeholder="10-9,10-9,10-9">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Performance Bonus?</label>
+            <select id="result-bonus">
+              <option value="false">No</option>
+              <option value="true">Yes (Fight of the Night / Performance of the Night)</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit Result & Update Rankings</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>Recent Results</h2>
+        <div id="result-list">
+          <p>Loading results...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
