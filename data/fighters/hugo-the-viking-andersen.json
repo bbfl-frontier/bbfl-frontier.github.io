@@ -5,10 +5,16 @@
   "nickname": "The Viking",
   "weight": 207,
   "height": "6'5\"",
+  "reach": "80\"",
+  "stance": "Orthodox",
+  "age": 29,
+  "nationality": "Norwegian",
+  "debut": "1909-06-17",
   "divisionId": "heavy",
   "fightingStyle": "Brawler",
   "country": "Norway",
   "bio": "A Norwegian fisherman built like his Viking ancestors.",
+  "bioFile": "hugo-the-viking-andersen.md",
   "active": true,
   "image": "/images/fighters/male-placeholder.png"
 }

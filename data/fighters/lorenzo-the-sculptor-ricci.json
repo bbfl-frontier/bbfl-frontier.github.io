@@ -5,10 +5,16 @@
   "nickname": "The Sculptor",
   "weight": 172,
   "height": "5'11\"",
+  "reach": "73\"",
+  "stance": "Orthodox",
+  "age": 30,
+  "nationality": "Italian",
+  "debut": "1909-12-25",
   "divisionId": "middle",
   "fightingStyle": "Technical",
   "country": "Italy",
   "bio": "An artist who shapes faces with his fists instead of marble.",
+  "bioFile": "lorenzo-the-sculptor-ricci.md",
   "active": true,
   "image": "/images/fighters/male-placeholder.png"
 }

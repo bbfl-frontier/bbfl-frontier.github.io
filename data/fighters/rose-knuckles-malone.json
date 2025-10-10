@@ -5,10 +5,16 @@
   "nickname": "Knuckles",
   "weight": 169,
   "height": "5'9\"",
+  "reach": "69\"",
+  "stance": "Southpaw",
+  "age": 25,
+  "nationality": "American",
+  "debut": "1911-03-08",
   "divisionId": "middle",
   "fightingStyle": "Boxer",
   "country": "USA",
   "bio": "A factory worker from Chicago with hands as tough as the steel she forges.",
+  "bioFile": "rose-knuckles-malone.md",
   "active": true,
   "image": "/images/fighters/female-placeholder.png"
 }

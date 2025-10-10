@@ -5,10 +5,16 @@
   "nickname": "Razorback",
   "weight": 145,
   "height": "5'9\"",
+  "reach": "69\"",
+  "stance": "Switch",
+  "age": 25,
+  "nationality": "American",
+  "debut": "1911-01-07",
   "divisionId": "feather",
   "fightingStyle": "Brawler",
   "country": "USA",
   "bio": "An Arkansas pig farmer who fights as dirty as his livestock.",
+  "bioFile": "silas-razorback-hawkins.md",
   "active": true,
   "image": "/images/fighters/male-placeholder.png"
 }

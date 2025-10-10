@@ -5,10 +5,16 @@
   "nickname": "The Cossack",
   "weight": 168,
   "height": "6'0\"",
+  "reach": "75\"",
+  "stance": "Southpaw",
+  "age": 34,
+  "nationality": "Russian",
+  "debut": "1907-02-28",
   "divisionId": "middle",
   "fightingStyle": "Brawler",
   "country": "Russia",
   "bio": "A former Cossack horseman who fights with the fury of the steppes.",
+  "bioFile": "victor-the-cossack-volkov.md",
   "active": true,
   "image": "/images/fighters/male-placeholder.png"
 }

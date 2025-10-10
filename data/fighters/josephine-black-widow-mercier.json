@@ -5,10 +5,16 @@
   "nickname": "Black Widow",
   "weight": 148,
   "height": "5'8\"",
+  "reach": "68\"",
+  "stance": "Orthodox",
+  "age": 27,
+  "nationality": "French-American",
+  "debut": "1910-10-31",
   "divisionId": "feather",
   "fightingStyle": "Grappler",
   "country": "France",
   "bio": "A mysterious fighter from New Orleans with a deadly submission game.",
+  "bioFile": "josephine-black-widow-mercier.md",
   "active": true,
   "image": "/images/fighters/female-placeholder.png"
 }

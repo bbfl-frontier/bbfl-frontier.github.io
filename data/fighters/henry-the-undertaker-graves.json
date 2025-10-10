@@ -5,10 +5,16 @@
   "nickname": "The Undertaker",
   "weight": 198,
   "height": "6'2\"",
+  "reach": "77\"",
+  "stance": "Orthodox",
+  "age": 36,
+  "nationality": "American",
+  "debut": "1906-10-13",
   "divisionId": "heavy",
   "fightingStyle": "Grappler",
   "country": "USA",
   "bio": "An actual undertaker who puts opponents to sleep permanently.",
+  "bioFile": "henry-the-undertaker-graves.md",
   "active": true,
   "image": "/images/fighters/male-placeholder.png"
 }

@@ -5,10 +5,16 @@
   "nickname": "The Ox",
   "weight": 195,
   "height": "6'3\"",
+  "reach": "78\"",
+  "stance": "Southpaw",
+  "age": 35,
+  "nationality": "Scottish",
+  "debut": "1907-09-12",
   "divisionId": "heavy",
   "fightingStyle": "Brawler",
   "country": "Scotland",
   "bio": "A lumberjack from the Highlands with tree-trunk arms and an unbreakable spirit.",
+  "bioFile": "william-the-ox-blackwood.md",
   "active": true,
   "image": "/images/fighters/male-placeholder.png"
 }

@@ -5,10 +5,16 @@
   "nickname": "The Preacher",
   "weight": 152,
   "height": "5'11\"",
+  "reach": "72\"",
+  "stance": "Orthodox",
+  "age": 38,
+  "nationality": "American",
+  "debut": "1909-11-03",
   "divisionId": "middle",
   "fightingStyle": "Technical",
   "country": "USA",
   "bio": "A former preacher who found redemption in the ring.",
+  "bioFile": "abraham-the-preacher-cole.md",
   "active": true,
   "image": "/images/fighters/male-placeholder.png"
 }

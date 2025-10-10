@@ -5,10 +5,16 @@
   "nickname": "The Governess",
   "weight": 156,
   "height": "5'8\"",
+  "reach": "67\"",
+  "stance": "Orthodox",
+  "age": 31,
+  "nationality": "English",
+  "debut": "1908-09-10",
   "divisionId": "middle",
   "fightingStyle": "Technical",
   "country": "England",
   "bio": "A stern governess who disciplines opponents with precision strikes.",
+  "bioFile": "agnes-the-governess-thornbury.md",
   "active": true,
   "image": "/images/fighters/female-placeholder.png"
 }

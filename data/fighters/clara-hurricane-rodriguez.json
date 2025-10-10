@@ -5,10 +5,16 @@
   "nickname": "Hurricane",
   "weight": 143,
   "height": "5'6\"",
+  "reach": "65\"",
+  "stance": "Orthodox",
+  "age": 23,
+  "nationality": "Mexican",
+  "debut": "1911-05-05",
   "divisionId": "feather",
   "fightingStyle": "Striker",
   "country": "Mexico",
   "bio": "A whirlwind of fury from Guadalajara with relentless combinations.",
+  "bioFile": "clara-hurricane-rodriguez.md",
   "active": true,
   "image": "/images/fighters/female-placeholder.png"
 }

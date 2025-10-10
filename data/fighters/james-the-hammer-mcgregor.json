@@ -5,10 +5,16 @@
   "nickname": "The Hammer",
   "weight": 148,
   "height": "5'10\"",
+  "reach": "70\"",
+  "stance": "Orthodox",
+  "age": 28,
+  "nationality": "Irish",
+  "debut": "1910-03-15",
   "divisionId": "feather",
   "fightingStyle": "Brawler",
   "country": "Ireland",
   "bio": "A coal miner from Dublin with fists like iron and a will to match.",
+  "bioFile": "james-the-hammer-mcgregor.md",
   "active": true,
   "image": "/images/fighters/male-placeholder.png"
 }

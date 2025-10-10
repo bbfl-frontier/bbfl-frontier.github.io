@@ -5,10 +5,16 @@
   "nickname": "Deacon",
   "weight": 186,
   "height": "6'1\"",
+  "reach": "76\"",
+  "stance": "Orthodox",
+  "age": 42,
+  "nationality": "American",
+  "debut": "1905-07-04",
   "divisionId": "heavy",
   "fightingStyle": "Boxer",
   "country": "USA",
   "bio": "A former slave who won his freedom and now fights for glory.",
+  "bioFile": "ezra-deacon-washington.md",
   "active": true,
   "image": "/images/fighters/male-placeholder.png"
 }

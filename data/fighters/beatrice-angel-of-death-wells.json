@@ -5,10 +5,16 @@
   "nickname": "Angel of Death",
   "weight": 191,
   "height": "6'0\"",
+  "reach": "73\"",
+  "stance": "Orthodox",
+  "age": 33,
+  "nationality": "English",
+  "debut": "1907-04-22",
   "divisionId": "heavy",
   "fightingStyle": "Striker",
   "country": "England",
   "bio": "A former nurse who learned anatomy to heal, now uses it to hurt.",
+  "bioFile": "beatrice-angel-of-death-wells.md",
   "active": true,
   "image": "/images/fighters/female-placeholder.png"
 }
