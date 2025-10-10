@@ -63,7 +63,7 @@ const baseUrl = import.meta.env.BASE_URL;
                 </div>
 
                 <div class="mt-4 flex items-center justify-between">
-                  <DivisionChip division={division?.name || fighter.divisionId} />
+                  <DivisionChip division={division?.nickname || fighter.divisionId} />
                   <span class="text-sm text-gray-500">{fighter.weight} lbs</span>
                 </div>
               </div>
