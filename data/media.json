@@ -1,0 +1,19 @@
+[
+  {
+    "id": "media-1",
+    "type": "image",
+    "url": "/images/gallery/event-1-main.jpg",
+    "thumbnail": "/images/gallery/thumbs/event-1-main.jpg",
+    "caption": "BBFL Championship Night - Main Event",
+    "eventId": "bbfl-001",
+    "date": "1912-10-10"
+  },
+  {
+    "id": "media-2",
+    "type": "image",
+    "url": "/images/gallery/fighter-promo-1.jpg",
+    "thumbnail": "/images/gallery/thumbs/fighter-promo-1.jpg",
+    "caption": "Fighter promotional shoot",
+    "date": "1912-10-07"
+  }
+]

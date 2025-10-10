@@ -1,0 +1,571 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Admin Portal" description="BBFL Admin Portal">
+  <div id="login-screen" class="min-h-screen flex items-center justify-center bg-gray-100 py-12 px-4">
+    <div class="max-w-md w-full bg-white rounded-2xl shadow-lg p-8 border-2 border-bourbon">
+      <div class="text-center mb-8">
+        <h1 class="text-3xl font-black text-bourbon mb-2">🥊 Admin Portal</h1>
+        <p class="text-gray-600">Blood & Bourbon Fight League</p>
+      </div>
+
+      <form id="login-form">
+        <div class="mb-6">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+          <input
+            type="password"
+            id="admin-password"
+            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-bourbon focus:outline-none"
+            placeholder="Enter admin password"
+            required
+          />
+        </div>
+
+        <div id="login-error" class="hidden mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-lg text-sm">
+          Incorrect password. Please try again.
+        </div>
+
+        <button
+          type="submit"
+          class="w-full bg-bourbon text-white font-bold py-3 px-4 rounded-lg hover:bg-bourbon-dark transition"
+        >
+          Login
+        </button>
+      </form>
+
+      <p class="text-xs text-gray-500 text-center mt-6">
+        For authorized personnel only
+      </p>
+    </div>
+  </div>
+
+  <div id="admin-portal" class="hidden">
+    <div class="bg-bourbon text-white shadow-lg sticky top-16 z-40">
+      <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <div>
+          <h1 class="text-2xl font-black">🥊 Admin Portal</h1>
+          <p class="text-sm opacity-90">Manage fighters, events, and results</p>
+        </div>
+        <button id="logout-btn" class="bg-white text-bourbon px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
+          Logout
+        </button>
+      </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-8">
+      <div class="tabs flex gap-2 mb-8 border-b-2 border-gray-300">
+        <button class="tab active" data-tab="fighters">Fighters</button>
+        <button class="tab" data-tab="events">Events</button>
+        <button class="tab" data-tab="bouts">Fight Card</button>
+        <button class="tab" data-tab="results">Results</button>
+      </div>
+
+      <!-- FIGHTERS TAB -->
+      <div class="tab-content active" id="fighters-tab">
+        <div class="card mb-8">
+          <h2 id="fighter-form-title" class="text-2xl font-bold text-bourbon mb-6">Add New Fighter</h2>
+          <div id="fighter-message" class="message"></div>
+
+          <form id="fighter-form" class="space-y-6">
+            <input type="hidden" id="fighter-edit-id">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="form-group">
+                <label>Fighter ID *</label>
+                <input type="text" id="fighter-id" required placeholder="e.g., john-doe">
+              </div>
+              <div class="form-group">
+                <label>Active Status *</label>
+                <select id="fighter-active">
+                  <option value="true">Active</option>
+                  <option value="false">Inactive</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="form-group">
+                <label>First Name *</label>
+                <input type="text" id="fighter-firstname" required>
+              </div>
+              <div class="form-group">
+                <label>Last Name *</label>
+                <input type="text" id="fighter-lastname" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Nickname</label>
+              <input type="text" id="fighter-nickname" placeholder="e.g., The Hammer">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="form-group">
+                <label>Weight (lbs) *</label>
+                <input type="number" id="fighter-weight" required>
+              </div>
+              <div class="form-group">
+                <label>Height</label>
+                <input type="text" id="fighter-height" placeholder="e.g., 6'2&quot;">
+              </div>
+              <div class="form-group">
+                <label>Division *</label>
+                <select id="fighter-division" required>
+                  <option value="">Select Division</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Fighting Style</label>
+              <input type="text" id="fighter-style" placeholder="e.g., Brawler, Boxer">
+            </div>
+
+            <div class="form-group">
+              <label>Country</label>
+              <input type="text" id="fighter-country" placeholder="e.g., USA">
+            </div>
+
+            <div class="form-group">
+              <label>Biography</label>
+              <textarea id="fighter-bio" rows="4" placeholder="Fighter's background..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Fighter Image URL</label>
+              <input type="text" id="fighter-image" placeholder="/images/fighters/fighter-name.jpg">
+              <p class="text-sm text-gray-500 mt-1">Upload image to /public/images/fighters/ folder first</p>
+            </div>
+
+            <div class="flex gap-4">
+              <button type="submit" class="btn btn-primary" id="fighter-submit-btn">Add Fighter</button>
+              <button type="button" class="btn btn-secondary hidden" id="fighter-cancel-btn">Cancel</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2 class="text-2xl font-bold text-bourbon mb-6">All Fighters</h2>
+          <div id="fighter-list" class="space-y-3">
+            <p class="text-gray-500">Loading fighters...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- EVENTS TAB -->
+      <div class="tab-content" id="events-tab">
+        <div class="card mb-8">
+          <h2 id="event-form-title" class="text-2xl font-bold text-bourbon mb-6">Create New Event</h2>
+          <div id="event-message" class="message"></div>
+
+          <form id="event-form" class="space-y-6">
+            <input type="hidden" id="event-edit-id">
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="form-group">
+                <label>Event ID *</label>
+                <input type="text" id="event-id" required placeholder="e.g., bbfl-002">
+              </div>
+              <div class="form-group">
+                <label>Slug *</label>
+                <input type="text" id="event-slug" required placeholder="e.g., bbfl-002-rising-stars">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Title *</label>
+              <input type="text" id="event-title" required placeholder="e.g., BBFL 002: Rising Stars">
+            </div>
+
+            <div class="form-group">
+              <label>Subtitle</label>
+              <input type="text" id="event-subtitle" placeholder="e.g., The Next Generation">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="form-group">
+                <label>Date * (YYYY-MM-DD)</label>
+                <input type="text" id="event-date" required placeholder="1912-11-08">
+              </div>
+              <div class="form-group">
+                <label>Time *</label>
+                <input type="time" id="event-time" required value="21:00">
+              </div>
+              <div class="form-group">
+                <label>Venue *</label>
+                <select id="event-venue" required>
+                  <option value="">Select Venue</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Status *</label>
+              <select id="event-status" required>
+                <option value="upcoming">Upcoming</option>
+                <option value="live">Live</option>
+                <option value="completed">Completed</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Description</label>
+              <textarea id="event-description" rows="4"></textarea>
+            </div>
+
+            <div class="flex gap-4">
+              <button type="submit" class="btn btn-primary" id="event-submit-btn">Create Event</button>
+              <button type="button" class="btn btn-secondary hidden" id="event-cancel-btn">Cancel</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2 class="text-2xl font-bold text-bourbon mb-6">All Events</h2>
+          <div id="event-list" class="space-y-3">
+            <p class="text-gray-500">Loading events...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOUTS TAB -->
+      <div class="tab-content" id="bouts-tab">
+        <div class="card mb-8">
+          <h2 class="text-2xl font-bold text-bourbon mb-6">Add Bout to Fight Card</h2>
+          <div id="bout-message" class="message"></div>
+
+          <form id="bout-form" class="space-y-6">
+            <div class="form-group">
+              <label>Event *</label>
+              <select id="bout-event" required>
+                <option value="">Select Event</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Bout ID *</label>
+              <input type="text" id="bout-id" required placeholder="e.g., bbfl-002-bout-1">
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="form-group">
+                <label>Fighter 1 *</label>
+                <select id="bout-fighter1" required>
+                  <option value="">Select Fighter</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Fighter 2 *</label>
+                <select id="bout-fighter2" required>
+                  <option value="">Select Fighter</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="form-group">
+                <label>Division *</label>
+                <select id="bout-division" required>
+                  <option value="">Select Division</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Rounds *</label>
+                <input type="number" id="bout-rounds" required value="3" min="1" max="5">
+              </div>
+              <div class="form-group">
+                <label>Bout Order *</label>
+                <input type="number" id="bout-order" required value="1" min="1">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Championship Bout?</label>
+              <select id="bout-championship">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Bout to Card</button>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2 class="text-2xl font-bold text-bourbon mb-6">Fight Card</h2>
+          <div id="bout-list" class="space-y-4">
+            <p class="text-gray-500">Loading bouts...</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RESULTS TAB -->
+      <div class="tab-content" id="results-tab">
+        <div class="card mb-8">
+          <h2 class="text-2xl font-bold text-bourbon mb-6">Add Fight Result</h2>
+          <div id="result-message" class="message"></div>
+
+          <form id="result-form" class="space-y-6">
+            <div class="form-group">
+              <label>Select Bout *</label>
+              <select id="result-bout" required>
+                <option value="">Select Bout</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Winner *</label>
+              <select id="result-winner" required>
+                <option value="">Select Winner</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label>Method *</label>
+              <select id="result-method" required>
+                <option value="KO">KO (Knockout)</option>
+                <option value="TKO">TKO (Technical Knockout)</option>
+                <option value="Submission">Submission</option>
+                <option value="Decision">Decision</option>
+                <option value="Draw">Draw</option>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="form-group">
+                <label>Round</label>
+                <input type="number" id="result-round" min="1" max="5">
+              </div>
+              <div class="form-group">
+                <label>Time (e.g., 2:45)</label>
+                <input type="text" id="result-time" placeholder="0:00">
+              </div>
+            </div>
+
+            <div id="scorecard-section" class="hidden space-y-4">
+              <h3 class="text-lg font-bold text-bourbon">Judges' Scorecard</h3>
+              <div class="form-group">
+                <label>Judge 1 Scores (10-9,10-9,10-9)</label>
+                <input type="text" id="result-judge1" placeholder="10-9,10-9,10-9">
+              </div>
+              <div class="form-group">
+                <label>Judge 2 Scores</label>
+                <input type="text" id="result-judge2" placeholder="10-9,10-9,10-9">
+              </div>
+              <div class="form-group">
+                <label>Judge 3 Scores</label>
+                <input type="text" id="result-judge3" placeholder="10-9,10-9,10-9">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Performance Bonus?</label>
+              <select id="result-bonus">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit Result</button>
+            <p class="text-sm text-yellow-700 bg-yellow-50 p-3 rounded-lg mt-4">
+              ⚠️ Note: You'll need to rebuild and redeploy the site to update rankings
+            </p>
+          </form>
+        </div>
+
+        <div class="card">
+          <h2 class="text-2xl font-bold text-bourbon mb-6">Recent Results</h2>
+          <div id="result-list" class="space-y-3">
+            <p class="text-gray-500">Loading results...</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .tab {
+    padding: 0.75rem 1.5rem;
+    background: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 8px 8px 0 0;
+    transition: all 0.2s;
+    color: #666;
+  }
+  .tab:hover { background: #f0f0f0; }
+  .tab.active {
+    background: #7B2E2E;
+    color: white;
+  }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+
+  .form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #555;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: #7B2E2E;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: #7B2E2E;
+    color: white;
+  }
+  .btn-primary:hover { background: #5a2222; }
+  .btn-secondary {
+    background: #6c757d;
+    color: white;
+  }
+  .btn-danger {
+    background: #dc3545;
+    color: white;
+  }
+
+  .message {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: none;
+  }
+  .message.success {
+    display: block;
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+  }
+  .message.error {
+    display: block;
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+  }
+
+  .item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 2px solid #e9ecef;
+  }
+
+  .item-info strong {
+    color: #7B2E2E;
+    font-size: 1.1rem;
+  }
+  .item-meta {
+    font-size: 0.9rem;
+    color: #666;
+    margin-top: 0.25rem;
+  }
+
+  .actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+</style>
+
+<script>
+  // Password hash
+  const PASSWORD_HASH = '1129d1f490d174206cc3175c9343751b9d5a68a55f3cfcf7d3cd780e88444bf8';
+
+  async function hashPassword(password: string): Promise<string> {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(password);
+    const hash = await crypto.subtle.digest('SHA-256', data);
+    return Array.from(new Uint8Array(hash))
+      .map(b => b.toString(16).padStart(2, '0'))
+      .join('');
+  }
+
+  // Check if already logged in
+  if (sessionStorage.getItem('bbfl-admin-auth') === 'true') {
+    document.getElementById('login-screen')!.classList.add('hidden');
+    document.getElementById('admin-portal')!.classList.remove('hidden');
+    initAdmin();
+  }
+
+  // Login form
+  document.getElementById('login-form')!.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const password = (document.getElementById('admin-password') as HTMLInputElement).value;
+    const hash = await hashPassword(password);
+
+    if (hash === PASSWORD_HASH) {
+      sessionStorage.setItem('bbfl-admin-auth', 'true');
+      document.getElementById('login-screen')!.classList.add('hidden');
+      document.getElementById('admin-portal')!.classList.remove('hidden');
+      document.getElementById('login-error')!.classList.add('hidden');
+      initAdmin();
+    } else {
+      document.getElementById('login-error')!.classList.remove('hidden');
+    }
+  });
+
+  // Logout
+  document.getElementById('logout-btn')!.addEventListener('click', () => {
+    sessionStorage.removeItem('bbfl-admin-auth');
+    location.reload();
+  });
+
+  // Tab switching
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const targetTab = tab.getAttribute('data-tab');
+
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+
+      tab.classList.add('active');
+      document.getElementById(`${targetTab}-tab`)!.classList.add('active');
+    });
+  });
+
+  function initAdmin() {
+    // Load admin script
+    const script = document.createElement('script');
+    script.src = '/admin-client.js';
+    document.body.appendChild(script);
+  }
+</script>
+</BaseLayout>

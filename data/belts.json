@@ -1,0 +1,26 @@
+[
+  {
+    "id": "feather-champion",
+    "divisionId": "feather",
+    "name": "Featherweight Championship",
+    "currentChampion": null,
+    "wonAt": null,
+    "defenses": 0
+  },
+  {
+    "id": "middle-champion",
+    "divisionId": "middle",
+    "name": "Middleweight Championship",
+    "currentChampion": null,
+    "wonAt": null,
+    "defenses": 0
+  },
+  {
+    "id": "heavy-champion",
+    "divisionId": "heavy",
+    "name": "Heavyweight Championship",
+    "currentChampion": null,
+    "wonAt": null,
+    "defenses": 0
+  }
+]

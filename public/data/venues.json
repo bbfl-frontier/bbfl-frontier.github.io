@@ -1,0 +1,23 @@
+[
+  {
+    "id": "saloon",
+    "name": "The Rusty Spur Saloon",
+    "location": "Saint Denis",
+    "description": "Historic saloon with a makeshift fighting pit",
+    "capacity": 150
+  },
+  {
+    "id": "barn",
+    "name": "McCready's Barn",
+    "location": "Valentine",
+    "description": "Converted barn hosting underground fights",
+    "capacity": 200
+  },
+  {
+    "id": "warehouse",
+    "name": "Saint Denis Underground Fight Arena",
+    "location": "Saint Denis",
+    "description": "Hidden beneath the city streets, this legendary underground arena hosts the most brutal fights in the frontier",
+    "capacity": 20
+  }
+]

@@ -1,0 +1,194 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import Countdown from '../../components/Countdown.astro';
+import fs from 'fs';
+import path from 'path';
+
+export function getStaticPaths() {
+  const eventsDir = path.join(process.cwd(), 'data/events');
+  const eventFiles = fs.existsSync(eventsDir) ? fs.readdirSync(eventsDir).filter(f => f.endsWith('.json')) : [];
+
+  return eventFiles.map(file => {
+    const event = JSON.parse(fs.readFileSync(path.join(eventsDir, file), 'utf-8'));
+    return {
+      params: { slug: event.slug },
+      props: { event }
+    };
+  });
+}
+
+const { event } = Astro.props;
+
+// Load venue
+const venues = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/venues.json'), 'utf-8'));
+const venue = venues.find((v: any) => v.id === event.venueId);
+
+// Load bouts
+const boutsDir = path.join(process.cwd(), 'data/bouts');
+const allBouts = fs.existsSync(boutsDir)
+  ? fs.readdirSync(boutsDir)
+      .filter(f => f.endsWith('.json'))
+      .map(f => JSON.parse(fs.readFileSync(path.join(boutsDir, f), 'utf-8')))
+  : [];
+
+const bouts = allBouts
+  .filter((b: any) => event.bouts.includes(b.id))
+  .sort((a: any, b: any) => b.order - a.order);
+
+// Load fighters
+const fightersDir = path.join(process.cwd(), 'data/fighters');
+const fighters = fs.readdirSync(fightersDir)
+  .filter(f => f.endsWith('.json'))
+  .map(f => JSON.parse(fs.readFileSync(path.join(fightersDir, f), 'utf-8')));
+const fightersMap = new Map(fighters.map((f: any) => [f.id, f]));
+
+// Load results
+const resultsDir = path.join(process.cwd(), 'data/results');
+const results = fs.existsSync(resultsDir)
+  ? fs.readdirSync(resultsDir)
+      .filter(f => f.endsWith('.json'))
+      .map(f => JSON.parse(fs.readFileSync(path.join(resultsDir, f), 'utf-8')))
+  : [];
+const resultsMap = new Map(results.map((r: any) => [r.boutId, r]));
+
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={event.title} description={event.description || `${event.title} fight card`}>
+  <PageHeader title={event.title} subtitle={event.subtitle} />
+
+  <section class="py-16">
+    <div class="container mx-auto px-4 max-w-4xl">
+      <!-- Countdown Timer for Upcoming Events -->
+      {event.status === 'upcoming' && (
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 border-2 border-bourbon">
+          <h3 class="text-2xl font-bold text-bourbon text-center mb-6">Event Starts In</h3>
+          <Countdown
+            targetDate={event.actualDate || event.date}
+            targetTime={event.time}
+            timezone={event.timezone}
+          />
+        </div>
+      )}
+
+      <!-- Event Info -->
+      <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 border-2 border-bourbon">
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h3 class="text-lg font-bold text-bourbon mb-4">Event Details</h3>
+            <dl class="space-y-2 text-sm">
+              <div class="flex justify-between">
+                <dt class="text-gray-600">Date:</dt>
+                <dd class="font-semibold">
+                  {new Date(event.date).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-gray-600">Time:</dt>
+                <dd class="font-semibold">{event.time} {event.timezone}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-gray-600">Status:</dt>
+                <dd class="font-semibold capitalize">{event.status}</dd>
+              </div>
+            </dl>
+          </div>
+
+          {venue && (
+            <div>
+              <h3 class="text-lg font-bold text-bourbon mb-4">Venue</h3>
+              <p class="font-bold text-lg">{venue.name}</p>
+              <p class="text-sm text-gray-600">{venue.location}</p>
+              <p class="text-sm text-gray-500 mt-2">{venue.description}</p>
+              <p class="text-xs text-gray-400 mt-1">Capacity: {venue.capacity}</p>
+            </div>
+          )}
+        </div>
+
+        {event.description && (
+          <div class="mt-6 pt-6 border-t">
+            <p class="text-gray-700">{event.description}</p>
+          </div>
+        )}
+      </div>
+
+      <!-- Fight Card -->
+      <div class="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-bourbon">
+        <div class="bg-bourbon text-white p-6">
+          <h2 class="text-2xl font-black">Fight Card</h2>
+        </div>
+
+        <div class="divide-y">
+          {bouts.map((bout: any) => {
+            const fighter1 = fightersMap.get(bout.fighter1Id);
+            const fighter2 = fightersMap.get(bout.fighter2Id);
+            const result = resultsMap.get(bout.id);
+
+            return (
+              <div class="p-6 hover:bg-gray-50 transition">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="text-xs font-bold uppercase tracking-wide text-bourbon">
+                    {bout.titleFight ? '🏆 Title Fight' : bout.cardPosition}
+                  </span>
+                  <span class="text-xs text-gray-500">
+                    {bout.scheduledRounds} Rounds
+                  </span>
+                </div>
+
+                <div class="grid grid-cols-[1fr,auto,1fr] gap-4 items-center">
+                  <div class={`text-right ${result?.winnerId === fighter1?.id ? 'font-bold' : ''}`}>
+                    <a href={`/fighters/${fighter1?.id}/`} class="hover:text-bourbon transition">
+                      {fighter1?.firstName} {fighter1?.lastName}
+                      {fighter1?.nickname && (
+                        <span class="block text-xs text-gray-500 italic">"{fighter1.nickname}"</span>
+                      )}
+                    </a>
+                  </div>
+
+                  <div class="text-center px-4">
+                    <span class="text-gray-400 font-bold">VS</span>
+                  </div>
+
+                  <div class={`text-left ${result?.winnerId === fighter2?.id ? 'font-bold' : ''}`}>
+                    <a href={`/fighters/${fighter2?.id}/`} class="hover:text-bourbon transition">
+                      {fighter2?.firstName} {fighter2?.lastName}
+                      {fighter2?.nickname && (
+                        <span class="block text-xs text-gray-500 italic">"{fighter2.nickname}"</span>
+                      )}
+                    </a>
+                  </div>
+                </div>
+
+                {result && (
+                  <div class="mt-4 pt-4 border-t text-center">
+                    <p class="text-sm font-semibold text-green-600">
+                      Winner: {
+                        result.winnerId === fighter1?.id
+                          ? `${fighter1.firstName} ${fighter1.lastName}`
+                          : `${fighter2?.firstName} ${fighter2?.lastName}`
+                      }
+                    </p>
+                    <p class="text-xs text-gray-500 mt-1">
+                      {result.method} • Round {result.round} at {result.time}
+                    </p>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+
+          {bouts.length === 0 && (
+            <div class="p-8 text-center text-gray-500">
+              Fight card to be announced.
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

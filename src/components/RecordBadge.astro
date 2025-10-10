@@ -1,0 +1,21 @@
+---
+interface Props {
+  wins: number;
+  losses: number;
+  draws?: number;
+}
+
+const { wins, losses, draws = 0 } = Astro.props;
+---
+
+<span class="inline-flex items-center gap-1 font-mono font-bold text-sm">
+  <span class="text-green-600">{wins}</span>
+  <span class="text-gray-400">-</span>
+  <span class="text-red-600">{losses}</span>
+  {draws > 0 && (
+    <>
+      <span class="text-gray-400">-</span>
+      <span class="text-gray-600">{draws}</span>
+    </>
+  )}
+</span>
