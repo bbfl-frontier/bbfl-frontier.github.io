@@ -26,7 +26,10 @@ const sponsors = JSON.parse(fs.readFileSync(sponsorsPath, 'utf-8'));
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title="Home">
+<BaseLayout
+  title="Home"
+  description="Blood & Bourbon Fight League - Where honor meets the underground. Experience bare-knuckle fighting in the heart of 1912 Saint Denis."
+>
   <!-- Hero Section -->
   <section class="relative bg-gradient-to-br from-[#4A1B1B] via-[#7B2E2E] to-[#4A1B1B] text-white py-20 md:py-32">
     <div class="container mx-auto px-4 text-center">

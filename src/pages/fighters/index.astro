@@ -27,7 +27,10 @@ const recordsMap = new Map(records.map((r: any) => [r.fighterId, r]));
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title="Fighters" description="Browse all fighters in the Blood & Bourbon Fight League">
+<BaseLayout
+  title="Fighters"
+  description="Meet the warriors of the Blood & Bourbon Fight League. Browse fighter profiles, records, and divisions including Light Hands, Roughnecks, and Bone Crushers."
+>
   <PageHeader title="Fighters" subtitle="Meet the warriors of BBFL" />
 
   <section class="py-16">

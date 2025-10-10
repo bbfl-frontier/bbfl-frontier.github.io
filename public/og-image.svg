@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#7B2E2E"/>
+
+  <!-- Subtle texture overlay -->
+  <rect width="1200" height="630" fill="url(#grain)" opacity="0.1"/>
+
+  <!-- Main B Logo -->
+  <text x="600" y="400" font-family="Arial, sans-serif" font-size="320" font-weight="900" fill="#F5F1E8" text-anchor="middle">B</text>
+
+  <!-- League Name -->
+  <text x="600" y="520" font-family="Arial, sans-serif" font-size="48" font-weight="700" fill="#F5F1E8" text-anchor="middle">BLOOD &amp; BOURBON FIGHT LEAGUE</text>
+
+  <!-- Tagline -->
+  <text x="600" y="570" font-family="Arial, sans-serif" font-size="28" font-weight="400" fill="#D4C5A9" text-anchor="middle" font-style="italic">"Where Honor Meets the Underground"</text>
+
+  <defs>
+    <pattern id="grain" patternUnits="userSpaceOnUse" width="100" height="100">
+      <rect width="100" height="100" fill="#000"/>
+    </pattern>
+  </defs>
+</svg>

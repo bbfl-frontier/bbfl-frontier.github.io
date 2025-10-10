@@ -31,7 +31,10 @@ const recordsMap = new Map(records.map((r: any) => [r.fighterId, r]));
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title="Rankings" description="Official fighter rankings for all BBFL divisions">
+<BaseLayout
+  title="Rankings"
+  description="Official BBFL fighter rankings. See the top warriors in Light Hands, Roughnecks, and Bone Crushers divisions based on their fight records."
+>
   <PageHeader title="Rankings" subtitle="Top fighters in each division" />
 
   <section class="py-16">
