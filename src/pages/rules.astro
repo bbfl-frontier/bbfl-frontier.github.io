@@ -24,7 +24,7 @@ const settings = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/setti
               <li><strong>Schedule:</strong> Events every other Friday at 9:00 PM ET</li>
               <li><strong>Card Structure:</strong> 3-5 preliminary bouts, 2-3 main card bouts, 1 title fight (optional)</li>
               <li><strong>Rounds:</strong> Non-title bouts are 3 rounds, title bouts are 5 rounds</li>
-              <li><strong>Round Duration:</strong> Each round is 45 seconds with 1 minute rest between rounds</li>
+              <li><strong>Round Duration:</strong> Each round is 1 minute with 1 minute rest between rounds</li>
               <li><strong>Corner Time:</strong> Coaches may enter the ring between rounds to tend to fighters</li>
               <li><strong>Medical Items:</strong> Fighters may use either 1 bandage OR 1 cigarette between rounds (not both)</li>
             </ul>
@@ -39,7 +39,7 @@ const settings = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/setti
               <h3 class="font-bold text-lg mb-3">Points Awarded</h3>
               <ul class="space-y-2 text-sm text-gray-700">
                 <li><span class="font-semibold text-green-600">+3 points</span> for a win</li>
-                <li><span class="font-semibold text-green-600">+2 bonus points</span> for finish (KO/TKO/Submission)</li>
+                <li><span class="font-semibold text-green-600">+2 bonus points</span> for finish (KO/TKO)</li>
                 <li><span class="font-semibold text-gray-600">+1 point</span> for a draw</li>
                 <li><span class="font-semibold text-red-600">0 points</span> for a loss</li>
               </ul>
@@ -88,7 +88,6 @@ const settings = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/setti
               <h3 class="font-bold text-lg mb-3">Bonuses</h3>
               <ul class="space-y-2 text-sm text-gray-700">
                 <li><strong>Knockout Bonus:</strong> +${settings.purses.koBonus}</li>
-                <li><strong>Submission Bonus:</strong> +${settings.purses.koBonus}</li>
                 <li><strong>Fight of the Night:</strong> Awarded at discretion</li>
               </ul>
             </div>
@@ -114,9 +113,9 @@ const settings = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/setti
           <h2 class="text-2xl font-black text-bourbon mb-4">Betting & Wagering</h2>
           <div class="prose prose-sm max-w-none">
             <p class="text-gray-700">
-              Spectator betting is permitted through approved league partners only. Fighters, coaches,
-              and officials are strictly prohibited from betting on any BBFL events. Violations will
-              result in permanent suspension from the league.
+              All betting must be authorized by the league organisers through an agreed third party.
+              Fighters, coaches, and officials are strictly prohibited from betting on any BBFL events.
+              Violations will result in permanent suspension from the league.
             </p>
           </div>
         </div>
