@@ -9,7 +9,7 @@
   "timezone": "Eastern Standard Time",
   "venueId": "warehouse",
   "status": "upcoming",
-  "posterImage": "/images/events/bbfl-001-poster.jpg",
+  "posterImage": "/images/events/bbfl-001-poster.jpg.png",
   "description": "The inaugural Blood & Bourbon Fight League event. Deep beneath the cobblestone streets of Saint Denis lies the Underground Fight Arena - a place where the city's finest warriors test their mettle in brutal combat. This historic night marks the beginning of organized fighting in the frontier, where honor, blood, and bourbon flow in equal measure.",
   "bouts": []
 }
