@@ -1,0 +1,1 @@
+A whirlwind of fury from Guadalajara with relentless combinations that overwhelm opponents. Clara "Hurricane" Rodriguez throws strikes in bunches and never stops moving forward.

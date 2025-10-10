@@ -1,0 +1,14 @@
+{
+  "id": "abraham-the-preacher-cole",
+  "firstName": "Abraham",
+  "lastName": "Cole",
+  "nickname": "The Preacher",
+  "weight": 152,
+  "height": "5'11\"",
+  "divisionId": "middle",
+  "fightingStyle": "Technical",
+  "country": "USA",
+  "bio": "A former preacher who found redemption in the ring.",
+  "active": true,
+  "image": "/images/fighters/male-placeholder.png"
+}

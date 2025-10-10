@@ -1,0 +1,14 @@
+{
+  "id": "marie-la-fleur-dubois",
+  "firstName": "Marie",
+  "lastName": "Dubois",
+  "nickname": "La Fleur",
+  "weight": 178,
+  "height": "5'11\"",
+  "divisionId": "middle",
+  "fightingStyle": "Technical",
+  "country": "France",
+  "bio": "A Parisian dancer who brings devastating elegance to the ring.",
+  "active": true,
+  "image": "/images/fighters/female-placeholder.png"
+}

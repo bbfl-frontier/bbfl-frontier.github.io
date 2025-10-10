@@ -1,0 +1,14 @@
+{
+  "id": "william-the-ox-blackwood",
+  "firstName": "William",
+  "lastName": "Blackwood",
+  "nickname": "The Ox",
+  "weight": 195,
+  "height": "6'3\"",
+  "divisionId": "heavy",
+  "fightingStyle": "Brawler",
+  "country": "Scotland",
+  "bio": "A lumberjack from the Highlands with tree-trunk arms and an unbreakable spirit.",
+  "active": true,
+  "image": "/images/fighters/male-placeholder.png"
+}

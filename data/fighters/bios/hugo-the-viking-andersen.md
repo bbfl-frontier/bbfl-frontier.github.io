@@ -1,0 +1,1 @@
+A Norwegian fisherman built like his Viking ancestors who conquered the seas. Hugo "The Viking" Andersen fights with the same ferocity his forebears used to raid coastlines centuries ago.

@@ -1,0 +1,1 @@
+An Arkansas pig farmer who fights with the same scrappy tenacity as his razorback hogs. Silas "Razorback" Hawkins brings farmboy toughness and surprising cunning to every bout.

@@ -1,0 +1,14 @@
+{
+  "id": "beatrice-angel-of-death-wells",
+  "firstName": "Beatrice",
+  "lastName": "Wells",
+  "nickname": "Angel of Death",
+  "weight": 191,
+  "height": "6'0\"",
+  "divisionId": "heavy",
+  "fightingStyle": "Striker",
+  "country": "England",
+  "bio": "A former nurse who learned anatomy to heal, now uses it to hurt.",
+  "active": true,
+  "image": "/images/fighters/female-placeholder.png"
+}

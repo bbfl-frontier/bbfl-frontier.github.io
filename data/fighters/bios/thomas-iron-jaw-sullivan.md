@@ -1,0 +1,1 @@
+A Boston dockworker known for taking punishment that would fell lesser men. Thomas "Iron Jaw" Sullivan earned his nickname after eating clean shots from heavyweight champions without hitting the canvas.

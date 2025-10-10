@@ -1,0 +1,14 @@
+{
+  "id": "james-the-hammer-mcgregor",
+  "firstName": "James",
+  "lastName": "McGregor",
+  "nickname": "The Hammer",
+  "weight": 148,
+  "height": "5'10\"",
+  "divisionId": "feather",
+  "fightingStyle": "Brawler",
+  "country": "Ireland",
+  "bio": "A coal miner from Dublin with fists like iron and a will to match.",
+  "active": true,
+  "image": "/images/fighters/male-placeholder.png"
+}

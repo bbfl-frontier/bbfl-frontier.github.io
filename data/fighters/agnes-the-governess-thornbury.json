@@ -1,0 +1,14 @@
+{
+  "id": "agnes-the-governess-thornbury",
+  "firstName": "Agnes",
+  "lastName": "Thornbury",
+  "nickname": "The Governess",
+  "weight": 156,
+  "height": "5'8\"",
+  "divisionId": "middle",
+  "fightingStyle": "Technical",
+  "country": "England",
+  "bio": "A stern governess who disciplines opponents with precision strikes.",
+  "active": true,
+  "image": "/images/fighters/female-placeholder.png"
+}

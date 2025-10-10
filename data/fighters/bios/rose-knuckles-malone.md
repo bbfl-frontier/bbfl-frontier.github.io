@@ -1,0 +1,1 @@
+A factory worker from Chicago with hands as tough as the steel she forges daily. Rose "Knuckles" Malone learned to fight by defending herself from aggressive foremen and never looked back.

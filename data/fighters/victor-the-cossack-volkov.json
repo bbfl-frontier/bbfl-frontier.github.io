@@ -1,0 +1,14 @@
+{
+  "id": "victor-the-cossack-volkov",
+  "firstName": "Victor",
+  "lastName": "Volkov",
+  "nickname": "The Cossack",
+  "weight": 168,
+  "height": "6'0\"",
+  "divisionId": "middle",
+  "fightingStyle": "Brawler",
+  "country": "Russia",
+  "bio": "A former Cossack horseman who fights with the fury of the steppes.",
+  "active": true,
+  "image": "/images/fighters/male-placeholder.png"
+}

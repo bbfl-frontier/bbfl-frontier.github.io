@@ -1,0 +1,14 @@
+{
+  "id": "clara-hurricane-rodriguez",
+  "firstName": "Clara",
+  "lastName": "Rodriguez",
+  "nickname": "Hurricane",
+  "weight": 143,
+  "height": "5'6\"",
+  "divisionId": "feather",
+  "fightingStyle": "Striker",
+  "country": "Mexico",
+  "bio": "A whirlwind of fury from Guadalajara with relentless combinations.",
+  "active": true,
+  "image": "/images/fighters/female-placeholder.png"
+}

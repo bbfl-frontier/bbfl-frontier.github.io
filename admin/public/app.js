@@ -142,7 +142,7 @@ document.getElementById('fighter-form').addEventListener('submit', async (e) => 
     country: document.getElementById('fighter-country').value,
     bio: document.getElementById('fighter-bio').value,
     active: document.getElementById('fighter-active').value === 'true',
-    image: '/images/fighters/placeholder.png'
+    image: '/images/fighters/male-placeholder.png'
   };
 
   try {

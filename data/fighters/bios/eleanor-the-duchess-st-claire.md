@@ -1,0 +1,1 @@
+An aristocrat who scandalizes Parisian society by fighting in underground arenas. Eleanor "The Duchess" St. Claire trades silk gowns for fighting gloves and proves nobility isn't just in bloodlines.

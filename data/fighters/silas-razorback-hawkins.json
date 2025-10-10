@@ -1,0 +1,14 @@
+{
+  "id": "silas-razorback-hawkins",
+  "firstName": "Silas",
+  "lastName": "Hawkins",
+  "nickname": "Razorback",
+  "weight": 145,
+  "height": "5'9\"",
+  "divisionId": "feather",
+  "fightingStyle": "Brawler",
+  "country": "USA",
+  "bio": "An Arkansas pig farmer who fights as dirty as his livestock.",
+  "active": true,
+  "image": "/images/fighters/male-placeholder.png"
+}

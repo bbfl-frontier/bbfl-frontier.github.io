@@ -1,0 +1,14 @@
+{
+  "id": "margaret-iron-belle-murphy",
+  "firstName": "Margaret",
+  "lastName": "Murphy",
+  "nickname": "Iron Belle",
+  "weight": 149,
+  "height": "5'7\"",
+  "divisionId": "feather",
+  "fightingStyle": "Boxer",
+  "country": "USA",
+  "bio": "A Southern belle with fists of iron and a will of steel.",
+  "active": true,
+  "image": "/images/fighters/female-placeholder.png"
+}

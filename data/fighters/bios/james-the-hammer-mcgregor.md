@@ -1,0 +1,1 @@
+A coal miner from Dublin with fists like iron and a will to match. James "The Hammer" McGregor learned to fight in the underground pits of Ireland before making his way to Saint Denis.

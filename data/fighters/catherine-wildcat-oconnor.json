@@ -1,0 +1,14 @@
+{
+  "id": "catherine-wildcat-oconnor",
+  "firstName": "Catherine",
+  "lastName": "O'Connor",
+  "nickname": "Wildcat",
+  "weight": 145,
+  "height": "5'7\"",
+  "divisionId": "feather",
+  "fightingStyle": "Striker",
+  "country": "Ireland",
+  "bio": "A saloon owner's daughter who refuses to back down from anyone.",
+  "active": true,
+  "image": "/images/fighters/female-placeholder.png"
+}

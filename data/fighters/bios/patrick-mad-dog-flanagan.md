@@ -1,0 +1,1 @@
+A railroad worker with a temper to match his legendary strength. Patrick "Mad Dog" Flanagan earned his nickname after single-handedly clearing out an entire saloon in a bar brawl.

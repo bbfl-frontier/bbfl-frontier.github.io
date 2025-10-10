@@ -1,0 +1,1 @@
+A saloon owner's daughter who refuses to back down from anyone. Catherine "Wildcat" O'Connor earned respect by defending her father's establishment against troublemakers twice her size.

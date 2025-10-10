@@ -1,0 +1,14 @@
+{
+  "id": "patrick-mad-dog-flanagan",
+  "firstName": "Patrick",
+  "lastName": "Flanagan",
+  "nickname": "Mad Dog",
+  "weight": 189,
+  "height": "6'1\"",
+  "divisionId": "heavy",
+  "fightingStyle": "Brawler",
+  "country": "Ireland",
+  "bio": "A railroad worker with a temper to match his strength.",
+  "active": true,
+  "image": "/images/fighters/male-placeholder.png"
+}

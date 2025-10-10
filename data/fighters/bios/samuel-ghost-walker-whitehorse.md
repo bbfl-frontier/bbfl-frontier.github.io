@@ -1,0 +1,1 @@
+A Lakota warrior who moves like smoke and strikes like lightning. Samuel "Ghost Walker" Whitehorse brings ancient fighting techniques to the modern arena with devastating effectiveness.

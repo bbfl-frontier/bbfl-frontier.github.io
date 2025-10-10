@@ -1,0 +1,14 @@
+{
+  "id": "samuel-ghost-walker-whitehorse",
+  "firstName": "Samuel",
+  "lastName": "Whitehorse",
+  "nickname": "Ghost Walker",
+  "weight": 147,
+  "height": "5'10\"",
+  "divisionId": "feather",
+  "fightingStyle": "Technical",
+  "country": "USA",
+  "bio": "A Lakota warrior who moves like smoke and strikes like lightning.",
+  "active": true,
+  "image": "/images/fighters/male-placeholder.png"
+}

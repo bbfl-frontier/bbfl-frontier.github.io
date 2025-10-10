@@ -1,0 +1,14 @@
+{
+  "id": "henry-the-undertaker-graves",
+  "firstName": "Henry",
+  "lastName": "Graves",
+  "nickname": "The Undertaker",
+  "weight": 198,
+  "height": "6'2\"",
+  "divisionId": "heavy",
+  "fightingStyle": "Grappler",
+  "country": "USA",
+  "bio": "An actual undertaker who puts opponents to sleep permanently.",
+  "active": true,
+  "image": "/images/fighters/male-placeholder.png"
+}

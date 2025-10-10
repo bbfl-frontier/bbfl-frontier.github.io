@@ -1,0 +1,14 @@
+{
+  "id": "ezra-deacon-washington",
+  "firstName": "Ezra",
+  "lastName": "Washington",
+  "nickname": "Deacon",
+  "weight": 186,
+  "height": "6'1\"",
+  "divisionId": "heavy",
+  "fightingStyle": "Boxer",
+  "country": "USA",
+  "bio": "A former slave who won his freedom and now fights for glory.",
+  "active": true,
+  "image": "/images/fighters/male-placeholder.png"
+}

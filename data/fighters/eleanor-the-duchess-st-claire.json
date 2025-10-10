@@ -1,0 +1,14 @@
+{
+  "id": "eleanor-the-duchess-st-claire",
+  "firstName": "Eleanor",
+  "lastName": "St. Claire",
+  "nickname": "The Duchess",
+  "weight": 175,
+  "height": "5'10\"",
+  "divisionId": "middle",
+  "fightingStyle": "Boxer",
+  "country": "France",
+  "bio": "An aristocrat who scandalizes society by fighting in underground arenas.",
+  "active": true,
+  "image": "/images/fighters/female-placeholder.png"
+}

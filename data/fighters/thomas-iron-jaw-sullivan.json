@@ -1,0 +1,14 @@
+{
+  "id": "thomas-iron-jaw-sullivan",
+  "firstName": "Thomas",
+  "lastName": "Sullivan",
+  "nickname": "Iron Jaw",
+  "weight": 177,
+  "height": "6'0\"",
+  "divisionId": "middle",
+  "fightingStyle": "Boxer",
+  "country": "USA",
+  "bio": "A Boston dockworker known for taking punishment that would fell lesser men.",
+  "active": true,
+  "image": "/images/fighters/male-placeholder.png"
+}

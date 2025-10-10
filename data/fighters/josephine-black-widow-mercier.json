@@ -1,0 +1,14 @@
+{
+  "id": "josephine-black-widow-mercier",
+  "firstName": "Josephine",
+  "lastName": "Mercier",
+  "nickname": "Black Widow",
+  "weight": 148,
+  "height": "5'8\"",
+  "divisionId": "feather",
+  "fightingStyle": "Grappler",
+  "country": "France",
+  "bio": "A mysterious fighter from New Orleans with a deadly submission game.",
+  "active": true,
+  "image": "/images/fighters/female-placeholder.png"
+}

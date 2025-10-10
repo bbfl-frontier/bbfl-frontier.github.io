@@ -1,0 +1,1 @@
+A mysterious fighter from New Orleans with a deadly submission game. Josephine "Black Widow" Mercier traps opponents in her web and makes them tap or sleep.
