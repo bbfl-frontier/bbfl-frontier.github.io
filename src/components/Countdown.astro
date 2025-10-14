@@ -6,7 +6,8 @@ interface Props {
 }
 
 const { targetDate, targetTime, timezone } = Astro.props;
-const targetISO = `${targetDate}T${targetTime}:00`;
+// Use EDT timezone offset (-04:00) for October 24th
+const targetISO = `${targetDate}T${targetTime}:00-04:00`;
 ---
 
 <div class="countdown-container text-center" data-target={targetISO} data-timezone={timezone}>
