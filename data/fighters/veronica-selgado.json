@@ -1,0 +1,25 @@
+{
+  "id": "veronica-selgado",
+  "firstName": "Veronica",
+  "lastName": "Selgado",
+  "nickname": "The Pitbull of Armadillo",
+  "weight": 150,
+  "height": "185",
+  "reach": "70",
+  "stance": "Orthodox",
+  "divisionId": "middle",
+  "fightingStyle": "Bruiser",
+  "age": 28,
+  "nationality": "American",
+  "country": "USA",
+  "debut": "1984-01-01",
+  "coach": "Sven Svensson",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
