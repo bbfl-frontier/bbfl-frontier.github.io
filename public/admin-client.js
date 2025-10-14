@@ -1,4 +1,4 @@
-// BBFL Admin Client - Static file management
+// BBFL Admin Client - GitHub API Integration
 let divisions = [];
 let fighters = [];
 let events = [];
@@ -6,16 +6,103 @@ let venues = [];
 let bouts = [];
 let results = [];
 
-// Load data from JSON files
+// GitHub Configuration
+let GITHUB_TOKEN = localStorage.getItem('bbfl-github-token');
+const GITHUB_OWNER = 'bbfl-frontier';
+const GITHUB_REPO = 'bbfl-frontier.github.io';
+const BRANCH = 'main';
+
+// Check if token exists, if not prompt for it
+if (!GITHUB_TOKEN) {
+  GITHUB_TOKEN = prompt('Enter your GitHub Personal Access Token (with repo access):\n\nCreate one at: https://github.com/settings/tokens/new');
+  if (GITHUB_TOKEN) {
+    localStorage.setItem('bbfl-github-token', GITHUB_TOKEN);
+  } else {
+    alert('GitHub token is required to use the admin portal');
+  }
+}
+
+// GitHub API Helper
+async function githubAPI(endpoint, method = 'GET', body = null) {
+  const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/${endpoint}`;
+  const options = {
+    method,
+    headers: {
+      'Authorization': `Bearer ${GITHUB_TOKEN}`,
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    }
+  };
+
+  if (body) {
+    options.body = JSON.stringify(body);
+  }
+
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      if (response.status === 401) {
+        localStorage.removeItem('bbfl-github-token');
+        alert('Invalid GitHub token. Please refresh and enter a valid token.');
+      }
+      throw new Error(`GitHub API Error: ${response.statusText}`);
+    }
+    return response.json();
+  } catch (error) {
+    console.error('GitHub API error:', error);
+    throw error;
+  }
+}
+
+// Get file from GitHub
+async function getGitHubFile(path) {
+  try {
+    const data = await githubAPI(`contents/${path}?ref=${BRANCH}`);
+    const content = atob(data.content);
+    return { content, sha: data.sha };
+  } catch (error) {
+    return null;
+  }
+}
+
+// Save file to GitHub
+async function saveGitHubFile(path, content, message, sha = null) {
+  const body = {
+    message,
+    content: btoa(unescape(encodeURIComponent(content))),
+    branch: BRANCH
+  };
+
+  if (sha) {
+    body.sha = sha;
+  }
+
+  return await githubAPI(`contents/${path}`, 'PUT', body);
+}
+
+// Delete file from GitHub
+async function deleteGitHubFile(path, message) {
+  const file = await getGitHubFile(path);
+  if (!file) return;
+
+  return await githubAPI(`contents/${path}`, 'DELETE', {
+    message,
+    sha: file.sha,
+    branch: BRANCH
+  });
+}
+
+// Load data from GitHub
 async function loadData() {
   try {
-    const [divisionsRes, venuesRes] = await Promise.all([
-      fetch('/data/divisions.json'),
-      fetch('/data/venues.json')
+    // Load divisions and venues from GitHub
+    const [divisionsFile, venuesFile] = await Promise.all([
+      getGitHubFile('data/divisions.json'),
+      getGitHubFile('data/venues.json')
     ]);
 
-    divisions = await divisionsRes.json();
-    venues = await venuesRes.json();
+    divisions = divisionsFile ? JSON.parse(divisionsFile.content) : [];
+    venues = venuesFile ? JSON.parse(venuesFile.content) : [];
 
     await Promise.all([
       loadFighters(),
@@ -32,6 +119,7 @@ async function loadData() {
 
   } catch (error) {
     console.error('Error loading data:', error);
+    alert('Error loading data. Please check your GitHub token and try again.');
   }
 }
 
@@ -51,17 +139,23 @@ function showMessage(elementId, message, isError = false) {
 
 async function loadFighters() {
   try {
-    const response = await fetch('/fighters.json');
-    if (response.ok) {
-      fighters = await response.json();
-    } else {
-      // Fallback: try to load individual fighter files
-      fighters = [];
+    // Get list of fighter files from GitHub
+    const contents = await githubAPI(`contents/data/fighters?ref=${BRANCH}`);
+    const fighterFiles = contents.filter(f => f.name.endsWith('.json') && f.name !== '.gitkeep');
+
+    fighters = [];
+    for (const file of fighterFiles) {
+      const fighterData = await getGitHubFile(file.path);
+      if (fighterData) {
+        fighters.push(JSON.parse(fighterData.content));
+      }
     }
+
     renderFighters();
   } catch (error) {
     console.error('Error loading fighters:', error);
     fighters = [];
+    renderFighters();
   }
 }
 
@@ -86,11 +180,13 @@ function renderFighters() {
             <div class="item-meta">
               ${f.weight} lbs • ${f.height || 'N/A'} • ${div?.name || f.divisionId}
               ${f.fightingStyle ? ` • ${f.fightingStyle}` : ''}
+              ${f.coach ? ` • Coach: ${f.coach}` : ''}
               ${!f.active ? ' • <span style="color:red;">INACTIVE</span>' : ''}
             </div>
           </div>
           <div class="actions">
-            <button class="btn btn-secondary" onclick="downloadFighterJSON('${f.id}')">Download JSON</button>
+            <button class="btn btn-primary" onclick="editFighter('${f.id}')">Edit</button>
+            <button class="btn btn-danger" onclick="deleteFighter('${f.id}')">Delete</button>
           </div>
         </div>
       `;
@@ -132,11 +228,15 @@ function populateFighterDropdowns() {
   });
 }
 
-document.getElementById('fighter-form')?.addEventListener('submit', (e) => {
+document.getElementById('fighter-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
 
+  const editMode = document.getElementById('fighter-edit-id')?.value;
+  const fighterId = document.getElementById('fighter-id').value;
+  const bio = document.getElementById('fighter-bio').value;
+
   const fighter = {
-    id: document.getElementById('fighter-id').value,
+    id: fighterId,
     firstName: document.getElementById('fighter-firstname').value,
     lastName: document.getElementById('fighter-lastname').value,
     nickname: document.getElementById('fighter-nickname').value,
@@ -145,33 +245,123 @@ document.getElementById('fighter-form')?.addEventListener('submit', (e) => {
     divisionId: document.getElementById('fighter-division').value,
     fightingStyle: document.getElementById('fighter-style').value,
     country: document.getElementById('fighter-country').value,
-    bio: document.getElementById('fighter-bio').value,
+    coach: document.getElementById('fighter-coach')?.value || '',
     active: document.getElementById('fighter-active').value === 'true',
-    image: document.getElementById('fighter-image').value || ''
+    image: document.getElementById('fighter-image').value || '/images/fighters/placeholder.jpg',
+    record: { wins: 0, losses: 0, draws: 0 },
+    rankingPoints: 0
   };
 
-  downloadJSON(fighter, `${fighter.id}.json`);
-  showMessage('fighter-message', `Download ${fighter.id}.json and place it in data/fighters/ folder`);
+  try {
+    // Save fighter JSON
+    const fighterPath = `data/fighters/${fighterId}.json`;
+    const existingFile = await getGitHubFile(fighterPath);
 
-  // Also create bio file content
-  const bioContent = fighter.bio || 'No bio available.';
-  const bioBlob = new Blob([bioContent], { type: 'text/markdown' });
-  const bioUrl = URL.createObjectURL(bioBlob);
-  const bioLink = document.createElement('a');
-  bioLink.href = bioUrl;
-  bioLink.download = `${fighter.id}.md`;
-  bioLink.click();
+    // Preserve record and ranking if editing
+    if (existingFile) {
+      const existing = JSON.parse(existingFile.content);
+      fighter.record = existing.record || fighter.record;
+      fighter.rankingPoints = existing.rankingPoints || 0;
+    }
 
-  showMessage('fighter-message', `Download both files and place them in the correct folders, then rebuild the site`);
-  document.getElementById('fighter-form').reset();
+    await saveGitHubFile(
+      fighterPath,
+      JSON.stringify(fighter, null, 2),
+      editMode ? `Update fighter: ${fighter.firstName} ${fighter.lastName}` : `Add fighter: ${fighter.firstName} ${fighter.lastName}`,
+      existingFile?.sha
+    );
+
+    // Save bio
+    if (bio) {
+      const bioPath = `data/fighters/bios/${fighterId}.md`;
+      const existingBio = await getGitHubFile(bioPath);
+      await saveGitHubFile(
+        bioPath,
+        bio,
+        `Update bio for ${fighter.firstName} ${fighter.lastName}`,
+        existingBio?.sha
+      );
+    }
+
+    showMessage('fighter-message', editMode ? 'Fighter updated successfully!' : 'Fighter added successfully!');
+    document.getElementById('fighter-form').reset();
+    document.getElementById('fighter-edit-id').value = '';
+    document.getElementById('fighter-form-title').textContent = 'Add New Fighter';
+    document.getElementById('fighter-submit-btn').textContent = 'Add Fighter';
+    document.getElementById('fighter-cancel-btn').classList.add('hidden');
+
+    await loadFighters();
+  } catch (error) {
+    console.error('Error saving fighter:', error);
+    showMessage('fighter-message', 'Error saving fighter: ' + error.message, true);
+  }
 });
 
-function downloadFighterJSON(id) {
+// Edit fighter
+window.editFighter = async function(id) {
   const fighter = fighters.find(f => f.id === id);
-  if (fighter) {
-    downloadJSON(fighter, `${id}.json`);
+  if (!fighter) return;
+
+  document.getElementById('fighter-edit-id').value = id;
+  document.getElementById('fighter-id').value = fighter.id;
+  document.getElementById('fighter-firstname').value = fighter.firstName;
+  document.getElementById('fighter-lastname').value = fighter.lastName;
+  document.getElementById('fighter-nickname').value = fighter.nickname || '';
+  document.getElementById('fighter-weight').value = fighter.weight;
+  document.getElementById('fighter-height').value = fighter.height || '';
+  document.getElementById('fighter-division').value = fighter.divisionId;
+  document.getElementById('fighter-style').value = fighter.fightingStyle || '';
+  document.getElementById('fighter-country').value = fighter.country || '';
+  if (document.getElementById('fighter-coach')) {
+    document.getElementById('fighter-coach').value = fighter.coach || '';
   }
-}
+  document.getElementById('fighter-active').value = fighter.active ? 'true' : 'false';
+  document.getElementById('fighter-image').value = fighter.image || '';
+
+  // Load bio
+  const bioFile = await getGitHubFile(`data/fighters/bios/${id}.md`);
+  if (bioFile) {
+    document.getElementById('fighter-bio').value = bioFile.content;
+  }
+
+  document.getElementById('fighter-form-title').textContent = 'Edit Fighter';
+  document.getElementById('fighter-submit-btn').textContent = 'Update Fighter';
+  document.getElementById('fighter-cancel-btn').classList.remove('hidden');
+
+  // Scroll to form
+  document.getElementById('fighter-form').scrollIntoView({ behavior: 'smooth' });
+};
+
+// Delete fighter
+window.deleteFighter = async function(id) {
+  if (!confirm('Are you sure you want to delete this fighter?')) return;
+
+  try {
+    const fighter = fighters.find(f => f.id === id);
+    await deleteGitHubFile(`data/fighters/${id}.json`, `Delete fighter: ${fighter.firstName} ${fighter.lastName}`);
+
+    // Try to delete bio if exists
+    try {
+      await deleteGitHubFile(`data/fighters/bios/${id}.md`, `Delete bio for ${fighter.firstName} ${fighter.lastName}`);
+    } catch (e) {
+      // Bio might not exist, ignore error
+    }
+
+    await loadFighters();
+    showMessage('fighter-message', 'Fighter deleted successfully!');
+  } catch (error) {
+    showMessage('fighter-message', 'Error deleting fighter: ' + error.message, true);
+  }
+};
+
+// Cancel fighter edit
+document.getElementById('fighter-cancel-btn')?.addEventListener('click', () => {
+  document.getElementById('fighter-form').reset();
+  document.getElementById('fighter-edit-id').value = '';
+  document.getElementById('fighter-form-title').textContent = 'Add New Fighter';
+  document.getElementById('fighter-submit-btn').textContent = 'Add Fighter';
+  document.getElementById('fighter-cancel-btn').classList.add('hidden');
+});
 
 // ===== EVENTS =====
 
