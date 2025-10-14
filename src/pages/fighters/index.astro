@@ -39,6 +39,8 @@ const baseUrl = import.meta.env.BASE_URL;
         {fighters.map((fighter: any) => {
           const record = recordsMap.get(fighter.id) || { wins: 0, losses: 0, draws: 0 };
           const division = divisions.find((d: any) => d.id === fighter.divisionId);
+          const hasImage = fighter.image && fighter.image !== '/images/fighters/placeholder.jpg';
+          const initials = `${fighter.firstName[0]}${fighter.lastName[0]}`.toUpperCase();
 
           return (
             <a
@@ -46,12 +48,18 @@ const baseUrl = import.meta.env.BASE_URL;
               class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition transform hover:scale-105 border-2 border-bourbon"
             >
               <div class="aspect-[3/2] overflow-hidden relative bg-gray-100">
-                <img
-                  src={fighter.image || '/images/fighters/male-placeholder.png'}
-                  alt={`${fighter.firstName} ${fighter.lastName}`}
-                  class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
-                  loading="lazy"
-                />
+                {hasImage ? (
+                  <img
+                    src={fighter.image}
+                    alt={`${fighter.firstName} ${fighter.lastName}`}
+                    class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-bourbon to-bourbon-dark">
+                    <span class="text-6xl md:text-7xl font-black text-white opacity-90">{initials}</span>
+                  </div>
+                )}
               </div>
               <div class="p-6">
                 <div class="flex items-start justify-between mb-2">
