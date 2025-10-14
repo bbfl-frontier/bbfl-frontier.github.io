@@ -23,7 +23,7 @@ const settings = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/setti
             <ul class="space-y-2 text-gray-700">
               <li><strong>Schedule:</strong> Events every other Friday at 9:00 PM ET</li>
               <li><strong>Card Structure:</strong> 3-5 preliminary bouts, 2-3 main card bouts, 1 title fight (optional)</li>
-              <li><strong>Rounds:</strong> Non-title bouts are 3 rounds, title bouts are 5 rounds</li>
+              <li><strong>Rounds:</strong> Non-title bouts are 5 rounds, title bouts are 7 rounds</li>
               <li><strong>Round Duration:</strong> Each round is 1 minute with 1 minute rest between rounds</li>
               <li><strong>Corner Time:</strong> Coaches may enter the ring between rounds to tend to fighters</li>
               <li><strong>Medical Items:</strong> Fighters may use either 1 bandage OR 1 cigarette between rounds (not both)</li>
@@ -48,7 +48,7 @@ const settings = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/setti
               <h3 class="font-bold text-lg mb-3">Championships</h3>
               <ul class="space-y-2 text-sm text-gray-700">
                 <li>Champions must defend title every {settings.championDefenseRequired} events</li>
-                <li>Title fights are 5 rounds</li>
+                <li>Title fights are 7 rounds</li>
                 <li>Champions cannot move divisions while holding belt</li>
               </ul>
             </div>

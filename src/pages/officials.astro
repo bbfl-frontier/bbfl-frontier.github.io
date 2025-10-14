@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import fs from 'fs';
+import path from 'path';
+
+const officials = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/officials.json'), 'utf-8'));
+
+// Group officials by role
+const groupedOfficials = officials.reduce((acc, official) => {
+  if (!acc[official.role]) acc[official.role] = [];
+  acc[official.role].push(official);
+  return acc;
+}, {});
+
+const roleOrder = ['Founder', 'Commentator', 'Judge', 'Referee', 'Doctor', 'Timekeeper', 'Inspector'];
+---
+
+<BaseLayout
+  title="Officials"
+  description="Meet the officials of the Blood & Bourbon Fight League. Learn about our founders, judges, referees, and medical staff who ensure fair competition."
+>
+  <PageHeader title="BBFL Officials" subtitle="Meet the team behind the Blood & Bourbon League" />
+
+  <section class="py-16 bg-tan">
+    <div class="container mx-auto px-4 max-w-6xl">
+      {roleOrder.map(role => {
+        const roleOfficials = groupedOfficials[role];
+        if (!roleOfficials || roleOfficials.length === 0) return null;
+
+        return (
+          <div class="mb-16">
+            <h2 class="text-3xl font-black text-bourbon mb-8 border-b-4 border-bourbon pb-2 inline-block">
+              {role}{roleOfficials.length > 1 ? 's' : ''}
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {roleOfficials.map(official => (
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden border-2 border-bourbon hover:shadow-2xl transition-all">
+                  <div class="aspect-square bg-gray-200 relative overflow-hidden">
+                    {official.image && official.image !== '/images/officials/placeholder.jpg' ? (
+                      <img
+                        src={official.image}
+                        alt={`${official.firstName} ${official.lastName}`}
+                        class="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-bourbon to-blood">
+                        <div class="text-6xl font-black text-white opacity-20">
+                          {official.firstName[0]}{official.lastName ? official.lastName[0] : ''}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  <div class="p-6">
+                    <h3 class="text-2xl font-black text-bourbon mb-1">
+                      {official.firstName}{official.lastName ? ' ' + official.lastName : ''}
+                    </h3>
+                    <p class="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-3">
+                      {official.role}
+                    </p>
+
+                    {official.bio && (
+                      <p class="text-sm text-gray-700 leading-relaxed">
+                        {official.bio}
+                      </p>
+                    )}
+
+                    {!official.active && (
+                      <div class="mt-4 inline-block px-3 py-1 bg-red-100 text-red-800 text-xs font-bold rounded-full">
+                        INACTIVE
+                      </div>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </section>
+
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4 max-w-4xl text-center">
+      <h2 class="text-3xl font-black text-bourbon mb-6">Join Our Team</h2>
+      <p class="text-lg text-gray-700 mb-8">
+        The Blood & Bourbon Fight League is always looking for qualified officials to join our team.
+        If you're interested in becoming a judge, referee, or medical professional for the BBFL,
+        please contact us for more information about certification requirements and application procedures.
+      </p>
+      <a
+        href="/about"
+        class="inline-block bg-bourbon text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-blood transition-colors"
+      >
+        Contact Us
+      </a>
+    </div>
+  </section>
+</BaseLayout>
