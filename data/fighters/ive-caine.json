@@ -1,0 +1,25 @@
+{
+  "id": "ive-caine",
+  "firstName": "Ivy",
+  "lastName": "Caine",
+  "nickname": "The Viper",
+  "weight": 150,
+  "height": "5'6\"",
+  "reach": "66",
+  "stance": "Orthodox",
+  "divisionId": "feather",
+  "fightingStyle": "Boxer",
+  "age": 30,
+  "nationality": "English",
+  "country": "Britain",
+  "debut": "1882-01-01",
+  "coach": "TBC",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
