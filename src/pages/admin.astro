@@ -102,7 +102,7 @@ const baseUrl = import.meta.env.BASE_URL;
               <input type="text" id="fighter-nickname" placeholder="e.g., The Hammer">
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="form-group">
                 <label>Weight (lbs) *</label>
                 <input type="number" id="fighter-weight" required>
@@ -111,12 +111,29 @@ const baseUrl = import.meta.env.BASE_URL;
                 <label>Height</label>
                 <input type="text" id="fighter-height" placeholder="e.g., 6'2&quot;">
               </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div class="form-group">
-                <label>Division *</label>
-                <select id="fighter-division" required>
-                  <option value="">Select Division</option>
+                <label>Reach</label>
+                <input type="text" id="fighter-reach" placeholder="e.g., 74&quot;">
+              </div>
+              <div class="form-group">
+                <label>Stance</label>
+                <select id="fighter-stance">
+                  <option value="">Select Stance</option>
+                  <option value="Orthodox">Orthodox</option>
+                  <option value="Southpaw">Southpaw</option>
+                  <option value="Switch">Switch</option>
                 </select>
               </div>
+            </div>
+
+            <div class="form-group">
+              <label>Division *</label>
+              <select id="fighter-division" required>
+                <option value="">Select Division</option>
+              </select>
             </div>
 
             <div class="form-group">
@@ -124,14 +141,30 @@ const baseUrl = import.meta.env.BASE_URL;
               <input type="text" id="fighter-style" placeholder="e.g., Brawler, Boxer">
             </div>
 
-            <div class="form-group">
-              <label>Country</label>
-              <input type="text" id="fighter-country" placeholder="e.g., USA">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div class="form-group">
+                <label>Age</label>
+                <input type="number" id="fighter-age" placeholder="e.g., 28" min="18" max="99">
+              </div>
+              <div class="form-group">
+                <label>Nationality</label>
+                <input type="text" id="fighter-nationality" placeholder="e.g., American">
+              </div>
+              <div class="form-group">
+                <label>Country</label>
+                <input type="text" id="fighter-country" placeholder="e.g., USA">
+              </div>
             </div>
 
-            <div class="form-group">
-              <label>Coach</label>
-              <input type="text" id="fighter-coach" placeholder="e.g., John Smith">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="form-group">
+                <label>Debut Date</label>
+                <input type="date" id="fighter-debut">
+              </div>
+              <div class="form-group">
+                <label>Coach</label>
+                <input type="text" id="fighter-coach" placeholder="e.g., John Smith">
+              </div>
             </div>
 
             <div class="form-group">

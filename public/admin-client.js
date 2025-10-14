@@ -242,9 +242,14 @@ document.getElementById('fighter-form')?.addEventListener('submit', async (e) =>
     nickname: document.getElementById('fighter-nickname').value,
     weight: parseInt(document.getElementById('fighter-weight').value),
     height: document.getElementById('fighter-height').value,
+    reach: document.getElementById('fighter-reach')?.value || '',
+    stance: document.getElementById('fighter-stance')?.value || '',
     divisionId: document.getElementById('fighter-division').value,
     fightingStyle: document.getElementById('fighter-style').value,
+    age: document.getElementById('fighter-age')?.value ? parseInt(document.getElementById('fighter-age').value) : null,
+    nationality: document.getElementById('fighter-nationality')?.value || '',
     country: document.getElementById('fighter-country').value,
+    debut: document.getElementById('fighter-debut')?.value || '',
     coach: document.getElementById('fighter-coach')?.value || '',
     active: document.getElementById('fighter-active').value === 'true',
     image: document.getElementById('fighter-image').value || '/images/fighters/placeholder.jpg',
@@ -309,9 +314,24 @@ window.editFighter = async function(id) {
   document.getElementById('fighter-nickname').value = fighter.nickname || '';
   document.getElementById('fighter-weight').value = fighter.weight;
   document.getElementById('fighter-height').value = fighter.height || '';
+  if (document.getElementById('fighter-reach')) {
+    document.getElementById('fighter-reach').value = fighter.reach || '';
+  }
+  if (document.getElementById('fighter-stance')) {
+    document.getElementById('fighter-stance').value = fighter.stance || '';
+  }
   document.getElementById('fighter-division').value = fighter.divisionId;
   document.getElementById('fighter-style').value = fighter.fightingStyle || '';
+  if (document.getElementById('fighter-age')) {
+    document.getElementById('fighter-age').value = fighter.age || '';
+  }
+  if (document.getElementById('fighter-nationality')) {
+    document.getElementById('fighter-nationality').value = fighter.nationality || '';
+  }
   document.getElementById('fighter-country').value = fighter.country || '';
+  if (document.getElementById('fighter-debut')) {
+    document.getElementById('fighter-debut').value = fighter.debut || '';
+  }
   if (document.getElementById('fighter-coach')) {
     document.getElementById('fighter-coach').value = fighter.coach || '';
   }
