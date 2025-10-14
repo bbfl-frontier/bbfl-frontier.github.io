@@ -5,7 +5,7 @@
   "schedule": {
     "frequency": "biweekly",
     "dayOfWeek": 5,
-    "hour": 21,
+    "hour": 18,
     "minute": 0,
     "timezone": "America/New_York"
   },
