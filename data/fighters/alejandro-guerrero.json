@@ -1,0 +1,25 @@
+{
+  "id": "alejandro-guerrero",
+  "firstName": "Alejandro",
+  "lastName": "Guerrero",
+  "nickname": "El Toro",
+  "weight": 179,
+  "height": "6'0\"",
+  "reach": "70",
+  "stance": "Southpaw",
+  "divisionId": "middle",
+  "fightingStyle": "Brawler",
+  "age": 27,
+  "nationality": "Mexican",
+  "country": "Mexico",
+  "debut": "1885-01-01",
+  "coach": "Lyra Snow",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
