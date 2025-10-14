@@ -90,36 +90,60 @@ if (fighter.bioFile) {
                   <dt class="text-gray-600">Weight:</dt>
                   <dd class="font-semibold">{fighter.weight} lbs</dd>
                 </div>
-                <div class="flex justify-between">
-                  <dt class="text-gray-600">Height:</dt>
-                  <dd class="font-semibold">{fighter.height}</dd>
-                </div>
-                <div class="flex justify-between">
-                  <dt class="text-gray-600">Reach:</dt>
-                  <dd class="font-semibold">{fighter.reach}</dd>
-                </div>
-                <div class="flex justify-between">
-                  <dt class="text-gray-600">Stance:</dt>
-                  <dd class="font-semibold">{fighter.stance}</dd>
-                </div>
+                {fighter.height && (
+                  <div class="flex justify-between">
+                    <dt class="text-gray-600">Height:</dt>
+                    <dd class="font-semibold">{fighter.height}</dd>
+                  </div>
+                )}
+                {fighter.reach && (
+                  <div class="flex justify-between">
+                    <dt class="text-gray-600">Reach:</dt>
+                    <dd class="font-semibold">{fighter.reach}"</dd>
+                  </div>
+                )}
+                {fighter.stance && (
+                  <div class="flex justify-between">
+                    <dt class="text-gray-600">Stance:</dt>
+                    <dd class="font-semibold">{fighter.stance}</dd>
+                  </div>
+                )}
+                {fighter.fightingStyle && (
+                  <div class="flex justify-between">
+                    <dt class="text-gray-600">Fighting Style:</dt>
+                    <dd class="font-semibold">{fighter.fightingStyle}</dd>
+                  </div>
+                )}
+                {fighter.coach && (
+                  <div class="flex justify-between">
+                    <dt class="text-gray-600">Coach:</dt>
+                    <dd class="font-semibold">{fighter.coach}</dd>
+                  </div>
+                )}
               </dl>
             </div>
 
             <div>
               <h3 class="text-lg font-bold text-bourbon mb-4">Info</h3>
               <dl class="space-y-2 text-sm">
-                <div class="flex justify-between">
-                  <dt class="text-gray-600">Age:</dt>
-                  <dd class="font-semibold">{fighter.age}</dd>
-                </div>
-                <div class="flex justify-between">
-                  <dt class="text-gray-600">Nationality:</dt>
-                  <dd class="font-semibold">{fighter.nationality}</dd>
-                </div>
-                <div class="flex justify-between">
-                  <dt class="text-gray-600">Debut:</dt>
-                  <dd class="font-semibold">{new Date(fighter.debut).toLocaleDateString()}</dd>
-                </div>
+                {fighter.age && (
+                  <div class="flex justify-between">
+                    <dt class="text-gray-600">Age:</dt>
+                    <dd class="font-semibold">{fighter.age}</dd>
+                  </div>
+                )}
+                {(fighter.nationality || fighter.country) && (
+                  <div class="flex justify-between">
+                    <dt class="text-gray-600">Nationality:</dt>
+                    <dd class="font-semibold">{fighter.nationality || fighter.country}</dd>
+                  </div>
+                )}
+                {fighter.debut && (
+                  <div class="flex justify-between">
+                    <dt class="text-gray-600">Debut:</dt>
+                    <dd class="font-semibold">{new Date(fighter.debut).toLocaleDateString()}</dd>
+                  </div>
+                )}
                 <div class="flex justify-between">
                   <dt class="text-gray-600">Status:</dt>
                   <dd class="font-semibold">{fighter.active ? 'Active' : 'Inactive'}</dd>
