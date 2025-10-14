@@ -1,0 +1,25 @@
+{
+  "id": "tasa-tabitsi ",
+  "firstName": "Tasa",
+  "lastName": "Tabitsi",
+  "nickname": "The Terror",
+  "weight": 145,
+  "height": "5'7\"",
+  "reach": "67",
+  "stance": "Switch",
+  "divisionId": "feather",
+  "fightingStyle": "Bruiser",
+  "age": 22,
+  "nationality": "American",
+  "country": "USA",
+  "debut": "1890-01-01",
+  "coach": "TBC",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
