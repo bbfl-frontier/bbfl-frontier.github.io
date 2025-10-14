@@ -70,5 +70,23 @@
     "active": true,
     "bio": "Official BBFL judge",
     "image": "/images/officials/placeholder.jpg"
+  },
+  {
+    "id": "referee-1",
+    "firstName": "Referee",
+    "lastName": "TBC",
+    "role": "Referee",
+    "active": true,
+    "bio": "Official BBFL referee",
+    "image": "/images/officials/placeholder.jpg"
+  },
+  {
+    "id": "referee-2",
+    "firstName": "Referee",
+    "lastName": "TBC",
+    "role": "Referee",
+    "active": true,
+    "bio": "Official BBFL referee",
+    "image": "/images/officials/placeholder.jpg"
   }
 ]
