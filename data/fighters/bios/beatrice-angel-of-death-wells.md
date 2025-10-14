@@ -1,1 +1,0 @@
-A former battlefield nurse from London who learned anatomy to heal, now uses that knowledge to hurt. Beatrice "Angel of Death" Wells knows exactly where to strike for maximum damage.

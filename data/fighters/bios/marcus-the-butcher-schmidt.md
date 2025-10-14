@@ -1,1 +1,0 @@
-An actual butcher from Berlin whose meat cleaver precision translates to devastating strikes in the ring. Marcus "The Butcher" Schmidt carves up opponents with surgical brutality.

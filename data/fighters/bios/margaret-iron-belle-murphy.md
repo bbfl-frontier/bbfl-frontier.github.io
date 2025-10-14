@@ -1,1 +1,0 @@
-A Southern belle from Georgia with fists of iron and a will of steel. Margaret "Iron Belle" Murphy defies expectations and proves that grace and brutality can coexist.

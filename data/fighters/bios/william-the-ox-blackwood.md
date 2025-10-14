@@ -1,1 +1,0 @@
-A lumberjack from the Scottish Highlands with tree-trunk arms and an unbreakable spirit. William "The Ox" Blackwood carried his brutal work ethic from the forests into the fighting pit.

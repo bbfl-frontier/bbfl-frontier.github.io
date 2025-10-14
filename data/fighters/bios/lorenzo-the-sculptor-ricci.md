@@ -1,1 +1,0 @@
-An artist from Florence who shapes faces with his fists instead of marble. Lorenzo "The Sculptor" Ricci brings Renaissance precision to every carefully calculated strike.

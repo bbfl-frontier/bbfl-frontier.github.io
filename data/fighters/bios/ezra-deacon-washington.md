@@ -1,1 +1,0 @@
-A former slave from Virginia who won his freedom through boxing matches and now fights for glory and respect. Ezra "Deacon" Washington represents hope and determination incarnate.

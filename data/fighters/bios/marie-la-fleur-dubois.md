@@ -1,1 +1,0 @@
-A Parisian dancer who brings devastating elegance to the ring. Marie "La Fleur" Dubois uses her footwork and timing from the dance floor to create beautiful yet brutal combinations.

@@ -1,1 +1,0 @@
-An actual undertaker from Philadelphia who puts opponents to sleep, though thankfully not permanently. Henry "The Undertaker" Graves brings the same cold efficiency to fighting as he does to his day job.

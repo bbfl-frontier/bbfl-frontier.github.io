@@ -96,6 +96,7 @@ async function loadFighters() {
           <div class="fighter-meta">
             ${f.weight} lbs • ${f.height || 'N/A'} • ${divisions.find(d => d.id === f.divisionId)?.name || f.divisionId}
             ${f.fightingStyle ? ` • ${f.fightingStyle}` : ''}
+            ${f.coach ? ` • Coach: ${f.coach}` : ''}
             ${!f.active ? ' • <span style="color:red;">INACTIVE</span>' : ''}
           </div>
         </div>
@@ -143,6 +144,7 @@ document.getElementById('fighter-form').addEventListener('submit', async (e) => 
     divisionId: document.getElementById('fighter-division').value,
     fightingStyle: document.getElementById('fighter-style').value,
     country: document.getElementById('fighter-country').value,
+    coach: document.getElementById('fighter-coach').value,
     bio: document.getElementById('fighter-bio').value,
     active: document.getElementById('fighter-active').value === 'true',
     image: '/images/fighters/male-placeholder.png'
@@ -201,6 +203,7 @@ async function editFighter(id) {
   document.getElementById('fighter-division').value = fighter.divisionId;
   document.getElementById('fighter-style').value = fighter.fightingStyle || '';
   document.getElementById('fighter-country').value = fighter.country || '';
+  document.getElementById('fighter-coach').value = fighter.coach || '';
   document.getElementById('fighter-bio').value = fighter.bio || '';
   document.getElementById('fighter-active').value = fighter.active ? 'true' : 'false';
 

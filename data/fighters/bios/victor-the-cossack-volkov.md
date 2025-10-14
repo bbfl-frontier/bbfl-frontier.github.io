@@ -1,1 +1,0 @@
-A former Cossack horseman who fights with the fury of the Russian steppes. Victor "The Cossack" Volkov brings wild, unpredictable aggression that overwhelms more technical opponents.

@@ -1,1 +1,0 @@
-A former preacher who found redemption in the ring after losing his faith. Abraham "The Preacher" Cole delivers sermons with his fists and shows no mercy to sinners.

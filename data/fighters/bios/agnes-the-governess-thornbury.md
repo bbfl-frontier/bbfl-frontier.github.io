@@ -1,1 +1,0 @@
-A stern governess from London who disciplines opponents with the same precision she uses on unruly children. Agnes "The Governess" Thornbury's technical mastery makes every strike a lesson in pain.
