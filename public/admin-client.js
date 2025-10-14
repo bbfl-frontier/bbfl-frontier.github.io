@@ -92,6 +92,19 @@ async function deleteGitHubFile(path, message) {
   });
 }
 
+// Trigger GitHub Actions workflow to rebuild site
+async function triggerRebuild() {
+  try {
+    await githubAPI('actions/workflows/deploy.yml/dispatches', 'POST', {
+      ref: BRANCH
+    });
+    return true;
+  } catch (error) {
+    console.error('Error triggering rebuild:', error);
+    return false;
+  }
+}
+
 // Load data from GitHub
 async function loadData() {
   try {
@@ -288,7 +301,7 @@ document.getElementById('fighter-form')?.addEventListener('submit', async (e) =>
       );
     }
 
-    showMessage('fighter-message', editMode ? 'Fighter updated successfully!' : 'Fighter added successfully!');
+    showMessage('fighter-message', editMode ? 'Fighter updated successfully! Rebuilding site...' : 'Fighter added successfully! Rebuilding site...');
     document.getElementById('fighter-form').reset();
     document.getElementById('fighter-edit-id').value = '';
     document.getElementById('fighter-form-title').textContent = 'Add New Fighter';
@@ -296,6 +309,12 @@ document.getElementById('fighter-form')?.addEventListener('submit', async (e) =>
     document.getElementById('fighter-cancel-btn').classList.add('hidden');
 
     await loadFighters();
+
+    // Trigger rebuild
+    const rebuilt = await triggerRebuild();
+    if (rebuilt) {
+      showMessage('fighter-message', 'Site rebuild triggered! Rankings will update in ~2-3 minutes.');
+    }
   } catch (error) {
     console.error('Error saving fighter:', error);
     showMessage('fighter-message', 'Error saving fighter: ' + error.message, true);
@@ -368,7 +387,13 @@ window.deleteFighter = async function(id) {
     }
 
     await loadFighters();
-    showMessage('fighter-message', 'Fighter deleted successfully!');
+    showMessage('fighter-message', 'Fighter deleted successfully! Rebuilding site...');
+
+    // Trigger rebuild
+    const rebuilt = await triggerRebuild();
+    if (rebuilt) {
+      showMessage('fighter-message', 'Site rebuild triggered! Rankings will update in ~2-3 minutes.');
+    }
   } catch (error) {
     showMessage('fighter-message', 'Error deleting fighter: ' + error.message, true);
   }
