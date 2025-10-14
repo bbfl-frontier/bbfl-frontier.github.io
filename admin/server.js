@@ -18,7 +18,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 // Configure multer for image uploads
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const dir = path.join(rootDir, 'public/images/fighters');
+    // Determine directory based on URL path
+    let subdir = 'fighters';
+    if (req.path.includes('/officials/')) {
+      subdir = 'officials';
+    }
+    const dir = path.join(rootDir, 'public/images', subdir);
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
@@ -26,8 +31,8 @@ const storage = multer.diskStorage({
   },
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname);
-    const fighterId = req.body.fighterId || Date.now();
-    cb(null, `${fighterId}${ext}`);
+    const entityId = req.body.fighterId || req.body.officialId || Date.now();
+    cb(null, `${entityId}${ext}`);
   }
 });
 
@@ -233,6 +238,17 @@ app.put('/api/bouts/:id', (req, res) => {
   res.json(bout);
 });
 
+// Delete bout
+app.delete('/api/bouts/:id', (req, res) => {
+  const filePath = path.join(rootDir, 'data/bouts', `${req.params.id}.json`);
+
+  if (fs.existsSync(filePath)) {
+    fs.unlinkSync(filePath);
+  }
+
+  res.json({ success: true });
+});
+
 // ===== RESULTS =====
 
 // Get all results
@@ -258,6 +274,20 @@ app.post('/api/results', (req, res) => {
   res.json(result);
 });
 
+// Delete result
+app.delete('/api/results/:boutId', (req, res) => {
+  const filePath = path.join(rootDir, 'data/results', `${req.params.boutId}.json`);
+
+  if (fs.existsSync(filePath)) {
+    fs.unlinkSync(filePath);
+  }
+
+  // Rebuild rankings after deleting result
+  rebuildRankings();
+
+  res.json({ success: true });
+});
+
 // ===== VENUES =====
 
 app.get('/api/venues', (req, res) => {
@@ -265,6 +295,95 @@ app.get('/api/venues', (req, res) => {
     fs.readFileSync(path.join(rootDir, 'data/venues.json'), 'utf-8')
   );
   res.json(venues);
+});
+
+// ===== OFFICIALS =====
+
+// Get all officials
+app.get('/api/officials', (req, res) => {
+  const filePath = path.join(rootDir, 'data/officials.json');
+  if (!fs.existsSync(filePath)) {
+    return res.json([]);
+  }
+  const officials = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  res.json(officials);
+});
+
+// Get single official
+app.get('/api/officials/:id', (req, res) => {
+  const officials = JSON.parse(
+    fs.readFileSync(path.join(rootDir, 'data/officials.json'), 'utf-8')
+  );
+  const official = officials.find(o => o.id === req.params.id);
+  if (!official) {
+    return res.status(404).json({ error: 'Official not found' });
+  }
+  res.json(official);
+});
+
+// Create official
+app.post('/api/officials', (req, res) => {
+  const filePath = path.join(rootDir, 'data/officials.json');
+  const officials = fs.existsSync(filePath)
+    ? JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+    : [];
+
+  const official = req.body;
+
+  // Check if ID already exists
+  if (officials.find(o => o.id === official.id)) {
+    return res.status(400).json({ error: 'Official already exists' });
+  }
+
+  officials.push(official);
+  fs.writeFileSync(filePath, JSON.stringify(officials, null, 2));
+  res.json(official);
+});
+
+// Update official
+app.put('/api/officials/:id', (req, res) => {
+  const filePath = path.join(rootDir, 'data/officials.json');
+  const officials = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+
+  const index = officials.findIndex(o => o.id === req.params.id);
+  if (index === -1) {
+    return res.status(404).json({ error: 'Official not found' });
+  }
+
+  officials[index] = req.body;
+  fs.writeFileSync(filePath, JSON.stringify(officials, null, 2));
+  res.json(req.body);
+});
+
+// Delete official
+app.delete('/api/officials/:id', (req, res) => {
+  const filePath = path.join(rootDir, 'data/officials.json');
+  const officials = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+
+  const filtered = officials.filter(o => o.id !== req.params.id);
+  fs.writeFileSync(filePath, JSON.stringify(filtered, null, 2));
+  res.json({ success: true });
+});
+
+// Upload official image
+app.post('/api/officials/:id/image', upload.single('image'), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: 'No file uploaded' });
+  }
+
+  const imagePath = `/images/officials/${req.file.filename}`;
+
+  // Update official JSON with image path
+  const filePath = path.join(rootDir, 'data/officials.json');
+  const officials = JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+
+  const official = officials.find(o => o.id === req.params.id);
+  if (official) {
+    official.image = imagePath;
+    fs.writeFileSync(filePath, JSON.stringify(officials, null, 2));
+  }
+
+  res.json({ imagePath });
 });
 
 const PORT = 3001;

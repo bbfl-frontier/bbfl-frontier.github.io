@@ -5,6 +5,8 @@ let fighters = [];
 let events = [];
 let venues = [];
 let bouts = [];
+let officials = [];
+let results = [];
 
 // Tab switching
 document.querySelectorAll('.tab').forEach(tab => {
@@ -22,6 +24,7 @@ document.querySelectorAll('.tab').forEach(tab => {
     if (targetTab === 'events') loadEvents();
     if (targetTab === 'bouts') loadBouts();
     if (targetTab === 'results') loadResults();
+    if (targetTab === 'officials') loadOfficials();
   });
 });
 
@@ -411,6 +414,10 @@ async function loadBouts() {
                     ${b.forChampionship ? ' • <span style="color:gold;">CHAMPIONSHIP BOUT</span>' : ''}
                   </div>
                 </div>
+                <div class="actions">
+                  <button class="btn btn-sm btn-secondary" onclick="editBout('${b.id}')">Edit</button>
+                  <button class="btn btn-sm btn-danger" onclick="deleteBout('${b.id}')">Delete</button>
+                </div>
               </div>
             `;
           }).join('')}
@@ -445,6 +452,9 @@ function populateBoutDropdown() {
 document.getElementById('bout-form').addEventListener('submit', async (e) => {
   e.preventDefault();
 
+  const editId = document.getElementById('bout-edit-id').value;
+  const isEdit = !!editId;
+
   const bout = {
     id: document.getElementById('bout-id').value,
     eventId: document.getElementById('bout-event').value,
@@ -457,22 +467,72 @@ document.getElementById('bout-form').addEventListener('submit', async (e) => {
   };
 
   try {
-    const response = await fetch(`${API_URL}/bouts`, {
-      method: 'POST',
+    const url = isEdit ? `${API_URL}/bouts/${editId}` : `${API_URL}/bouts`;
+    const method = isEdit ? 'PUT' : 'POST';
+    const response = await fetch(url, {
+      method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(bout)
     });
 
-    if (!response.ok) throw new Error('Failed to add bout');
+    if (!response.ok) throw new Error('Failed to save bout');
 
-    showMessage('bout-message', 'Bout added to fight card!');
+    showMessage('bout-message', isEdit ? 'Bout updated!' : 'Bout added to fight card!');
     document.getElementById('bout-form').reset();
+    document.getElementById('bout-edit-id').value = '';
+    document.getElementById('bout-form-title').textContent = 'Add Bout to Fight Card';
+    document.getElementById('bout-submit-btn').textContent = 'Add Bout to Card';
+    document.getElementById('bout-cancel-btn').style.display = 'none';
+    document.getElementById('bout-id').disabled = false;
 
     loadBouts();
   } catch (err) {
     showMessage('bout-message', err.message, true);
   }
 });
+
+document.getElementById('bout-cancel-btn').addEventListener('click', () => {
+  document.getElementById('bout-form').reset();
+  document.getElementById('bout-edit-id').value = '';
+  document.getElementById('bout-id').disabled = false;
+  document.getElementById('bout-form-title').textContent = 'Add Bout to Fight Card';
+  document.getElementById('bout-submit-btn').textContent = 'Add Bout to Card';
+  document.getElementById('bout-cancel-btn').style.display = 'none';
+});
+
+async function editBout(id) {
+  const bout = bouts.find(b => b.id === id);
+  if (!bout) return;
+
+  document.getElementById('bout-edit-id').value = id;
+  document.getElementById('bout-id').value = bout.id;
+  document.getElementById('bout-id').disabled = true;
+  document.getElementById('bout-event').value = bout.eventId;
+  document.getElementById('bout-fighter1').value = bout.fighter1Id;
+  document.getElementById('bout-fighter2').value = bout.fighter2Id;
+  document.getElementById('bout-division').value = bout.divisionId;
+  document.getElementById('bout-rounds').value = bout.rounds;
+  document.getElementById('bout-order').value = bout.order;
+  document.getElementById('bout-championship').value = bout.forChampionship ? 'true' : 'false';
+
+  document.getElementById('bout-form-title').textContent = 'Edit Bout';
+  document.getElementById('bout-submit-btn').textContent = 'Update Bout';
+  document.getElementById('bout-cancel-btn').style.display = 'inline-block';
+
+  window.scrollTo(0, 0);
+}
+
+async function deleteBout(id) {
+  if (!confirm('Are you sure you want to delete this bout?')) return;
+
+  try {
+    await fetch(`${API_URL}/bouts/${id}`, { method: 'DELETE' });
+    showMessage('bout-message', 'Bout deleted.');
+    loadBouts();
+  } catch (err) {
+    showMessage('bout-message', 'Failed to delete bout.', true);
+  }
+}
 
 // ===== RESULTS =====
 
@@ -559,7 +619,7 @@ document.getElementById('result-form').addEventListener('submit', async (e) => {
 });
 
 async function loadResults() {
-  const results = await fetch(`${API_URL}/results`).then(r => r.json());
+  results = await fetch(`${API_URL}/results`).then(r => r.json());
 
   const list = document.getElementById('result-list');
   if (results.length === 0) {
@@ -586,10 +646,238 @@ async function loadResults() {
               ${r.performanceBonus ? ' • <span style="color:gold;">⭐ BONUS</span>' : ''}
             </div>
           </div>
+          <div class="actions">
+            <button class="btn btn-sm btn-secondary" onclick="editResult('${r.boutId}')">Edit</button>
+            <button class="btn btn-sm btn-danger" onclick="deleteResult('${r.boutId}')">Delete</button>
+          </div>
         </div>
       `;
     }).join('');
 }
+
+document.getElementById('result-cancel-btn').addEventListener('click', () => {
+  document.getElementById('result-form').reset();
+  document.getElementById('result-edit-bout-id').value = '';
+  document.getElementById('result-bout').disabled = false;
+  document.getElementById('result-form-title').textContent = 'Add Fight Result';
+  document.getElementById('result-submit-btn').textContent = 'Submit Result & Update Rankings';
+  document.getElementById('result-cancel-btn').style.display = 'none';
+  document.getElementById('scorecard-section').style.display = 'none';
+});
+
+async function editResult(boutId) {
+  const result = results.find(r => r.boutId === boutId);
+  if (!result) return;
+
+  document.getElementById('result-edit-bout-id').value = boutId;
+  document.getElementById('result-bout').value = boutId;
+  document.getElementById('result-bout').disabled = true;
+  document.getElementById('result-winner').value = result.winnerId || 'draw';
+  document.getElementById('result-method').value = result.method;
+  document.getElementById('result-round').value = result.round || '';
+  document.getElementById('result-time').value = result.time || '';
+  document.getElementById('result-bonus').value = result.performanceBonus ? 'true' : 'false';
+
+  // Populate winner dropdown manually
+  const bout = bouts.find(b => b.id === boutId);
+  if (bout) {
+    const winnerSelect = document.getElementById('result-winner');
+    winnerSelect.innerHTML = '<option value="">Select Winner</option>';
+    const f1 = fighters.find(f => f.id === bout.fighter1Id);
+    const f2 = fighters.find(f => f.id === bout.fighter2Id);
+
+    [f1, f2].forEach(f => {
+      if (f) {
+        const option = document.createElement('option');
+        option.value = f.id;
+        option.textContent = `${f.firstName} ${f.lastName}`;
+        winnerSelect.appendChild(option);
+      }
+    });
+
+    const drawOption = document.createElement('option');
+    drawOption.value = 'draw';
+    drawOption.textContent = 'Draw';
+    winnerSelect.appendChild(drawOption);
+
+    winnerSelect.value = result.winnerId || 'draw';
+  }
+
+  // Show scorecard if Decision
+  if (result.method === 'Decision' && result.scorecard) {
+    document.getElementById('scorecard-section').style.display = 'block';
+    document.getElementById('result-judge1').value = result.scorecard.judge1?.join(',') || '';
+    document.getElementById('result-judge2').value = result.scorecard.judge2?.join(',') || '';
+    document.getElementById('result-judge3').value = result.scorecard.judge3?.join(',') || '';
+  }
+
+  document.getElementById('result-form-title').textContent = 'Edit Fight Result';
+  document.getElementById('result-submit-btn').textContent = 'Update Result';
+  document.getElementById('result-cancel-btn').style.display = 'inline-block';
+
+  window.scrollTo(0, 0);
+}
+
+async function deleteResult(boutId) {
+  if (!confirm('Are you sure you want to delete this result? This will update rankings.')) return;
+
+  try {
+    await fetch(`${API_URL}/results/${boutId}`, { method: 'DELETE' });
+    showMessage('result-message', 'Result deleted. Rankings updated.');
+    loadResults();
+  } catch (err) {
+    showMessage('result-message', 'Failed to delete result.', true);
+  }
+}
+
+// ===== OFFICIALS =====
+
+async function loadOfficials() {
+  officials = await fetch(`${API_URL}/officials`).then(r => r.json());
+
+  const list = document.getElementById('official-list');
+  if (officials.length === 0) {
+    list.innerHTML = '<p>No officials yet.</p>';
+    return;
+  }
+
+  list.innerHTML = officials
+    .sort((a, b) => `${a.role}${a.lastName}${a.firstName}`.localeCompare(`${b.role}${b.lastName}${b.firstName}`))
+    .map(o => `
+      <div class="fighter-item">
+        <div class="fighter-info">
+          <strong>${o.firstName}${o.lastName ? ' ' + o.lastName : ''}</strong>
+          <div class="fighter-meta">
+            ${o.role}
+            ${!o.active ? ' • <span style="color:red;">INACTIVE</span>' : ''}
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-sm btn-secondary" onclick="editOfficial('${o.id}')">Edit</button>
+          <button class="btn btn-sm btn-danger" onclick="deleteOfficial('${o.id}')">Delete</button>
+        </div>
+      </div>
+    `).join('');
+}
+
+document.getElementById('official-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const editId = document.getElementById('official-edit-id').value;
+  const isEdit = !!editId;
+
+  const official = {
+    id: document.getElementById('official-id').value,
+    firstName: document.getElementById('official-firstname').value,
+    lastName: document.getElementById('official-lastname').value,
+    role: document.getElementById('official-role').value,
+    bio: document.getElementById('official-bio').value,
+    active: document.getElementById('official-active').value === 'true',
+    image: '/images/officials/placeholder.jpg'
+  };
+
+  try {
+    const url = isEdit ? `${API_URL}/officials/${editId}` : `${API_URL}/officials`;
+    const method = isEdit ? 'PUT' : 'POST';
+    const response = await fetch(url, {
+      method,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(official)
+    });
+
+    if (!response.ok) throw new Error('Failed to save official');
+
+    // Upload image if provided
+    const imageFile = document.getElementById('official-image-upload').files[0];
+    if (imageFile) {
+      const formData = new FormData();
+      formData.append('image', imageFile);
+      formData.append('officialId', official.id);
+
+      await fetch(`${API_URL}/officials/${official.id}/image`, {
+        method: 'POST',
+        body: formData
+      });
+    }
+
+    showMessage('official-message', isEdit ? 'Official updated!' : 'Official added!');
+    document.getElementById('official-form').reset();
+    document.getElementById('official-edit-id').value = '';
+    document.getElementById('official-form-title').textContent = 'Add Official';
+    document.getElementById('official-submit-btn').textContent = 'Add Official';
+    document.getElementById('official-cancel-btn').style.display = 'none';
+    document.getElementById('official-image-preview').classList.add('hidden');
+
+    loadOfficials();
+  } catch (err) {
+    showMessage('official-message', err.message, true);
+  }
+});
+
+async function editOfficial(id) {
+  const official = officials.find(o => o.id === id);
+  if (!official) return;
+
+  document.getElementById('official-edit-id').value = id;
+  document.getElementById('official-id').value = official.id;
+  document.getElementById('official-id').disabled = true;
+  document.getElementById('official-firstname').value = official.firstName;
+  document.getElementById('official-lastname').value = official.lastName || '';
+  document.getElementById('official-role').value = official.role;
+  document.getElementById('official-bio').value = official.bio || '';
+  document.getElementById('official-active').value = official.active ? 'true' : 'false';
+
+  // Show existing image if available
+  const preview = document.getElementById('official-image-preview');
+  if (official.image) {
+    preview.src = official.image;
+    preview.classList.remove('hidden');
+  } else {
+    preview.classList.add('hidden');
+  }
+
+  document.getElementById('official-form-title').textContent = 'Edit Official';
+  document.getElementById('official-submit-btn').textContent = 'Update Official';
+  document.getElementById('official-cancel-btn').style.display = 'inline-block';
+
+  window.scrollTo(0, 0);
+}
+
+document.getElementById('official-cancel-btn').addEventListener('click', () => {
+  document.getElementById('official-form').reset();
+  document.getElementById('official-edit-id').value = '';
+  document.getElementById('official-id').disabled = false;
+  document.getElementById('official-form-title').textContent = 'Add Official';
+  document.getElementById('official-submit-btn').textContent = 'Add Official';
+  document.getElementById('official-cancel-btn').style.display = 'none';
+  document.getElementById('official-image-preview').classList.add('hidden');
+});
+
+async function deleteOfficial(id) {
+  if (!confirm('Are you sure you want to delete this official?')) return;
+
+  try {
+    await fetch(`${API_URL}/officials/${id}`, { method: 'DELETE' });
+    showMessage('official-message', 'Official deleted.');
+    loadOfficials();
+  } catch (err) {
+    showMessage('official-message', 'Failed to delete official.', true);
+  }
+}
+
+// Image preview for officials
+document.getElementById('official-image-upload').addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const preview = document.getElementById('official-image-preview');
+      preview.src = e.target.result;
+      preview.classList.remove('hidden');
+    };
+    reader.readAsDataURL(file);
+  }
+});
 
 // ===== START =====
 

@@ -163,6 +163,7 @@
       <button class="tab" data-tab="events">Events</button>
       <button class="tab" data-tab="bouts">Fight Card</button>
       <button class="tab" data-tab="results">Results</button>
+      <button class="tab" data-tab="officials">Officials</button>
     </div>
 
     <!-- FIGHTERS TAB -->
@@ -335,9 +336,11 @@
     <!-- BOUTS TAB -->
     <div class="tab-content" id="bouts">
       <div class="card">
-        <h2>Add Bout to Fight Card</h2>
+        <h2 id="bout-form-title">Add Bout to Fight Card</h2>
         <div id="bout-message"></div>
         <form id="bout-form">
+          <input type="hidden" id="bout-edit-id">
+
           <div class="form-group">
             <label>Event *</label>
             <select id="bout-event" required>
@@ -390,7 +393,10 @@
             </select>
           </div>
 
-          <button type="submit" class="btn btn-primary">Add Bout to Card</button>
+          <div class="actions">
+            <button type="submit" class="btn btn-primary" id="bout-submit-btn">Add Bout to Card</button>
+            <button type="button" class="btn btn-secondary" id="bout-cancel-btn" style="display:none;">Cancel</button>
+          </div>
         </form>
       </div>
 
@@ -405,9 +411,11 @@
     <!-- RESULTS TAB -->
     <div class="tab-content" id="results">
       <div class="card">
-        <h2>Add Fight Result</h2>
+        <h2 id="result-form-title">Add Fight Result</h2>
         <div id="result-message"></div>
         <form id="result-form">
+          <input type="hidden" id="result-edit-bout-id">
+
           <div class="form-group">
             <label>Select Bout *</label>
             <select id="result-bout" required>
@@ -472,7 +480,10 @@
             </select>
           </div>
 
-          <button type="submit" class="btn btn-primary">Submit Result & Update Rankings</button>
+          <div class="actions">
+            <button type="submit" class="btn btn-primary" id="result-submit-btn">Submit Result & Update Rankings</button>
+            <button type="button" class="btn btn-secondary" id="result-cancel-btn" style="display:none;">Cancel</button>
+          </div>
         </form>
       </div>
 
@@ -480,6 +491,79 @@
         <h2>Recent Results</h2>
         <div id="result-list">
           <p>Loading results...</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- OFFICIALS TAB -->
+    <div class="tab-content" id="officials">
+      <div class="card">
+        <h2 id="official-form-title">Add Official</h2>
+        <div id="official-message"></div>
+        <form id="official-form">
+          <input type="hidden" id="official-edit-id">
+
+          <div class="grid grid-2">
+            <div class="form-group">
+              <label>Official ID *</label>
+              <input type="text" id="official-id" required placeholder="e.g., john-smith">
+            </div>
+            <div class="form-group">
+              <label>Active Status *</label>
+              <select id="official-active">
+                <option value="true">Active</option>
+                <option value="false">Inactive</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-2">
+            <div class="form-group">
+              <label>First Name *</label>
+              <input type="text" id="official-firstname" required>
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" id="official-lastname">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Role *</label>
+            <select id="official-role" required>
+              <option value="">Select Role</option>
+              <option value="Founder">Founder</option>
+              <option value="Judge">Judge</option>
+              <option value="Referee">Referee</option>
+              <option value="Commentator">Commentator</option>
+              <option value="Doctor">Doctor</option>
+              <option value="Timekeeper">Timekeeper</option>
+              <option value="Inspector">Inspector</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Biography</label>
+            <textarea id="official-bio" placeholder="Official's background..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Official Image</label>
+            <input type="file" id="official-image-upload" accept="image/*">
+            <img id="official-image-preview" class="image-preview hidden">
+          </div>
+
+          <div class="actions">
+            <button type="submit" class="btn btn-primary" id="official-submit-btn">Add Official</button>
+            <button type="button" class="btn btn-secondary" id="official-cancel-btn" style="display:none;">Cancel</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2>All Officials</h2>
+        <div class="fighter-list" id="official-list">
+          <p>Loading officials...</p>
         </div>
       </div>
     </div>

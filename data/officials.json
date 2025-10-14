@@ -1,0 +1,74 @@
+[
+  {
+    "id": "raymond-black",
+    "firstName": "Raymond",
+    "lastName": "Black",
+    "role": "Founder",
+    "active": true,
+    "bio": "Founder of the Bare Knuckle Fighting League",
+    "image": "/images/officials/raymond-black.jpg"
+  },
+  {
+    "id": "little-fox",
+    "firstName": "Little",
+    "lastName": "Fox",
+    "role": "Founder",
+    "active": true,
+    "bio": "Co-founder of the Bare Knuckle Fighting League",
+    "image": "/images/officials/little-fox.jpg"
+  },
+  {
+    "id": "todd",
+    "firstName": "Todd",
+    "lastName": "",
+    "role": "Commentator",
+    "active": true,
+    "bio": "Official BBFL commentator providing live fight analysis",
+    "image": "/images/officials/todd.jpg"
+  },
+  {
+    "id": "dr-bedford",
+    "firstName": "Dr. Bedford",
+    "lastName": "",
+    "role": "Doctor",
+    "active": true,
+    "bio": "Medical professional ensuring fighter safety",
+    "image": "/images/officials/dr-bedford.jpg"
+  },
+  {
+    "id": "dr-megan",
+    "firstName": "Dr. Megan",
+    "lastName": "",
+    "role": "Doctor",
+    "active": true,
+    "bio": "Medical professional ensuring fighter safety",
+    "image": "/images/officials/dr-megan.jpg"
+  },
+  {
+    "id": "judge-1",
+    "firstName": "Judge",
+    "lastName": "TBC",
+    "role": "Judge",
+    "active": true,
+    "bio": "Official BBFL judge",
+    "image": "/images/officials/placeholder.jpg"
+  },
+  {
+    "id": "judge-2",
+    "firstName": "Judge",
+    "lastName": "TBC",
+    "role": "Judge",
+    "active": true,
+    "bio": "Official BBFL judge",
+    "image": "/images/officials/placeholder.jpg"
+  },
+  {
+    "id": "judge-3",
+    "firstName": "Judge",
+    "lastName": "TBC",
+    "role": "Judge",
+    "active": true,
+    "bio": "Official BBFL judge",
+    "image": "/images/officials/placeholder.jpg"
+  }
+]
