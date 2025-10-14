@@ -1,0 +1,25 @@
+{
+  "id": "shiela-shaw",
+  "firstName": "Shiela",
+  "lastName": "Shaw",
+  "nickname": "Swampturd",
+  "weight": 145,
+  "height": "5'7\"",
+  "reach": "66",
+  "stance": "Orthodox",
+  "divisionId": "feather",
+  "fightingStyle": "Bruiser",
+  "age": 23,
+  "nationality": "Australian",
+  "country": "Australia",
+  "debut": "1889-01-01",
+  "coach": "TBC",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
