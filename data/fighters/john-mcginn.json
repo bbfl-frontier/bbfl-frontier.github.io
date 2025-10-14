@@ -1,0 +1,20 @@
+{
+  "id": "john-mcginn",
+  "firstName": "John",
+  "lastName": "McGinn",
+  "nickname": "The Ginger Nut",
+  "weight": 149,
+  "height": "5'9\"",
+  "divisionId": "feather",
+  "fightingStyle": "Bruiser",
+  "country": "Ireland",
+  "coach": "Willy Williamson",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
