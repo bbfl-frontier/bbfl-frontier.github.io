@@ -46,8 +46,8 @@
   },
   {
     "id": "judge-1",
-    "firstName": "Judge",
-    "lastName": "TBC",
+    "firstName": "Alice",
+    "lastName": "Whitlock",
     "role": "Judge",
     "active": true,
     "bio": "Official BBFL judge",
