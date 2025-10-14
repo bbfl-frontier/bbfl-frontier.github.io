@@ -38,11 +38,11 @@ const record = records.find((r: any) => r.fighterId === fighter.id) || { wins: 0
 
 // Load bio
 let bio = '';
-if (fighter.bioFile) {
-  const bioPath = path.join(process.cwd(), 'data/fighters/bios', fighter.bioFile);
-  if (fs.existsSync(bioPath)) {
-    bio = fs.readFileSync(bioPath, 'utf-8');
-  }
+// Try to load bio file - either from bioFile field or by fighter ID
+const bioFileName = fighter.bioFile || `${fighter.id}.md`;
+const bioPath = path.join(process.cwd(), 'data/fighters/bios', bioFileName);
+if (fs.existsSync(bioPath)) {
+  bio = fs.readFileSync(bioPath, 'utf-8');
 }
 ---
 
