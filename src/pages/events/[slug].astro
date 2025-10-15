@@ -56,6 +56,17 @@ const results = fs.existsSync(resultsDir)
   : [];
 const resultsMap = new Map(results.map((r: any) => [r.boutId, r]));
 
+// Helper function to check if image exists
+const imageExists = (imagePath: string) => {
+  const publicPath = path.join(process.cwd(), 'public', imagePath);
+  return fs.existsSync(publicPath);
+};
+
+// Helper function to get initials
+const getInitials = (firstName: string, lastName: string) => {
+  return `${firstName?.charAt(0) || ''}${lastName?.charAt(0) || ''}`;
+};
+
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
@@ -145,24 +156,43 @@ const baseUrl = import.meta.env.BASE_URL;
                   </span>
                 </div>
 
-                <div class="grid md:grid-cols-[1fr,auto,1fr] gap-6 items-start">
+                <div class="grid md:grid-cols-[1fr,auto,1fr] gap-6 items-center">
                   {/* Fighter 1 */}
-                  <div class={`${result?.winnerId === fighter1?.id ? 'font-bold' : ''}`}>
-                    <a href={`/fighters/${fighter1?.id}/`} class="hover:text-bourbon transition">
-                      <div class="text-lg font-bold text-right md:text-right">
-                        {fighter1?.firstName} {fighter1?.lastName}
-                      </div>
-                      {fighter1?.nickname && (
-                        <div class="text-xs text-gray-500 italic text-right md:text-right">"{fighter1.nickname}"</div>
+                  <div class={`flex flex-col md:flex-row-reverse items-center md:items-start gap-4 ${result?.winnerId === fighter1?.id ? 'font-bold' : ''}`}>
+                    {/* Fighter 1 Image */}
+                    <a href={`/fighters/${fighter1?.id}/`} class="flex-shrink-0">
+                      {fighter1?.image && imageExists(fighter1.image) ? (
+                        <img
+                          src={fighter1.image}
+                          alt={`${fighter1.firstName} ${fighter1.lastName}`}
+                          class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-4 border-bourbon shadow-lg hover:opacity-80 transition"
+                        />
+                      ) : (
+                        <div class="w-24 h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center text-white text-2xl font-black border-4 border-bourbon shadow-lg hover:opacity-80 transition"
+                             style={`background: linear-gradient(135deg, #7B2E2E 0%, #B85C5C 100%);`}>
+                          {getInitials(fighter1?.firstName || '', fighter1?.lastName || '')}
+                        </div>
                       )}
                     </a>
-                    <div class="text-xs text-gray-600 mt-2 space-y-1 text-right md:text-right">
-                      {fighter1?.record && (
-                        <div>Record: {fighter1.record.wins}-{fighter1.record.losses}-{fighter1.record.draws}</div>
-                      )}
-                      <div>{fighter1?.weight} lbs {fighter1?.height && `• ${fighter1.height}`}</div>
-                      {fighter1?.stance && <div>Stance: {fighter1.stance}</div>}
-                      {fighter1?.coach && <div>Coach: {fighter1.coach}</div>}
+
+                    {/* Fighter 1 Info */}
+                    <div class="flex-1 text-center md:text-right">
+                      <a href={`/fighters/${fighter1?.id}/`} class="hover:text-bourbon transition">
+                        <div class="text-lg font-bold">
+                          {fighter1?.firstName} {fighter1?.lastName}
+                        </div>
+                        {fighter1?.nickname && (
+                          <div class="text-xs text-gray-500 italic">"{fighter1.nickname}"</div>
+                        )}
+                      </a>
+                      <div class="text-xs text-gray-600 mt-2 space-y-1">
+                        {fighter1?.record && (
+                          <div>Record: {fighter1.record.wins}-{fighter1.record.losses}-{fighter1.record.draws}</div>
+                        )}
+                        <div>{fighter1?.weight} lbs {fighter1?.height && `• ${fighter1.height}`}</div>
+                        {fighter1?.stance && <div>Stance: {fighter1.stance}</div>}
+                        {fighter1?.coach && <div>Coach: {fighter1.coach}</div>}
+                      </div>
                     </div>
                   </div>
 
@@ -172,22 +202,41 @@ const baseUrl = import.meta.env.BASE_URL;
                   </div>
 
                   {/* Fighter 2 */}
-                  <div class={`${result?.winnerId === fighter2?.id ? 'font-bold' : ''}`}>
-                    <a href={`/fighters/${fighter2?.id}/`} class="hover:text-bourbon transition">
-                      <div class="text-lg font-bold">
-                        {fighter2?.firstName} {fighter2?.lastName}
-                      </div>
-                      {fighter2?.nickname && (
-                        <div class="text-xs text-gray-500 italic">"{fighter2.nickname}"</div>
+                  <div class={`flex flex-col md:flex-row items-center md:items-start gap-4 ${result?.winnerId === fighter2?.id ? 'font-bold' : ''}`}>
+                    {/* Fighter 2 Image */}
+                    <a href={`/fighters/${fighter2?.id}/`} class="flex-shrink-0">
+                      {fighter2?.image && imageExists(fighter2.image) ? (
+                        <img
+                          src={fighter2.image}
+                          alt={`${fighter2.firstName} ${fighter2.lastName}`}
+                          class="w-24 h-24 md:w-28 md:h-28 rounded-full object-cover border-4 border-bourbon shadow-lg hover:opacity-80 transition"
+                        />
+                      ) : (
+                        <div class="w-24 h-24 md:w-28 md:h-28 rounded-full flex items-center justify-center text-white text-2xl font-black border-4 border-bourbon shadow-lg hover:opacity-80 transition"
+                             style={`background: linear-gradient(135deg, #7B2E2E 0%, #B85C5C 100%);`}>
+                          {getInitials(fighter2?.firstName || '', fighter2?.lastName || '')}
+                        </div>
                       )}
                     </a>
-                    <div class="text-xs text-gray-600 mt-2 space-y-1">
-                      {fighter2?.record && (
-                        <div>Record: {fighter2.record.wins}-{fighter2.record.losses}-{fighter2.record.draws}</div>
-                      )}
-                      <div>{fighter2?.weight} lbs {fighter2?.height && `• ${fighter2.height}`}</div>
-                      {fighter2?.stance && <div>Stance: {fighter2.stance}</div>}
-                      {fighter2?.coach && <div>Coach: {fighter2.coach}</div>}
+
+                    {/* Fighter 2 Info */}
+                    <div class="flex-1 text-center md:text-left">
+                      <a href={`/fighters/${fighter2?.id}/`} class="hover:text-bourbon transition">
+                        <div class="text-lg font-bold">
+                          {fighter2?.firstName} {fighter2?.lastName}
+                        </div>
+                        {fighter2?.nickname && (
+                          <div class="text-xs text-gray-500 italic">"{fighter2.nickname}"</div>
+                        )}
+                      </a>
+                      <div class="text-xs text-gray-600 mt-2 space-y-1">
+                        {fighter2?.record && (
+                          <div>Record: {fighter2.record.wins}-{fighter2.record.losses}-{fighter2.record.draws}</div>
+                        )}
+                        <div>{fighter2?.weight} lbs {fighter2?.height && `• ${fighter2.height}`}</div>
+                        {fighter2?.stance && <div>Stance: {fighter2.stance}</div>}
+                        {fighter2?.coach && <div>Coach: {fighter2.coach}</div>}
+                      </div>
                     </div>
                   </div>
                 </div>
