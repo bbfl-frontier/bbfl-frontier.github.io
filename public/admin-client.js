@@ -93,16 +93,11 @@ async function deleteGitHubFile(path, message) {
 }
 
 // Trigger GitHub Actions workflow to rebuild site
+// Note: Site automatically rebuilds when changes are pushed to main branch
 async function triggerRebuild() {
-  try {
-    await githubAPI('actions/workflows/deploy.yml/dispatches', 'POST', {
-      ref: BRANCH
-    });
-    return true;
-  } catch (error) {
-    console.error('Error triggering rebuild:', error);
-    return false;
-  }
+  // GitHub Pages automatically rebuilds on push to main
+  // No manual trigger needed
+  return true;
 }
 
 // Load data from GitHub
