@@ -483,11 +483,13 @@ function populateEventDropdown() {
     });
 }
 
-document.getElementById('event-form')?.addEventListener('submit', (e) => {
+document.getElementById('event-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
 
+  const eventId = document.getElementById('event-id').value;
+
   const event = {
-    id: document.getElementById('event-id').value,
+    id: eventId,
     slug: document.getElementById('event-slug').value,
     title: document.getElementById('event-title').value,
     subtitle: document.getElementById('event-subtitle').value,
@@ -497,13 +499,33 @@ document.getElementById('event-form')?.addEventListener('submit', (e) => {
     venueId: document.getElementById('event-venue').value,
     status: document.getElementById('event-status').value,
     description: document.getElementById('event-description').value,
-    posterImage: `/images/events/${event.id}-poster.jpg`,
+    posterImage: `/images/events/${eventId}-poster.jpg`,
     bouts: []
   };
 
-  downloadJSON(event, `${event.id}.json`);
-  showMessage('event-message', `Download ${event.id}.json and place it in data/events/ folder, then rebuild`);
-  document.getElementById('event-form').reset();
+  try {
+    // Save event to GitHub
+    const eventPath = `data/events/${eventId}.json`;
+    await saveGitHubFile(
+      eventPath,
+      JSON.stringify(event, null, 2),
+      `Add event: ${event.title}`
+    );
+
+    showMessage('event-message', 'Event created successfully! Rebuilding site...');
+    document.getElementById('event-form').reset();
+
+    await loadEvents();
+
+    // Trigger rebuild
+    const rebuilt = await triggerRebuild();
+    if (rebuilt) {
+      showMessage('event-message', 'Site rebuild triggered! Event will be live in ~2-3 minutes.');
+    }
+  } catch (error) {
+    console.error('Error creating event:', error);
+    showMessage('event-message', 'Error creating event: ' + error.message, true);
+  }
 });
 
 function downloadEventJSON(id) {
@@ -600,7 +622,7 @@ function populateBoutDropdown() {
     });
 }
 
-document.getElementById('bout-form')?.addEventListener('submit', (e) => {
+document.getElementById('bout-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const bout = {
@@ -614,9 +636,29 @@ document.getElementById('bout-form')?.addEventListener('submit', (e) => {
     forChampionship: document.getElementById('bout-championship').value === 'true'
   };
 
-  downloadJSON(bout, `${bout.id}.json`);
-  showMessage('bout-message', `Download ${bout.id}.json and place it in data/bouts/ folder, then rebuild`);
-  document.getElementById('bout-form').reset();
+  try {
+    // Save bout to GitHub
+    const boutPath = `data/bouts/${bout.id}.json`;
+    await saveGitHubFile(
+      boutPath,
+      JSON.stringify(bout, null, 2),
+      `Add bout: ${bout.id}`
+    );
+
+    showMessage('bout-message', 'Bout added to fight card! Rebuilding site...');
+    document.getElementById('bout-form').reset();
+
+    await loadBouts();
+
+    // Trigger rebuild
+    const rebuilt = await triggerRebuild();
+    if (rebuilt) {
+      showMessage('bout-message', 'Site rebuild triggered! Bout will be live in ~2-3 minutes.');
+    }
+  } catch (error) {
+    console.error('Error adding bout:', error);
+    showMessage('bout-message', 'Error adding bout: ' + error.message, true);
+  }
 });
 
 function downloadBoutJSON(id) {
@@ -717,12 +759,18 @@ document.getElementById('result-bout')?.addEventListener('change', (e) => {
   }
 });
 
-document.getElementById('result-form')?.addEventListener('submit', (e) => {
+document.getElementById('result-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
 
   const boutId = document.getElementById('result-bout').value;
   const method = document.getElementById('result-method').value;
   const winnerId = document.getElementById('result-winner').value;
+
+  const bout = bouts.find(b => b.id === boutId);
+  if (!bout) {
+    showMessage('result-message', 'Bout not found', true);
+    return;
+  }
 
   const result = {
     boutId,
@@ -742,13 +790,152 @@ document.getElementById('result-form')?.addEventListener('submit', (e) => {
     };
   }
 
-  downloadJSON(result, `${boutId}.json`);
-  showMessage('result-message', `Download ${boutId}.json and place it in data/results/ folder, then rebuild to update rankings`);
-  document.getElementById('result-form').reset();
-  document.getElementById('scorecard-section').classList.add('hidden');
+  try {
+    showMessage('result-message', 'Submitting result and updating fighter records...');
+
+    // Save result to GitHub
+    const resultPath = `data/results/${boutId}.json`;
+    await saveGitHubFile(
+      resultPath,
+      JSON.stringify(result, null, 2),
+      `Add result for ${boutId}`
+    );
+
+    // Update fighter records
+    await updateFighterRecords(bout, result);
+
+    showMessage('result-message', 'Result saved! Fighter records updated. Rebuilding site...');
+
+    document.getElementById('result-form').reset();
+    document.getElementById('scorecard-section').classList.add('hidden');
+
+    await loadResults();
+    await loadFighters();
+
+    // Trigger rebuild
+    const rebuilt = await triggerRebuild();
+    if (rebuilt) {
+      showMessage('result-message', 'Site rebuild triggered! Changes will be live in ~2-3 minutes.');
+    }
+  } catch (error) {
+    console.error('Error submitting result:', error);
+    showMessage('result-message', 'Error submitting result: ' + error.message, true);
+  }
 });
 
 // ===== UTILITIES =====
+
+// Calculate ranking points based on result
+function calculatePoints(result, isWinner, bout) {
+  if (!isWinner) return 0;
+
+  let points = 0;
+
+  // Base points for winning
+  points += 10;
+
+  // Method bonus
+  switch (result.method) {
+    case 'KO':
+      points += 5; // Knockout gets extra points
+      break;
+    case 'TKO':
+      points += 4; // TKO gets good points
+      break;
+    case 'Submission':
+      points += 4;
+      break;
+    case 'Decision':
+      points += 2; // Decision gets fewer points
+      break;
+  }
+
+  // Championship bonus
+  if (bout.forChampionship) {
+    points += 10;
+  }
+
+  // Performance bonus
+  if (result.performanceBonus) {
+    points += 5;
+  }
+
+  // Early finish bonus (finished before final round)
+  if (result.round && result.round < bout.rounds) {
+    points += 3;
+  }
+
+  return points;
+}
+
+// Update fighter records based on result
+async function updateFighterRecords(bout, result) {
+  const fighter1 = fighters.find(f => f.id === bout.fighter1Id);
+  const fighter2 = fighters.find(f => f.id === bout.fighter2Id);
+
+  if (!fighter1 || !fighter2) {
+    throw new Error('Fighters not found');
+  }
+
+  // Determine winner and loser
+  let winner, loser;
+  const isDraw = !result.winnerId || result.winnerId === 'draw';
+
+  if (!isDraw) {
+    winner = result.winnerId === fighter1.id ? fighter1 : fighter2;
+    loser = result.winnerId === fighter1.id ? fighter2 : fighter1;
+  }
+
+  // Update fighter 1
+  const fighter1Updated = { ...fighter1 };
+  if (!fighter1Updated.record) {
+    fighter1Updated.record = { wins: 0, losses: 0, draws: 0 };
+  }
+  if (isDraw) {
+    fighter1Updated.record.draws += 1;
+  } else if (winner.id === fighter1.id) {
+    fighter1Updated.record.wins += 1;
+    fighter1Updated.rankingPoints = (fighter1Updated.rankingPoints || 0) + calculatePoints(result, true, bout);
+  } else {
+    fighter1Updated.record.losses += 1;
+  }
+
+  // Update fighter 2
+  const fighter2Updated = { ...fighter2 };
+  if (!fighter2Updated.record) {
+    fighter2Updated.record = { wins: 0, losses: 0, draws: 0 };
+  }
+  if (isDraw) {
+    fighter2Updated.record.draws += 1;
+  } else if (winner.id === fighter2.id) {
+    fighter2Updated.record.wins += 1;
+    fighter2Updated.rankingPoints = (fighter2Updated.rankingPoints || 0) + calculatePoints(result, true, bout);
+  } else {
+    fighter2Updated.record.losses += 1;
+  }
+
+  // Save both fighters to GitHub
+  try {
+    const fighter1File = await getGitHubFile(`data/fighters/${fighter1.id}.json`);
+    await saveGitHubFile(
+      `data/fighters/${fighter1.id}.json`,
+      JSON.stringify(fighter1Updated, null, 2),
+      `Update ${fighter1.firstName} ${fighter1.lastName} record after ${bout.id}`,
+      fighter1File?.sha
+    );
+
+    const fighter2File = await getGitHubFile(`data/fighters/${fighter2.id}.json`);
+    await saveGitHubFile(
+      `data/fighters/${fighter2.id}.json`,
+      JSON.stringify(fighter2Updated, null, 2),
+      `Update ${fighter2.firstName} ${fighter2.lastName} record after ${bout.id}`,
+      fighter2File?.sha
+    );
+  } catch (error) {
+    console.error('Error updating fighter records:', error);
+    throw new Error('Failed to update fighter records: ' + error.message);
+  }
+}
 
 function downloadJSON(data, filename) {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
