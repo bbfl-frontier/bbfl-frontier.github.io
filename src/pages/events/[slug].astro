@@ -34,7 +34,7 @@ const allBouts = fs.existsSync(boutsDir)
 
 const bouts = allBouts
   .filter((b: any) => event.bouts.includes(b.id))
-  .sort((a: any, b: any) => b.order - a.order);
+  .sort((a: any, b: any) => a.order - b.order);
 
 // Load fighters
 const fightersDir = path.join(process.cwd(), 'data/fighters');
