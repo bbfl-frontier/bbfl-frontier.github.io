@@ -732,16 +732,16 @@ window.deleteBout = async function(boutId, eventId) {
       }
     }
 
-    showMessage('bout-message', 'Bout deleted successfully! Rebuilding site...');
+    // Remove bout from local array immediately
+    bouts = bouts.filter(b => b.id !== boutId);
 
-    await loadBouts();
-    await loadEvents();
+    // Update display
+    renderBouts();
+
+    showMessage('bout-message', 'Bout deleted successfully! Site will rebuild in ~2-3 minutes.');
 
     // Trigger rebuild
-    const rebuilt = await triggerRebuild();
-    if (rebuilt) {
-      showMessage('bout-message', 'Site rebuild triggered! Changes will be live in ~2-3 minutes.');
-    }
+    await triggerRebuild();
   } catch (error) {
     console.error('Error deleting bout:', error);
     showMessage('bout-message', 'Error deleting bout: ' + error.message, true);
