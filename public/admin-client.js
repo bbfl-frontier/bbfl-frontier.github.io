@@ -674,6 +674,10 @@ document.getElementById('bout-form')?.addEventListener('submit', async (e) => {
 
     // Update event to include this bout - MUST fetch fresh from GitHub for correct SHA
     const eventPath = `data/events/${bout.eventId}.json`;
+
+    // Add small delay to ensure previous commit is processed
+    await new Promise(resolve => setTimeout(resolve, 500));
+
     const eventFile = await getGitHubFile(eventPath);
 
     if (eventFile) {
@@ -689,12 +693,32 @@ document.getElementById('bout-form')?.addEventListener('submit', async (e) => {
         eventData.bouts.sort();
       }
 
-      await saveGitHubFile(
-        eventPath,
-        JSON.stringify(eventData, null, 2),
-        `Add bout ${bout.id} to event ${bout.eventId}`,
-        eventFile.sha
-      );
+      try {
+        await saveGitHubFile(
+          eventPath,
+          JSON.stringify(eventData, null, 2),
+          `Add bout ${bout.id} to event ${bout.eventId}`,
+          eventFile.sha
+        );
+      } catch (shaError) {
+        // If SHA error, retry once with fresh fetch
+        console.warn('SHA conflict, retrying with fresh fetch...');
+        const freshEventFile = await getGitHubFile(eventPath);
+        if (freshEventFile) {
+          const freshEventData = JSON.parse(freshEventFile.content);
+          if (!freshEventData.bouts) freshEventData.bouts = [];
+          if (!freshEventData.bouts.includes(bout.id)) {
+            freshEventData.bouts.push(bout.id);
+            freshEventData.bouts.sort();
+          }
+          await saveGitHubFile(
+            eventPath,
+            JSON.stringify(freshEventData, null, 2),
+            `Add bout ${bout.id} to event ${bout.eventId}`,
+            freshEventFile.sha
+          );
+        }
+      }
     }
 
     showMessage('bout-message', 'Bout added to fight card and event updated! Rebuilding site...');
