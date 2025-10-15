@@ -45,7 +45,15 @@ async function githubAPI(endpoint, method = 'GET', body = null) {
         localStorage.removeItem('bbfl-github-token');
         alert('Invalid GitHub token. Please refresh and enter a valid token.');
       }
-      throw new Error(`GitHub API Error: ${response.statusText}`);
+      // Get more error details
+      let errorMessage = `GitHub API Error (${response.status})`;
+      try {
+        const errorData = await response.json();
+        errorMessage += `: ${errorData.message || response.statusText}`;
+      } catch (e) {
+        errorMessage += `: ${response.statusText}`;
+      }
+      throw new Error(errorMessage);
     }
     return response.json();
   } catch (error) {
@@ -620,14 +628,20 @@ function populateBoutDropdown() {
 document.getElementById('bout-form')?.addEventListener('submit', async (e) => {
   e.preventDefault();
 
+  const eventId = document.getElementById('bout-event').value;
+  const boutOrder = parseInt(document.getElementById('bout-order').value);
+
+  // Auto-generate bout ID: {eventId}-bout-{order}
+  const boutId = `${eventId}-bout-${boutOrder}`;
+
   const bout = {
-    id: document.getElementById('bout-id').value,
-    eventId: document.getElementById('bout-event').value,
+    id: boutId,
+    eventId: eventId,
     fighter1Id: document.getElementById('bout-fighter1').value,
     fighter2Id: document.getElementById('bout-fighter2').value,
     divisionId: document.getElementById('bout-division').value,
     rounds: parseInt(document.getElementById('bout-rounds').value),
-    order: parseInt(document.getElementById('bout-order').value),
+    order: boutOrder,
     forChampionship: document.getElementById('bout-championship').value === 'true'
   };
 
