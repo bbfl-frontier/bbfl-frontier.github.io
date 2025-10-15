@@ -55,12 +55,12 @@
   },
   {
     "id": "judge-2",
-    "firstName": "Judge",
-    "lastName": "TBC",
+    "firstName": "Pancho",
+    "lastName": "Makatewewese",
     "role": "Judge",
     "active": true,
     "bio": "Official BBFL judge",
-    "image": "/images/officials/judge-tbc.png"
+    "image": "/images/officials/pancho-makatewewese.png"
   },
   {
     "id": "judge-3",
