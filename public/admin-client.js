@@ -155,15 +155,23 @@ function showMessage(elementId, message, isError = false) {
 
 async function loadFighters() {
   try {
-    // Get list of fighter files from GitHub
-    const contents = await githubAPI(`contents/data/fighters?ref=${BRANCH}`);
-    const fighterFiles = contents.filter(f => f.name.endsWith('.json') && f.name !== '.gitkeep');
+    // Load from public JSON first for faster access
+    const response = await fetch(`/fighters.json?t=${Date.now()}`);
+    if (response.ok) {
+      fighters = await response.json();
+      console.log('Loaded fighters from public JSON:', fighters.length);
+    } else {
+      // Fallback to GitHub API
+      console.warn('Failed to load fighters.json, falling back to GitHub API');
+      const contents = await githubAPI(`contents/data/fighters?ref=${BRANCH}`);
+      const fighterFiles = contents.filter(f => f.name.endsWith('.json') && f.name !== '.gitkeep');
 
-    fighters = [];
-    for (const file of fighterFiles) {
-      const fighterData = await getGitHubFile(file.path);
-      if (fighterData) {
-        fighters.push(JSON.parse(fighterData.content));
+      fighters = [];
+      for (const file of fighterFiles) {
+        const fighterData = await getGitHubFile(file.path);
+        if (fighterData) {
+          fighters.push(JSON.parse(fighterData.content));
+        }
       }
     }
 
@@ -567,6 +575,7 @@ function renderBouts() {
   }
 
   console.log('Rendering bouts, count:', bouts.length);
+  console.log('Fighters available:', fighters.length);
 
   if (bouts.length === 0) {
     list.innerHTML = '<p class="text-gray-500">No bouts scheduled yet.</p>';
