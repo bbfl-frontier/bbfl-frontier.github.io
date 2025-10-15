@@ -9,7 +9,12 @@ const eventsDir = path.join(process.cwd(), 'data/events');
 const eventFiles = fs.existsSync(eventsDir) ? fs.readdirSync(eventsDir).filter(f => f.endsWith('.json')) : [];
 const events = eventFiles.map(f =>
   JSON.parse(fs.readFileSync(path.join(eventsDir, f), 'utf-8'))
-).sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime());
+).sort((a: any, b: any) => {
+  // Sort by actualDate if available, otherwise by date
+  const dateA = new Date(a.actualDate || a.date).getTime();
+  const dateB = new Date(b.actualDate || b.date).getTime();
+  return dateA - dateB; // Ascending order (nearest first)
+});
 
 // Load venues
 const venues = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/venues.json'), 'utf-8'));

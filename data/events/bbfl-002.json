@@ -2,13 +2,14 @@
   "id": "bbfl-002",
   "slug": "bbfl-002-rising-stars",
   "title": "BBFL 002: Rising Stars",
-  "subtitle": "Tomorrow’s Champions Begin Here",
+  "subtitle": "Tomorrow's Champions Begin Here",
   "date": "1912-11-07",
-  "time": "21:00",
-  "timezone": "America/New_York",
+  "actualDate": "2025-11-07",
+  "time": "23:00",
+  "timezone": "UTC",
   "venueId": "warehouse",
   "status": "upcoming",
-  "description": "After the dust settled from BBFL 001: Beginnings, the Blood & Bourbon Fight League is back, louder, rowdier, and meaner than ever.\n\nThe debut event shocked everyone with its turnout, as over a hundred fans packed shoulder to shoulder in the Valentine Pit, roaring with every swing, every choke, and every knockout. What was meant to be a humble first card became a statement. The frontier is hungry for bloodsport, and BBFL is feeding it.\n\nNow, BBFL 002: Rising Stars brings the heat with fresh faces looking to make their mark and veterans eager to prove that their opening night success wasn’t luck. Every fighter stepping into the ring this Saturday is chasing something, a name, a belt, or just the thrill of the crowd.\n\nExpect fireworks, grit, and rivalries that will burn long after the night is over.",
+  "description": "After the dust settled from BBFL 001: Beginnings, the Blood & Bourbon Fight League is back, louder, rowdier, and meaner than ever.\n\nThe debut event shocked everyone with its turnout, as over a hundred fans packed shoulder to shoulder in the Valentine Pit, roaring with every swing, every choke, and every knockout. What was meant to be a humble first card became a statement. The frontier is hungry for bloodsport, and BBFL is feeding it.\n\nNow, BBFL 002: Rising Stars brings the heat with fresh faces looking to make their mark and veterans eager to prove that their opening night success wasn't luck. Every fighter stepping into the ring this Saturday is chasing something, a name, a belt, or just the thrill of the crowd.\n\nExpect fireworks, grit, and rivalries that will burn long after the night is over.",
   "posterImage": "/images/events/bbfl-002-poster.jpg",
   "bouts": []
 }
