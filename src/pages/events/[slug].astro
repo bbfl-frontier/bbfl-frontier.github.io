@@ -147,7 +147,7 @@ const baseUrl = import.meta.env.BASE_URL;
 
             return (
               <div class="p-6 hover:bg-gray-50 transition">
-                <div class="flex items-center justify-between mb-4" style="padding-left: 100px;">
+                <div class="flex items-center justify-between mb-4">
                   <span class="text-xs font-bold uppercase tracking-wide text-bourbon">
                     {bout.forChampionship ? '🏆 Championship Bout' : `Bout #${bout.order}`}
                   </span>
@@ -156,9 +156,9 @@ const baseUrl = import.meta.env.BASE_URL;
                   </span>
                 </div>
 
-                <div class="flex flex-col items-center gap-6 w-full">
+                <div class="grid md:grid-cols-[1fr,auto,1fr] gap-6 items-center">
                   {/* Fighter 1 */}
-                  <div class={`flex items-center gap-4 w-full max-w-xl ${result?.winnerId === fighter1?.id ? 'font-bold' : ''}`} style="margin-left: 100px;">
+                  <div class={`flex flex-col md:flex-row-reverse items-center gap-4 ${result?.winnerId === fighter1?.id ? 'font-bold' : ''}`}>
                     {/* Fighter 1 Image */}
                     <a href={`/fighters/${fighter1?.id}/`} class="flex-shrink-0">
                       {fighter1?.image && imageExists(fighter1.image) ? (
@@ -176,7 +176,7 @@ const baseUrl = import.meta.env.BASE_URL;
                     </a>
 
                     {/* Fighter 1 Info */}
-                    <div class="flex-1 text-left">
+                    <div class="flex-1 text-center md:text-right">
                       <a href={`/fighters/${fighter1?.id}/`} class="hover:text-bourbon transition">
                         <div class="text-lg font-bold">
                           {fighter1?.firstName} {fighter1?.lastName}
@@ -197,12 +197,12 @@ const baseUrl = import.meta.env.BASE_URL;
                   </div>
 
                   {/* VS */}
-                  <div class="text-center py-2">
+                  <div class="text-center px-4 flex items-center justify-center">
                     <span class="text-gray-400 font-black text-2xl">VS</span>
                   </div>
 
                   {/* Fighter 2 */}
-                  <div class={`flex items-center gap-4 w-full max-w-xl ${result?.winnerId === fighter2?.id ? 'font-bold' : ''}`} style="margin-left: 100px;">
+                  <div class={`flex flex-col md:flex-row items-center gap-4 ${result?.winnerId === fighter2?.id ? 'font-bold' : ''}`}>
                     {/* Fighter 2 Image */}
                     <a href={`/fighters/${fighter2?.id}/`} class="flex-shrink-0">
                       {fighter2?.image && imageExists(fighter2.image) ? (
@@ -220,7 +220,7 @@ const baseUrl = import.meta.env.BASE_URL;
                     </a>
 
                     {/* Fighter 2 Info */}
-                    <div class="flex-1 text-left">
+                    <div class="flex-1 text-center md:text-left">
                       <a href={`/fighters/${fighter2?.id}/`} class="hover:text-bourbon transition">
                         <div class="text-lg font-bold">
                           {fighter2?.firstName} {fighter2?.lastName}
