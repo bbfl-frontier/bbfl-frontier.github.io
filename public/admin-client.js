@@ -592,7 +592,7 @@ function renderBouts() {
                   </div>
                 </div>
                 <div class="actions">
-                  <button class="btn btn-secondary" onclick="downloadBoutJSON('${b.id}')">Download JSON</button>
+                  <button class="btn btn-danger" onclick="deleteBout('${b.id}', '${b.eventId}')">Delete</button>
                 </div>
               </div>
             `;
@@ -705,6 +705,48 @@ function downloadBoutJSON(id) {
     downloadJSON(bout, `${id}.json`);
   }
 }
+
+// Delete bout
+window.deleteBout = async function(boutId, eventId) {
+  if (!confirm('Are you sure you want to delete this bout? This action cannot be undone.')) return;
+
+  try {
+    // Delete bout file from GitHub
+    await deleteGitHubFile(`data/bouts/${boutId}.json`, `Delete bout: ${boutId}`);
+
+    // Remove bout from event's bouts array
+    const eventPath = `data/events/${eventId}.json`;
+    const eventFile = await getGitHubFile(eventPath);
+
+    if (eventFile) {
+      const eventData = JSON.parse(eventFile.content);
+      if (eventData.bouts) {
+        eventData.bouts = eventData.bouts.filter(id => id !== boutId);
+
+        await saveGitHubFile(
+          eventPath,
+          JSON.stringify(eventData, null, 2),
+          `Remove bout ${boutId} from event ${eventId}`,
+          eventFile.sha
+        );
+      }
+    }
+
+    showMessage('bout-message', 'Bout deleted successfully! Rebuilding site...');
+
+    await loadBouts();
+    await loadEvents();
+
+    // Trigger rebuild
+    const rebuilt = await triggerRebuild();
+    if (rebuilt) {
+      showMessage('bout-message', 'Site rebuild triggered! Changes will be live in ~2-3 minutes.');
+    }
+  } catch (error) {
+    console.error('Error deleting bout:', error);
+    showMessage('bout-message', 'Error deleting bout: ' + error.message, true);
+  }
+};
 
 // ===== RESULTS =====
 
