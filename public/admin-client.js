@@ -542,22 +542,31 @@ function downloadEventJSON(id) {
 
 async function loadBouts() {
   try {
-    const response = await fetch('/bouts.json');
+    // Add timestamp to prevent caching
+    const response = await fetch(`/bouts.json?t=${Date.now()}`);
     if (response.ok) {
       bouts = await response.json();
+      console.log('Loaded bouts:', bouts);
     } else {
+      console.warn('Failed to load bouts.json:', response.status, response.statusText);
       bouts = [];
     }
     renderBouts();
   } catch (error) {
     console.error('Error loading bouts:', error);
     bouts = [];
+    renderBouts();
   }
 }
 
 function renderBouts() {
   const list = document.getElementById('bout-list');
-  if (!list) return;
+  if (!list) {
+    console.warn('bout-list element not found');
+    return;
+  }
+
+  console.log('Rendering bouts, count:', bouts.length);
 
   if (bouts.length === 0) {
     list.innerHTML = '<p class="text-gray-500">No bouts scheduled yet.</p>';
