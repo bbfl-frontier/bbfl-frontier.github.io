@@ -6,7 +6,7 @@
     "role": "Founder",
     "active": true,
     "bio": "Founder of the Blood & Bourbon Fight League",
-    "image": "/images/officials/placeholder.jpg"
+    "image": "/images/officials/raymond-black.png"
   },
   {
     "id": "little-fox",
@@ -15,7 +15,7 @@
     "role": "Founder",
     "active": true,
     "bio": "Founder of the Blood & Bourbon Fight League",
-    "image": "/images/officials/placeholder.jpg"
+    "image": "/images/officials/tasa-tabitsi.png"
   },
   {
     "id": "todd",
@@ -24,7 +24,7 @@
     "role": "Commentator",
     "active": true,
     "bio": "Official BBFL commentator providing live fight analysis",
-    "image": "/images/officials/placeholder.jpg"
+    "image": "/images/officials/william-todd.png"
   },
   {
     "id": "dr-bedford",
@@ -33,7 +33,7 @@
     "role": "Doctor",
     "active": true,
     "bio": "Medical professional ensuring fighter safety",
-    "image": "/images/officials/placeholder.jpg"
+    "image": "/images/officials/dr-bedford.png"
   },
   {
     "id": "dr-megan",
@@ -42,7 +42,7 @@
     "role": "Doctor",
     "active": true,
     "bio": "Medical professional ensuring fighter safety",
-    "image": "/images/officials/placeholder.jpg"
+    "image": "/images/officials/dr-megan.png"
   },
   {
     "id": "judge-1",
@@ -51,7 +51,7 @@
     "role": "Judge",
     "active": true,
     "bio": "Official BBFL judge",
-    "image": "/images/officials/placeholder.jpg"
+    "image": "/images/officials/alice-whitlock.png"
   },
   {
     "id": "judge-2",
@@ -60,7 +60,7 @@
     "role": "Judge",
     "active": true,
     "bio": "Official BBFL judge",
-    "image": "/images/officials/placeholder.jpg"
+    "image": "/images/officials/judge-tbc.png"
   },
   {
     "id": "judge-3",
@@ -69,7 +69,7 @@
     "role": "Judge",
     "active": true,
     "bio": "Official BBFL judge",
-    "image": "/images/officials/placeholder.jpg"
+    "image": "/images/officials/judge-tbc.png"
   },
   {
     "id": "referee-1",
@@ -78,7 +78,7 @@
     "role": "Referee",
     "active": true,
     "bio": "Official BBFL referee",
-    "image": "/images/officials/placeholder.jpg"
+    "image": "/images/officials/red-homes.png"
   },
   {
     "id": "referee-2",
@@ -87,6 +87,6 @@
     "role": "Referee",
     "active": true,
     "bio": "Official BBFL referee",
-    "image": "/images/officials/placeholder.jpg"
+    "image": "/images/officials/referee-tbc.png"
   }
 ]

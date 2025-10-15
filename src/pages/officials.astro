@@ -6,6 +6,12 @@ import path from 'path';
 
 const officials = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/officials.json'), 'utf-8'));
 
+// Check if image file exists
+const imageExists = (imagePath) => {
+  const publicPath = path.join(process.cwd(), 'public', imagePath);
+  return fs.existsSync(publicPath);
+};
+
 // Group officials by role
 const groupedOfficials = officials.reduce((acc, official) => {
   if (!acc[official.role]) acc[official.role] = [];
@@ -35,23 +41,25 @@ const roleOrder = ['Founder', 'Commentator', 'Judge', 'Referee', 'Doctor', 'Time
             </h2>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {roleOfficials.map(official => (
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden border-2 border-bourbon hover:shadow-2xl transition-all">
-                  <div class="aspect-square bg-gray-200 relative overflow-hidden">
-                    {official.image && official.image !== '/images/officials/placeholder.jpg' ? (
-                      <img
-                        src={official.image}
-                        alt={`${official.firstName} ${official.lastName}`}
-                        class="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-bourbon to-blood">
-                        <div class="text-6xl font-black text-white opacity-20">
-                          {official.firstName[0]}{official.lastName ? official.lastName[0] : ''}
+              {roleOfficials.map(official => {
+                const hasImage = official.image && imageExists(official.image);
+                return (
+                  <div class="bg-white rounded-xl shadow-lg overflow-hidden border-2 border-bourbon hover:shadow-2xl transition-all">
+                    <div class="aspect-square bg-gray-200 relative overflow-hidden">
+                      {hasImage ? (
+                        <img
+                          src={official.image}
+                          alt={`${official.firstName} ${official.lastName}`}
+                          class="w-full h-full object-cover"
+                        />
+                      ) : (
+                        <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-bourbon to-blood">
+                          <div class="text-6xl font-black text-white opacity-20">
+                            {official.firstName[0]}{official.lastName ? official.lastName[0] : ''}
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </div>
+                      )}
+                    </div>
 
                   <div class="p-6">
                     <h3 class="text-2xl font-black text-bourbon mb-1">
@@ -74,7 +82,8 @@ const roleOrder = ['Founder', 'Commentator', 'Judge', 'Referee', 'Doctor', 'Time
                     )}
                   </div>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         );
