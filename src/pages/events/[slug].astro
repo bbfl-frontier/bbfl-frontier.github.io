@@ -156,9 +156,9 @@ const baseUrl = import.meta.env.BASE_URL;
                   </span>
                 </div>
 
-                <div class="flex flex-col items-center gap-6">
+                <div class="flex flex-col items-center gap-6 w-full">
                   {/* Fighter 1 */}
-                  <div class={`flex items-center gap-4 w-full max-w-md ${result?.winnerId === fighter1?.id ? 'font-bold' : ''}`}>
+                  <div class={`flex items-center gap-4 w-full max-w-xl mx-auto ${result?.winnerId === fighter1?.id ? 'font-bold' : ''}`}>
                     {/* Fighter 1 Image */}
                     <a href={`/fighters/${fighter1?.id}/`} class="flex-shrink-0">
                       {fighter1?.image && imageExists(fighter1.image) ? (
@@ -202,7 +202,7 @@ const baseUrl = import.meta.env.BASE_URL;
                   </div>
 
                   {/* Fighter 2 */}
-                  <div class={`flex items-center gap-4 w-full max-w-md ${result?.winnerId === fighter2?.id ? 'font-bold' : ''}`}>
+                  <div class={`flex items-center gap-4 w-full max-w-xl mx-auto ${result?.winnerId === fighter2?.id ? 'font-bold' : ''}`}>
                     {/* Fighter 2 Image */}
                     <a href={`/fighters/${fighter2?.id}/`} class="flex-shrink-0">
                       {fighter2?.image && imageExists(fighter2.image) ? (
