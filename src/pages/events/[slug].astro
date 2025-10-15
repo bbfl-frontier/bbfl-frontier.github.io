@@ -43,6 +43,10 @@ const fighters = fs.readdirSync(fightersDir)
   .map(f => JSON.parse(fs.readFileSync(path.join(fightersDir, f), 'utf-8')));
 const fightersMap = new Map(fighters.map((f: any) => [f.id, f]));
 
+// Load divisions
+const divisions = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/divisions.json'), 'utf-8'));
+const divisionsMap = new Map(divisions.map((d: any) => [d.id, d]));
+
 // Load results
 const resultsDir = path.join(process.cwd(), 'data/results');
 const results = fs.existsSync(resultsDir)
@@ -128,39 +132,63 @@ const baseUrl = import.meta.env.BASE_URL;
             const fighter1 = fightersMap.get(bout.fighter1Id);
             const fighter2 = fightersMap.get(bout.fighter2Id);
             const result = resultsMap.get(bout.id);
+            const division = divisionsMap.get(bout.divisionId);
 
             return (
               <div class="p-6 hover:bg-gray-50 transition">
-                <div class="flex items-center justify-between mb-2">
+                <div class="flex items-center justify-between mb-4">
                   <span class="text-xs font-bold uppercase tracking-wide text-bourbon">
-                    {bout.titleFight ? '🏆 Title Fight' : bout.cardPosition}
+                    {bout.forChampionship ? '🏆 Championship Bout' : `Bout #${bout.order}`}
                   </span>
                   <span class="text-xs text-gray-500">
-                    {bout.scheduledRounds} Rounds
+                    {bout.rounds} Rounds • {division?.name || bout.divisionId}
                   </span>
                 </div>
 
-                <div class="grid grid-cols-[1fr,auto,1fr] gap-4 items-center">
-                  <div class={`text-right ${result?.winnerId === fighter1?.id ? 'font-bold' : ''}`}>
+                <div class="grid md:grid-cols-[1fr,auto,1fr] gap-6 items-start">
+                  {/* Fighter 1 */}
+                  <div class={`${result?.winnerId === fighter1?.id ? 'font-bold' : ''}`}>
                     <a href={`/fighters/${fighter1?.id}/`} class="hover:text-bourbon transition">
-                      {fighter1?.firstName} {fighter1?.lastName}
+                      <div class="text-lg font-bold text-right md:text-right">
+                        {fighter1?.firstName} {fighter1?.lastName}
+                      </div>
                       {fighter1?.nickname && (
-                        <span class="block text-xs text-gray-500 italic">"{fighter1.nickname}"</span>
+                        <div class="text-xs text-gray-500 italic text-right md:text-right">"{fighter1.nickname}"</div>
                       )}
                     </a>
+                    <div class="text-xs text-gray-600 mt-2 space-y-1 text-right md:text-right">
+                      {fighter1?.record && (
+                        <div>Record: {fighter1.record.wins}-{fighter1.record.losses}-{fighter1.record.draws}</div>
+                      )}
+                      <div>{fighter1?.weight} lbs {fighter1?.height && `• ${fighter1.height}`}</div>
+                      {fighter1?.stance && <div>Stance: {fighter1.stance}</div>}
+                      {fighter1?.coach && <div>Coach: {fighter1.coach}</div>}
+                    </div>
                   </div>
 
-                  <div class="text-center px-4">
-                    <span class="text-gray-400 font-bold">VS</span>
+                  {/* VS */}
+                  <div class="text-center px-4 flex items-center justify-center">
+                    <span class="text-gray-400 font-black text-2xl">VS</span>
                   </div>
 
-                  <div class={`text-left ${result?.winnerId === fighter2?.id ? 'font-bold' : ''}`}>
+                  {/* Fighter 2 */}
+                  <div class={`${result?.winnerId === fighter2?.id ? 'font-bold' : ''}`}>
                     <a href={`/fighters/${fighter2?.id}/`} class="hover:text-bourbon transition">
-                      {fighter2?.firstName} {fighter2?.lastName}
+                      <div class="text-lg font-bold">
+                        {fighter2?.firstName} {fighter2?.lastName}
+                      </div>
                       {fighter2?.nickname && (
-                        <span class="block text-xs text-gray-500 italic">"{fighter2.nickname}"</span>
+                        <div class="text-xs text-gray-500 italic">"{fighter2.nickname}"</div>
                       )}
                     </a>
+                    <div class="text-xs text-gray-600 mt-2 space-y-1">
+                      {fighter2?.record && (
+                        <div>Record: {fighter2.record.wins}-{fighter2.record.losses}-{fighter2.record.draws}</div>
+                      )}
+                      <div>{fighter2?.weight} lbs {fighter2?.height && `• ${fighter2.height}`}</div>
+                      {fighter2?.stance && <div>Stance: {fighter2.stance}</div>}
+                      {fighter2?.coach && <div>Coach: {fighter2.coach}</div>}
+                    </div>
                   </div>
                 </div>
 
