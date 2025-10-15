@@ -667,12 +667,19 @@ document.getElementById('bout-form')?.addEventListener('submit', async (e) => {
   };
 
   try {
-    // Save bout to GitHub
+    // Save bout to GitHub - check if it exists first to get SHA
     const boutPath = `data/bouts/${bout.id}.json`;
+    const existingBout = await getGitHubFile(boutPath);
+
+    if (existingBout) {
+      console.warn('Bout file already exists, updating with SHA:', existingBout.sha);
+    }
+
     await saveGitHubFile(
       boutPath,
       JSON.stringify(bout, null, 2),
-      `Add bout: ${bout.id}`
+      existingBout ? `Update bout: ${bout.id}` : `Add bout: ${bout.id}`,
+      existingBout?.sha
     );
 
     // Update event to include this bout - MUST fetch fresh from GitHub for correct SHA
