@@ -1,0 +1,10 @@
+{
+  "id": "bbfl-001-bout-1",
+  "eventId": "bbfl-001",
+  "fighter1Id": "ivy-caine",
+  "fighter2Id": "john-mcginn",
+  "divisionId": "feather",
+  "rounds": 5,
+  "order": 1,
+  "forChampionship": false
+}
