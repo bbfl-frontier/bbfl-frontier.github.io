@@ -654,38 +654,40 @@ document.getElementById('bout-form')?.addEventListener('submit', async (e) => {
       `Add bout: ${bout.id}`
     );
 
-    // Update event to include this bout
-    const event = events.find(e => e.id === bout.eventId);
-    if (event) {
-      const eventPath = `data/events/${bout.eventId}.json`;
-      const eventFile = await getGitHubFile(eventPath);
+    // Update event to include this bout - MUST fetch fresh from GitHub for correct SHA
+    const eventPath = `data/events/${bout.eventId}.json`;
+    const eventFile = await getGitHubFile(eventPath);
 
-      if (eventFile) {
-        const eventData = JSON.parse(eventFile.content);
-        if (!eventData.bouts) {
-          eventData.bouts = [];
-        }
-
-        // Add bout ID if not already in the array
-        if (!eventData.bouts.includes(bout.id)) {
-          eventData.bouts.push(bout.id);
-          // Sort bouts by order if we have the bout data
-          eventData.bouts.sort();
-        }
-
-        await saveGitHubFile(
-          eventPath,
-          JSON.stringify(eventData, null, 2),
-          `Add bout ${bout.id} to event ${bout.eventId}`,
-          eventFile.sha
-        );
+    if (eventFile) {
+      const eventData = JSON.parse(eventFile.content);
+      if (!eventData.bouts) {
+        eventData.bouts = [];
       }
+
+      // Add bout ID if not already in the array
+      if (!eventData.bouts.includes(bout.id)) {
+        eventData.bouts.push(bout.id);
+        // Sort bouts by order if we have the bout data
+        eventData.bouts.sort();
+      }
+
+      await saveGitHubFile(
+        eventPath,
+        JSON.stringify(eventData, null, 2),
+        `Add bout ${bout.id} to event ${bout.eventId}`,
+        eventFile.sha
+      );
     }
 
     showMessage('bout-message', 'Bout added to fight card and event updated! Rebuilding site...');
     document.getElementById('bout-form').reset();
 
-    await loadBouts();
+    // Add bout to local array immediately for instant display
+    bouts.push(bout);
+
+    // Update display immediately
+    renderBouts();
+
     await loadEvents();
 
     // Trigger rebuild
