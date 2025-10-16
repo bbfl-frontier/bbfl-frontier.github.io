@@ -27,22 +27,22 @@
     "image": "/images/officials/william-todd.png"
   },
   {
-    "id": "dr-bradford",
-    "firstName": "Dr. Bradford",
+    "id": "dr-bradford-manser",
+    "firstName": "Dr. Bradford Manser",
     "lastName": "",
     "role": "Doctor",
     "active": true,
     "bio": "Medical professional ensuring fighter safety",
-    "image": "/images/officials/dr-bradford.png"
+    "image": "/images/officials/dr-bradford-manser.png"
   },
   {
-    "id": "dr-martinez",
-    "firstName": "Dr. Martinez",
+    "id": "dr-megan-martinez",
+    "firstName": "Dr. Megan Martinez",
     "lastName": "",
     "role": "Doctor",
     "active": true,
     "bio": "Medical professional ensuring fighter safety",
-    "image": "/images/officials/dr-martinez.png"
+    "image": "/images/officials/dr-megan-martinez.png"
   },
   {
     "id": "judge-1",
