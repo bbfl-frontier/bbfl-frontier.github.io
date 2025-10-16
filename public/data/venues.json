@@ -19,5 +19,12 @@
     "location": "Saint Denis",
     "description": "Hidden beneath the city streets, this legendary underground arena hosts the most brutal fights in the frontier",
     "capacity": 20
+  },
+  {
+    "id": "tumbleweed-arena",
+    "name": "Tumbleweed Underground Fight Arena",
+    "location": "Tumbleweed",
+    "description": "Deep in the desert wilderness, this rough and dusty arena brings brutal combat to the lawless frontier town",
+    "capacity": 25
   }
 ]
