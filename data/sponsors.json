@@ -11,13 +11,13 @@
     "name": "Tartan Arms Dealer",
     "logo": "/images/sponsors/tartan-arms.png",
     "website": "https://example.com/tartan",
-    "tier": "gold"
+    "tier": "silver"
   },
   {
     "id": "violet-belladonna",
     "name": "Violet Belladonna",
     "logo": "/images/sponsors/violet-belladonna.png",
     "website": "https://example.com/violet-belladonna",
-    "tier": "silver"
+    "tier": "gold"
   }
 ]
