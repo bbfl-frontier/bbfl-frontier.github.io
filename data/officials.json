@@ -27,13 +27,13 @@
     "image": "/images/officials/william-todd.png"
   },
   {
-    "id": "dr-bedford",
-    "firstName": "Dr. Bedford",
+    "id": "dr-bradford",
+    "firstName": "Dr. Bradford",
     "lastName": "",
     "role": "Doctor",
     "active": true,
     "bio": "Medical professional ensuring fighter safety",
-    "image": "/images/officials/dr-bedford.png"
+    "image": "/images/officials/dr-bradford.png"
   },
   {
     "id": "dr-megan",
