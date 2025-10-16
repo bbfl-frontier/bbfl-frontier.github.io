@@ -18,7 +18,7 @@
     "name": "Saint Denis Underground Fight Arena",
     "location": "Saint Denis",
     "description": "Hidden beneath the city streets, this legendary underground arena hosts the most brutal fights in the frontier",
-    "capacity": 20
+    "capacity": 25
   },
   {
     "id": "tumbleweed-arena",
