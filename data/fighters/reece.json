@@ -1,0 +1,25 @@
+{
+  "id": "reece",
+  "firstName": "Reece",
+  "lastName": "TBC",
+  "nickname": "TBC",
+  "weight": 183,
+  "height": "6'2\"",
+  "reach": "72",
+  "stance": "Orthodox",
+  "divisionId": "heavy",
+  "fightingStyle": "Brawler",
+  "age": 26,
+  "nationality": "American",
+  "country": "USA",
+  "debut": "1886-01-01",
+  "coach": "Daniel 'Ike' Wayland",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
