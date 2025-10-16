@@ -7,17 +7,17 @@
     "tier": "platinum"
   },
   {
-    "id": "tartan-arms",
-    "name": "Tartan Arms Dealer",
-    "logo": "/images/sponsors/tartan-arms.png",
-    "website": "https://example.com/tartan",
-    "tier": "silver"
-  },
-  {
     "id": "violet-belladonna",
     "name": "Violet Belladonna",
     "logo": "/images/sponsors/violet-belladonna.png",
     "website": "https://example.com/violet-belladonna",
     "tier": "gold"
+  },
+  {
+    "id": "tartan-arms",
+    "name": "Tartan Arms Dealer",
+    "logo": "/images/sponsors/tartan-arms.png",
+    "website": "https://example.com/tartan",
+    "tier": "silver"
   }
 ]
