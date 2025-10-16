@@ -1,0 +1,10 @@
+{
+  "id": "bbfl-001-bout-4",
+  "eventId": "bbfl-001",
+  "fighter1Id": "buffalo-man",
+  "fighter2Id": "reece",
+  "divisionId": "heavy",
+  "rounds": 5,
+  "order": 4,
+  "forChampionship": false
+}
