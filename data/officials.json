@@ -79,14 +79,5 @@
     "active": true,
     "bio": "Official BBFL referee",
     "image": "/images/officials/red-homes.png"
-  },
-  {
-    "id": "referee-2",
-    "firstName": "Referee",
-    "lastName": "TBC",
-    "role": "Referee",
-    "active": true,
-    "bio": "Official BBFL referee",
-    "image": "/images/officials/referee-tbc.png"
   }
 ]
