@@ -63,15 +63,6 @@
     "image": "/images/officials/pancho-makatewewese.png"
   },
   {
-    "id": "judge-3",
-    "firstName": "Judge",
-    "lastName": "TBC",
-    "role": "Judge",
-    "active": true,
-    "bio": "Official BBFL judge",
-    "image": "/images/officials/judge-tbc.png"
-  },
-  {
     "id": "judge-4",
     "firstName": "Thomas",
     "lastName": "Whitlock",
