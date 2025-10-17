@@ -72,6 +72,15 @@
     "image": "/images/officials/judge-tbc.png"
   },
   {
+    "id": "judge-4",
+    "firstName": "Thomas",
+    "lastName": "Whitlock",
+    "role": "Judge",
+    "active": true,
+    "bio": "Official BBFL judge",
+    "image": "/images/officials/thomas-whitlock.png"
+  },
+  {
     "id": "referee-1",
     "firstName": "Red",
     "lastName": "Homes",
