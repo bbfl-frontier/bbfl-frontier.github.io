@@ -1,0 +1,25 @@
+{
+  "id": "reece-dawn",
+  "firstName": "Reece",
+  "lastName": "Dawn",
+  "nickname": "TBC",
+  "weight": 183,
+  "height": "6'2\"",
+  "reach": "72",
+  "stance": "Orthodox",
+  "divisionId": "heavy",
+  "fightingStyle": "Bounty Hunter",
+  "age": 31,
+  "nationality": "American",
+  "country": "USA",
+  "debut": "1881-01-01",
+  "coach": "Daniel 'Ike' Wayland",
+  "active": true,
+  "image": "/images/fighters/reece-dawn.png",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
