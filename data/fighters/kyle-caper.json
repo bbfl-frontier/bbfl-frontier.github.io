@@ -1,0 +1,25 @@
+{
+  "id": "kyle-caper",
+  "firstName": "Kyle",
+  "lastName": "Caper",
+  "nickname": "The Nutcracker",
+  "weight": 240,
+  "height": "5'9\"",
+  "reach": "70",
+  "stance": "Orthodox",
+  "divisionId": "heavy",
+  "fightingStyle": "Standard",
+  "age": 42,
+  "nationality": "Scottish",
+  "country": "USA",
+  "debut": "1870-09-20",
+  "coach": "Jeremiah Swanson",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
