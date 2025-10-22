@@ -1,0 +1,25 @@
+{
+  "id": "trixie-tannin",
+  "firstName": "Trixie",
+  "lastName": "Tannin",
+  "nickname": "The Witch",
+  "weight": 125,
+  "height": "5'2\"",
+  "reach": "54",
+  "stance": "Orthodox",
+  "divisionId": "feather",
+  "fightingStyle": "Bruiser",
+  "age": 36,
+  "nationality": "American",
+  "country": "USA",
+  "debut": "1876-07-27",
+  "coach": "Jeremiah Thorne",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
