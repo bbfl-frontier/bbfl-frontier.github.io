@@ -2,7 +2,7 @@
   "id": "trixie-tannin",
   "firstName": "Trixie",
   "lastName": "Tannin",
-  "nickname": "The Witch",
+  "nickname": "WSO Witch",
   "weight": 125,
   "height": "5'2\"",
   "reach": "54",
@@ -15,7 +15,7 @@
   "debut": "1876-07-27",
   "coach": "Jeremiah Thorne",
   "active": true,
-  "image": "/images/fighters/trixie-tannin.png",
+  "image": "/images/fighters/placeholder.jpg",
   "record": {
     "wins": 0,
     "losses": 0,
