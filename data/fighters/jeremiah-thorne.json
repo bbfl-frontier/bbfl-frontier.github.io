@@ -1,0 +1,25 @@
+{
+  "id": "jeremiah-thorne",
+  "firstName": "Jeremiah",
+  "lastName": "Thorne",
+  "nickname": "Jer Jer Bonks",
+  "weight": 195,
+  "height": "6'2\"",
+  "reach": "73",
+  "stance": "Orthodox",
+  "divisionId": "heavy",
+  "fightingStyle": "Cowboy",
+  "age": 31,
+  "nationality": "American",
+  "country": "USA",
+  "debut": "1881-03-27",
+  "coach": "Trixie Tannin",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
