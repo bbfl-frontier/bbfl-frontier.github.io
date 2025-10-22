@@ -1,0 +1,25 @@
+{
+  "id": "thomas-omalley",
+  "firstName": "Thomas",
+  "lastName": "O'Malley",
+  "nickname": "The Train",
+  "weight": 207,
+  "height": "6'1\"",
+  "reach": "69",
+  "stance": "Orthodox",
+  "divisionId": "heavy",
+  "fightingStyle": "Classic",
+  "age": 21,
+  "nationality": "South African",
+  "country": "South Africa",
+  "debut": "1891-01-14",
+  "coach": "TBC",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
