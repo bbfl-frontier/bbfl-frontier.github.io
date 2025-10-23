@@ -1,8 +1,8 @@
 {
   "id": "bbfl-001-bout-5",
   "eventId": "bbfl-001",
-  "fighter1Id": "buffalo-man",
-  "fighter2Id": "kyle-caper",
+  "fighter1Id": "kyle-caper",
+  "fighter2Id": "reece",
   "divisionId": "heavy",
   "rounds": 5,
   "order": 5,
