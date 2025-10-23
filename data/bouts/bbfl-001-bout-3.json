@@ -1,0 +1,10 @@
+{
+  "id": "bbfl-001-bout-3",
+  "eventId": "bbfl-001",
+  "fighter1Id": "tasa-tabitsi ",
+  "fighter2Id": "john-mcginn",
+  "divisionId": "feather",
+  "rounds": 5,
+  "order": 3,
+  "forChampionship": false
+}
