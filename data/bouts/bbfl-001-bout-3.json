@@ -1,0 +1,10 @@
+{
+  "id": "bbfl-001-bout-3",
+  "eventId": "bbfl-001",
+  "fighter1Id": "buffalo-man",
+  "fighter2Id": "kyle-caper",
+  "divisionId": "heavy",
+  "rounds": 5,
+  "order": 3,
+  "forChampionship": false
+}
