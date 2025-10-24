@@ -1,0 +1,25 @@
+{
+  "id": "charles-python",
+  "firstName": "Charles",
+  "lastName": "Python",
+  "nickname": "The Striker",
+  "weight": 180,
+  "height": "6'0\"",
+  "reach": "69",
+  "stance": "Orthodox",
+  "divisionId": "middle",
+  "fightingStyle": "Cowboy",
+  "age": 22,
+  "nationality": "American",
+  "country": "USA",
+  "debut": "1890-06-14",
+  "coach": "Demi",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
