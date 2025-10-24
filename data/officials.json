@@ -45,6 +45,15 @@
     "image": "/images/officials/dr-megan-martinez.png"
   },
   {
+    "id": "dr-lara-fairlight",
+    "firstName": "Dr. Lara Fairlight",
+    "lastName": "",
+    "role": "Doctor",
+    "active": true,
+    "bio": "Medical professional ensuring fighter safety",
+    "image": "/images/officials/dr-lara-fairlight.png"
+  },
+  {
     "id": "judge-1",
     "firstName": "Alice",
     "lastName": "Whitlock",
@@ -63,6 +72,15 @@
     "image": "/images/officials/pancho-makatewewese.png"
   },
   {
+    "id": "judge-3",
+    "firstName": "Kit",
+    "lastName": "Hunter",
+    "role": "Judge",
+    "active": true,
+    "bio": "Official BBFL judge",
+    "image": "/images/officials/kit-hunter.png"
+  },
+  {
     "id": "judge-4",
     "firstName": "Thomas",
     "lastName": "Whitlock",
@@ -79,5 +97,14 @@
     "active": true,
     "bio": "Official BBFL referee",
     "image": "/images/officials/red-homes.png"
+  },
+  {
+    "id": "referee-2",
+    "firstName": "Willy",
+    "lastName": "Williamson",
+    "role": "Referee",
+    "active": true,
+    "bio": "Official BBFL referee",
+    "image": "/images/officials/willy-williamson.png"
   }
 ]
