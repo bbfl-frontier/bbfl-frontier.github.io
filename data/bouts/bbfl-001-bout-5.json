@@ -1,0 +1,10 @@
+{
+  "id": "bbfl-001-bout-5",
+  "eventId": "bbfl-001",
+  "fighter1Id": "tasa-tabitsi ",
+  "fighter2Id": "shiela-shaw",
+  "divisionId": "feather",
+  "rounds": 5,
+  "order": 5,
+  "forChampionship": false
+}
