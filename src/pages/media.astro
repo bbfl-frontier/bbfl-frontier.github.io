@@ -22,12 +22,22 @@ const baseUrl = import.meta.env.BASE_URL;
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {media.map((item: any) => (
             <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition border-2 border-bourbon">
-              <div class="aspect-video bg-gradient-to-br from-bourbon to-bourbon-dark flex items-center justify-center text-white">
-                <div class="text-center p-8">
-                  <div class="text-4xl mb-2">📸</div>
-                  <p class="text-sm">Image placeholder</p>
+              {item.image ? (
+                <div class="aspect-video overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={item.caption}
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  />
                 </div>
-              </div>
+              ) : (
+                <div class="aspect-video bg-gradient-to-br from-bourbon to-bourbon-dark flex items-center justify-center text-white">
+                  <div class="text-center p-8">
+                    <div class="text-4xl mb-2">📸</div>
+                    <p class="text-sm">Image placeholder</p>
+                  </div>
+                </div>
+              )}
               <div class="p-4">
                 <p class="font-semibold text-sm text-gray-800">{item.caption}</p>
                 {item.date && (

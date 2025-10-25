@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "image": "/images/media/bbfl-001/001-kyle.png",
+    "caption": "Kyle Caper's devastating KO victory",
+    "eventId": "bbfl-001",
+    "date": "1912-10-24"
+  },
+  {
+    "image": "/images/media/bbfl-001/001-shiela.png",
+    "caption": "Shiela Shaw's knockout performance",
+    "eventId": "bbfl-001",
+    "date": "1912-10-24"
+  }
+]
