@@ -5,32 +5,62 @@ import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+interface Event {
+  id: string;
+  date: string;
+  actualDate: string;
+  time: string;
+  timezone: string;
+  status: string;
+}
+
 export function computeNextEvent() {
-  // Read settings
-  const settingsPath = path.join(__dirname, '../data/settings.json');
-  const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf-8'));
-
-  const { hour, minute, timezone } = settings.schedule;
-
-  // Actual event date: October 24, 2025 at 9 PM EST (for countdown)
-  const actualEvent = DateTime.fromObject(
-    { year: 2025, month: 10, day: 24, hour, minute, second: 0, millisecond: 0 },
-    { zone: timezone }
+  // Load all events
+  const eventsDir = path.join(__dirname, '../data/events');
+  const eventFiles = fs.existsSync(eventsDir) ? fs.readdirSync(eventsDir).filter(f => f.endsWith('.json')) : [];
+  const events: Event[] = eventFiles.map(f =>
+    JSON.parse(fs.readFileSync(path.join(eventsDir, f), 'utf-8'))
   );
 
-  // Display date: October 24, 1912 (for roleplay/in-character display)
-  const displayEvent = DateTime.fromObject(
-    { year: 1912, month: 10, day: 24, hour, minute, second: 0, millisecond: 0 },
-    { zone: timezone }
+  // Find the next upcoming event (sorted by actualDate)
+  const upcomingEvents = events
+    .filter((e: Event) => e.status === 'upcoming')
+    .sort((a: Event, b: Event) => {
+      const dateA = new Date(a.actualDate || a.date).getTime();
+      const dateB = new Date(b.actualDate || b.date).getTime();
+      return dateA - dateB;
+    });
+
+  if (upcomingEvents.length === 0) {
+    console.log('⚠️  No upcoming events found');
+    return null;
+  }
+
+  const nextEvent = upcomingEvents[0];
+
+  // Parse the actual date and time for countdown
+  const [actualYear, actualMonth, actualDay] = nextEvent.actualDate.split('-').map(Number);
+  const [hour, minute] = nextEvent.time.split(':').map(Number);
+
+  const actualEventDateTime = DateTime.fromObject(
+    { year: actualYear, month: actualMonth, day: actualDay, hour, minute, second: 0, millisecond: 0 },
+    { zone: nextEvent.timezone }
+  );
+
+  // Parse the display date (in-character date)
+  const [displayYear, displayMonth, displayDay] = nextEvent.date.split('-').map(Number);
+  const displayEventDateTime = DateTime.fromObject(
+    { year: displayYear, month: displayMonth, day: displayDay, hour, minute, second: 0, millisecond: 0 },
+    { zone: nextEvent.timezone }
   );
 
   const nextEventData = {
-    date: actualEvent.toISODate(),
-    time: actualEvent.toFormat('HH:mm'),
-    timezone,
-    iso: actualEvent.toISO(),
-    unix: actualEvent.toSeconds(),
-    formatted: displayEvent.toFormat('MMMM d, yyyy'),
+    date: actualEventDateTime.toISODate(),
+    time: actualEventDateTime.toFormat('HH:mm'),
+    timezone: nextEvent.timezone,
+    iso: actualEventDateTime.toISO(),
+    unix: actualEventDateTime.toSeconds(),
+    formatted: displayEventDateTime.toFormat('MMMM d, yyyy'),
   };
 
   // Write to generated folder
