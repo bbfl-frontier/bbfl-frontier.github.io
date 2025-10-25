@@ -1,0 +1,10 @@
+{
+  "id": "bbfl-001-bout-4",
+  "eventId": "bbfl-001",
+  "fighter1Id": "sven-svensson",
+  "fighter2Id": "dartt-vanderbelt",
+  "divisionId": "middle",
+  "rounds": 5,
+  "order": 4,
+  "forChampionship": false
+}
