@@ -1,0 +1,25 @@
+{
+  "id": "sven-svensson",
+  "firstName": "Sven",
+  "lastName": "Svensson",
+  "nickname": "The Sausage",
+  "weight": 166,
+  "height": "5'10\"",
+  "reach": "68",
+  "stance": "Orthodox",
+  "divisionId": "middle",
+  "fightingStyle": "Bruiser",
+  "age": 26,
+  "nationality": "Swedish",
+  "country": "Sweden",
+  "debut": "1886-01-01",
+  "coach": "Veronica Selgado",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
