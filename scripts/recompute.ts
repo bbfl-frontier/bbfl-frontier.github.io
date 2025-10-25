@@ -66,7 +66,8 @@ export function computeRankingsAndRecords() {
       }
     }
 
-    if (loserRecord) {
+    // Special case: Don't count loss for John McGinn in bout 1 (special occasion)
+    if (loserRecord && !(result.boutId === 'bbfl-001-bout-1' && loserId === 'john-mcginn')) {
       loserRecord.losses++;
     }
   });
