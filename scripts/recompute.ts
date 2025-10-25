@@ -46,12 +46,18 @@ export function computeRankingsAndRecords() {
     const bout = bouts.find(b => b.id === result.boutId);
     if (!bout) return;
 
+    // Infer loserId from bout data (the fighter who is not the winner)
+    const loserId = bout.fighter1Id === result.winnerId ? bout.fighter2Id : bout.fighter1Id;
+
+    // Infer finish from method (anything other than Decision is a finish)
+    const isFinish = result.method.toLowerCase() !== 'decision';
+
     const winnerRecord = records.get(result.winnerId);
-    const loserRecord = records.get(result.loserId);
+    const loserRecord = records.get(loserId);
 
     if (winnerRecord) {
       winnerRecord.wins++;
-      if (result.finish) {
+      if (isFinish) {
         if (result.method.toLowerCase().includes('ko') || result.method.toLowerCase().includes('tko')) {
           winnerRecord.koWins++;
         } else if (result.method.toLowerCase().includes('sub')) {
@@ -76,12 +82,15 @@ export function computeRankingsAndRecords() {
     const bout = bouts.find(b => b.id === result.boutId);
     if (!bout) return;
 
+    // Infer finish from method (anything other than Decision is a finish)
+    const isFinish = result.method.toLowerCase() !== 'decision';
+
     // Winner gets +3 points
     const currentPoints = pointsMap.get(result.winnerId) || 0;
     let winPoints = 3;
 
     // Finish bonus +2
-    if (result.finish) {
+    if (isFinish) {
       winPoints += 2;
     }
 
