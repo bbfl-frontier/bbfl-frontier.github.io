@@ -1,0 +1,31 @@
+{
+  "boutId": "bbfl-001-bout-1",
+  "winnerId": "ivy-caine",
+  "method": "Decision",
+  "round": 5,
+  "time": "5:00",
+  "performanceBonus": false,
+  "scorecard": {
+    "judge1": [
+      "10-9",
+      "9-10",
+      "9-9",
+      "9-10",
+      "10-9"
+    ],
+    "judge2": [
+      "10-9",
+      "10-9",
+      "10-9",
+      "9-7",
+      "10-8"
+    ],
+    "judge3": [
+      "10-9",
+      "9-9",
+      "9-9",
+      "10-9",
+      "10-9"
+    ]
+  }
+}
