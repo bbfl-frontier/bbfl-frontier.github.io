@@ -17,9 +17,9 @@
   "active": true,
   "image": "/images/fighters/kyle-caper.png",
   "record": {
-    "wins": 0,
+    "wins": 1,
     "losses": 0,
     "draws": 0
   },
-  "rankingPoints": 0
+  "rankingPoints": 15
 }
