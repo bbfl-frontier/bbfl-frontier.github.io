@@ -1,0 +1,25 @@
+{
+  "id": "winston-james",
+  "firstName": "Winston",
+  "lastName": "James",
+  "nickname": "The Gentleman",
+  "weight": 190,
+  "height": "5'9\"",
+  "reach": "68",
+  "stance": "Orthodox",
+  "divisionId": "middle",
+  "fightingStyle": "Cowboy",
+  "age": 32,
+  "nationality": "British",
+  "country": "Britain",
+  "debut": "1880-02-19",
+  "coach": "",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
