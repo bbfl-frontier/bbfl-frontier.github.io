@@ -1,1 +1,1 @@
-Biography TBC
+Winston “The Gentleman”James, proprietor of the Pirates Cove Saloon by day a bare knuckle fighter by night. A man of the frontier where life’s a gamble and every fight has a story. He fights to forget a shadowed past with a powerful right hook leaving opponents in the dust.
