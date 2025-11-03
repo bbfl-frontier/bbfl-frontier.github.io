@@ -27,6 +27,24 @@
     "image": "/images/officials/william-todd.png"
   },
   {
+    "id": "referee-1",
+    "firstName": "Red",
+    "lastName": "Homes",
+    "role": "Commentator",
+    "active": true,
+    "bio": "Official BBFL commentator providing live fight analysis",
+    "image": "/images/officials/red-homes.png"
+  },
+  {
+    "id": "referee-2",
+    "firstName": "Willy",
+    "lastName": "Williamson",
+    "role": "Commentator",
+    "active": true,
+    "bio": "Official BBFL commentator providing live fight analysis",
+    "image": "/images/officials/willy-williamson.png"
+  },
+  {
     "id": "dr-bradford-manser",
     "firstName": "Dr. Bradford Manser",
     "lastName": "",
@@ -61,23 +79,5 @@
     "active": true,
     "bio": "Official BBFL judge",
     "image": "/images/officials/kit-hunter.png"
-  },
-  {
-    "id": "referee-1",
-    "firstName": "Red",
-    "lastName": "Homes",
-    "role": "Referee",
-    "active": true,
-    "bio": "Official BBFL referee",
-    "image": "/images/officials/red-homes.png"
-  },
-  {
-    "id": "referee-2",
-    "firstName": "Willy",
-    "lastName": "Williamson",
-    "role": "Referee",
-    "active": true,
-    "bio": "Official BBFL referee",
-    "image": "/images/officials/willy-williamson.png"
   }
 ]
