@@ -45,24 +45,6 @@
     "image": "/images/officials/dr-megan-martinez.png"
   },
   {
-    "id": "dr-lara-fairlight",
-    "firstName": "Dr. Lara Fairlight",
-    "lastName": "",
-    "role": "Doctor",
-    "active": true,
-    "bio": "Medical professional ensuring fighter safety",
-    "image": "/images/officials/dr-lara-fairlight.png"
-  },
-  {
-    "id": "judge-1",
-    "firstName": "Alice",
-    "lastName": "Whitlock",
-    "role": "Judge",
-    "active": true,
-    "bio": "Official BBFL judge",
-    "image": "/images/officials/alice-whitlock.png"
-  },
-  {
     "id": "judge-2",
     "firstName": "Pancho",
     "lastName": "Makatewewese",
@@ -79,15 +61,6 @@
     "active": true,
     "bio": "Official BBFL judge",
     "image": "/images/officials/kit-hunter.png"
-  },
-  {
-    "id": "judge-4",
-    "firstName": "Thomas",
-    "lastName": "Whitlock",
-    "role": "Judge",
-    "active": true,
-    "bio": "Official BBFL judge",
-    "image": "/images/officials/thomas-whitlock.png"
   },
   {
     "id": "referee-1",
