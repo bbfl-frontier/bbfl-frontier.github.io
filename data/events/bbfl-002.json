@@ -11,5 +11,7 @@
   "status": "upcoming",
   "description": "TBC",
   "posterImage": "/images/events/bbfl-001-poster.jpg.png",
-  "bouts": []
+  "bouts": [
+    "bbfl-002-bout-1"
+  ]
 }
