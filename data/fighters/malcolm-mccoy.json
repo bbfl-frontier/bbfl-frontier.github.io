@@ -1,0 +1,25 @@
+{
+  "id": "malcolm-mccoy",
+  "firstName": "Malcolm",
+  "lastName": "McCoy",
+  "nickname": "The Rhodes Sweeper",
+  "weight": 149,
+  "height": "5'9\"",
+  "reach": "65",
+  "stance": "Southpaw",
+  "divisionId": "feather",
+  "fightingStyle": "Bruiser",
+  "age": 20,
+  "nationality": "British",
+  "country": "United Kingdom",
+  "debut": "1890-01-01",
+  "coach": "",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
