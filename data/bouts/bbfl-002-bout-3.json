@@ -1,0 +1,10 @@
+{
+  "id": "bbfl-002-bout-3",
+  "eventId": "bbfl-002",
+  "fighter1Id": "winston-james",
+  "fighter2Id": "buffalo-man",
+  "divisionId": "heavy",
+  "rounds": 5,
+  "order": 3,
+  "forChampionship": false
+}
