@@ -17,9 +17,9 @@
   "active": true,
   "image": "/images/fighters/ivy-caine.png",
   "record": {
-    "wins": 1,
+    "wins": 2,
     "losses": 0,
     "draws": 0
   },
-  "rankingPoints": 12
+  "rankingPoints": 30
 }
