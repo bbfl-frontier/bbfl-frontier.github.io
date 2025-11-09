@@ -1,0 +1,10 @@
+{
+  "id": "bbfl-002-bout-4",
+  "eventId": "bbfl-002",
+  "fighter1Id": "kyle-caper",
+  "fighter2Id": "tustanagee-thlucco",
+  "divisionId": "heavy",
+  "rounds": 5,
+  "order": 4,
+  "forChampionship": false
+}
