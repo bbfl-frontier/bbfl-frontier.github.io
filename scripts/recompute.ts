@@ -83,16 +83,19 @@ export function computeRankingsAndRecords() {
     const bout = bouts.find(b => b.id === result.boutId);
     if (!bout) return;
 
-    // Infer finish from method (anything other than Decision is a finish)
-    const isFinish = result.method.toLowerCase() !== 'decision';
-
-    // Winner gets +3 points
+    // New scoring system based on best-of-3 knockout format
     const currentPoints = pointsMap.get(result.winnerId) || 0;
-    let winPoints = 3;
+    let winPoints = 0;
 
-    // Finish bonus +2
-    if (isFinish) {
-      winPoints += 2;
+    // Check the score field to determine points
+    // @ts-ignore - score may not be in old type definition
+    if (result.score === '2-0') {
+      winPoints = 3; // Dominant victory (2-0)
+    } else if (result.score === '2-1') {
+      winPoints = 2; // Hard-fought victory (2-1)
+    } else {
+      // Fallback for legacy results without score field
+      winPoints = 3;
     }
 
     pointsMap.set(result.winnerId, currentPoints + winPoints);

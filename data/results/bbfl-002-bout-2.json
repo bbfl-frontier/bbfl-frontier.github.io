@@ -2,7 +2,9 @@
   "boutId": "bbfl-002-bout-2",
   "winnerId": "ivy-caine",
   "method": "KO",
-  "round": 3,
-  "time": "4:42",
-  "performanceBonus": false
+  "score": "2-0",
+  "rounds": [
+    {"round": 1, "winnerId": "ivy-caine", "time": "1:42"},
+    {"round": 2, "winnerId": "ivy-caine", "time": "1:33"}
+  ]
 }

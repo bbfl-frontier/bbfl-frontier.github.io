@@ -2,7 +2,10 @@
   "boutId": "bbfl-002-bout-4",
   "winnerId": "tustanagee-thlucco",
   "method": "KO",
-  "round": 4,
-  "time": "6:47",
-  "performanceBonus": false
+  "score": "2-1",
+  "rounds": [
+    {"round": 1, "winnerId": "kyle-caper", "time": "1:19"},
+    {"round": 2, "winnerId": "tustanagee-thlucco", "time": "1:42"},
+    {"round": 3, "winnerId": "tustanagee-thlucco", "time": "1:35"}
+  ]
 }

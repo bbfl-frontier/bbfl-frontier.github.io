@@ -2,7 +2,9 @@
   "boutId": "bbfl-001-bout-4",
   "winnerId": "sven-svensson",
   "method": "KO",
-  "round": 3,
-  "time": "6:54",
-  "performanceBonus": false
+  "score": "2-0",
+  "rounds": [
+    {"round": 1, "winnerId": "sven-svensson", "time": "1:25"},
+    {"round": 2, "winnerId": "sven-svensson", "time": "1:31"}
+  ]
 }

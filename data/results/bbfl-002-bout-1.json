@@ -2,7 +2,9 @@
   "boutId": "bbfl-002-bout-1",
   "winnerId": "veronica-selgado",
   "method": "KO",
-  "round": 3,
-  "time": "5:14",
-  "performanceBonus": false
+  "score": "2-0",
+  "rounds": [
+    {"round": 1, "winnerId": "veronica-selgado", "time": "1:37"},
+    {"round": 2, "winnerId": "veronica-selgado", "time": "1:24"}
+  ]
 }
