@@ -39,6 +39,20 @@ const baseUrl = import.meta.env.BASE_URL;
 
   <section class="py-16">
     <div class="container mx-auto px-4">
+      <!-- Rule Change Notice -->
+      <div class="mb-8 bg-yellow-50 border-2 border-yellow-400 rounded-2xl p-6 shadow-lg">
+        <div class="flex items-start gap-3">
+          <div class="text-3xl">⚠️</div>
+          <div>
+            <h3 class="text-lg font-black text-yellow-900 mb-2">Rule Change Notice - Effective BBFL 003</h3>
+            <p class="text-sm text-yellow-800 leading-relaxed">
+              As of BBFL 003, the fighting structure is moving from judges/decisions & knockouts to a best-of-3 knockout format.
+              <strong>New scoring: 3 points for a 2-0 win, 2 points for a 2-1 win.</strong>
+              Previous fights have been adjusted accordingly: knockout wins = 3 points, decision wins = 2 points.
+            </p>
+          </div>
+        </div>
+      </div>
       {divisions.map((division: any) => {
         // Get rankings if they exist, otherwise list all fighters in division alphabetically
         let divisionRankings = rankings

@@ -8,8 +8,13 @@
   "time": "18:00",
   "timezone": "America/New_York",
   "venueId": "warehouse",
-  "status": "upcoming",
+  "status": "completed",
   "description": "TBC",
   "posterImage": "/images/events/bbfl-001-poster.jpg.png",
-  "bouts": []
+  "bouts": [
+    "bbfl-002-bout-1",
+    "bbfl-002-bout-2",
+    "bbfl-002-bout-3",
+    "bbfl-002-bout-4"
+  ]
 }
