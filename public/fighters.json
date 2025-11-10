@@ -175,9 +175,9 @@
     "rankingPoints": 0
   },
   {
-    "id": "veronica-selgado",
+    "id": "veronica-salgado",
     "firstName": "Veronica",
-    "lastName": "Selgado",
+    "lastName": "Salgado",
     "nickname": "The Pitbull of Armadillo",
     "weight": 164,
     "height": "185",
@@ -191,7 +191,7 @@
     "debut": "1984-01-01",
     "coach": "Sven Svensson",
     "active": true,
-    "image": "/images/fighters/veronica-selgado.png",
+    "image": "/images/fighters/veronica-salgado.png",
     "record": {
       "wins": 0,
       "losses": 0,
