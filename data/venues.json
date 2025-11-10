@@ -26,5 +26,12 @@
     "location": "Tumbleweed",
     "description": "Deep in the desert wilderness, this rough and dusty arena brings brutal combat to the lawless frontier town",
     "capacity": 25
+  },
+  {
+    "id": "rhodes-arena",
+    "name": "Rhodes Town Hall",
+    "location": "Rhodes",
+    "description": "The historic Rhodes Town Hall hosts fierce combat in the heart of the South",
+    "capacity": 25
   }
 ]

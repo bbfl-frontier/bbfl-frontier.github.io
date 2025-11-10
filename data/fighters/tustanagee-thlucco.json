@@ -1,0 +1,25 @@
+{
+  "id": "tustanagee-thlucco",
+  "firstName": "Tustanagee",
+  "lastName": "Thlucco",
+  "nickname": "Yazzie",
+  "weight": 210,
+  "height": "6'2\"",
+  "reach": "70",
+  "stance": "",
+  "divisionId": "heavy",
+  "fightingStyle": "Cowboy",
+  "age": 22,
+  "nationality": "Seminole",
+  "country": "Bahoruco",
+  "debut": "1890-01-01",
+  "coach": "Primrose",
+  "active": true,
+  "image": "/images/fighters/tustanagee-thlucco.png",
+  "record": {
+    "wins": 1,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 18
+}
