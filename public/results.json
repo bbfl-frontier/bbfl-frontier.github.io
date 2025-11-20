@@ -1,1 +1,184 @@
-[]
+[
+  {
+    "boutId": "bbfl-001-bout-1",
+    "winnerId": "ivy-caine",
+    "method": "KO",
+    "score": "2-1",
+    "rounds": [
+      {
+        "round": 1,
+        "winnerId": "ivy-caine",
+        "time": "1:32"
+      },
+      {
+        "round": 2,
+        "winnerId": "john-mcginn",
+        "time": "1:18"
+      },
+      {
+        "round": 3,
+        "winnerId": "ivy-caine",
+        "time": "1:41"
+      }
+    ]
+  },
+  {
+    "boutId": "bbfl-001-bout-2",
+    "winnerId": "alejandro-guerrero",
+    "method": "KO",
+    "score": "2-1",
+    "rounds": [
+      {
+        "round": 1,
+        "winnerId": "malcolm-mccoy",
+        "time": "1:28"
+      },
+      {
+        "round": 2,
+        "winnerId": "alejandro-guerrero",
+        "time": "1:35"
+      },
+      {
+        "round": 3,
+        "winnerId": "alejandro-guerrero",
+        "time": "1:22"
+      }
+    ]
+  },
+  {
+    "boutId": "bbfl-001-bout-3",
+    "winnerId": "kyle-caper",
+    "method": "KO",
+    "score": "2-1",
+    "rounds": [
+      {
+        "round": 1,
+        "winnerId": "kyle-caper",
+        "time": "1:29"
+      },
+      {
+        "round": 2,
+        "winnerId": "buffalo-man",
+        "time": "1:15"
+      },
+      {
+        "round": 3,
+        "winnerId": "kyle-caper",
+        "time": "1:38"
+      }
+    ]
+  },
+  {
+    "boutId": "bbfl-001-bout-4",
+    "winnerId": "sven-svensson",
+    "method": "KO",
+    "score": "2-0",
+    "rounds": [
+      {
+        "round": 1,
+        "winnerId": "sven-svensson",
+        "time": "1:25"
+      },
+      {
+        "round": 2,
+        "winnerId": "sven-svensson",
+        "time": "1:31"
+      }
+    ]
+  },
+  {
+    "boutId": "bbfl-001-bout-5",
+    "winnerId": "shiela-shaw",
+    "method": "KO",
+    "score": "2-0",
+    "rounds": [
+      {
+        "round": 1,
+        "winnerId": "shiela-shaw",
+        "time": "1:43"
+      },
+      {
+        "round": 2,
+        "winnerId": "shiela-shaw",
+        "time": "1:29"
+      }
+    ]
+  },
+  {
+    "boutId": "bbfl-002-bout-1",
+    "winnerId": "veronica-salgado",
+    "method": "KO",
+    "score": "2-0",
+    "rounds": [
+      {
+        "round": 1,
+        "winnerId": "veronica-salgado",
+        "time": "1:37"
+      },
+      {
+        "round": 2,
+        "winnerId": "veronica-salgado",
+        "time": "1:24"
+      }
+    ]
+  },
+  {
+    "boutId": "bbfl-002-bout-2",
+    "winnerId": "ivy-caine",
+    "method": "KO",
+    "score": "2-0",
+    "rounds": [
+      {
+        "round": 1,
+        "winnerId": "ivy-caine",
+        "time": "1:42"
+      },
+      {
+        "round": 2,
+        "winnerId": "ivy-caine",
+        "time": "1:33"
+      }
+    ]
+  },
+  {
+    "boutId": "bbfl-002-bout-3",
+    "winnerId": "buffalo-man",
+    "method": "KO",
+    "score": "2-0",
+    "rounds": [
+      {
+        "round": 1,
+        "winnerId": "buffalo-man",
+        "time": "1:28"
+      },
+      {
+        "round": 2,
+        "winnerId": "buffalo-man",
+        "time": "1:45"
+      }
+    ]
+  },
+  {
+    "boutId": "bbfl-002-bout-4",
+    "winnerId": "tustanagee-thlucco",
+    "method": "KO",
+    "score": "2-1",
+    "rounds": [
+      {
+        "round": 1,
+        "winnerId": "kyle-caper",
+        "time": "1:19"
+      },
+      {
+        "round": 2,
+        "winnerId": "tustanagee-thlucco",
+        "time": "1:42"
+      },
+      {
+        "round": 3,
+        "winnerId": "tustanagee-thlucco",
+        "time": "1:35"
+      }
+    ]
+  }
+]

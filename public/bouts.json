@@ -12,9 +12,9 @@
   {
     "id": "bbfl-001-bout-2",
     "eventId": "bbfl-001",
-    "fighter1Id": "shiela-shaw",
-    "fighter2Id": "tasa-tabitsi ",
-    "divisionId": "feather",
+    "fighter1Id": "alejandro-guerrero",
+    "fighter2Id": "veronica-salgado",
+    "divisionId": "middle",
     "rounds": 5,
     "order": 2,
     "forChampionship": false
@@ -22,9 +22,9 @@
   {
     "id": "bbfl-001-bout-3",
     "eventId": "bbfl-001",
-    "fighter1Id": "alejandro-guerrero",
-    "fighter2Id": "veronica-salgado",
-    "divisionId": "middle",
+    "fighter1Id": "buffalo-man",
+    "fighter2Id": "kyle-caper",
+    "divisionId": "heavy",
     "rounds": 5,
     "order": 3,
     "forChampionship": false
@@ -32,8 +32,58 @@
   {
     "id": "bbfl-001-bout-4",
     "eventId": "bbfl-001",
-    "fighter1Id": "buffalo-man",
-    "fighter2Id": "reece",
+    "fighter1Id": "sven-svensson",
+    "fighter2Id": "dartt-vanderbelt",
+    "divisionId": "middle",
+    "rounds": 5,
+    "order": 4,
+    "forChampionship": false
+  },
+  {
+    "id": "bbfl-001-bout-5",
+    "eventId": "bbfl-001",
+    "fighter1Id": "tasa-tabitsi ",
+    "fighter2Id": "shiela-shaw",
+    "divisionId": "feather",
+    "rounds": 5,
+    "order": 5,
+    "forChampionship": false
+  },
+  {
+    "id": "bbfl-002-bout-1",
+    "eventId": "bbfl-002",
+    "fighter1Id": "veronica-salgado",
+    "fighter2Id": "sven-svensson",
+    "divisionId": "middle",
+    "rounds": 5,
+    "order": 1,
+    "forChampionship": false
+  },
+  {
+    "id": "bbfl-002-bout-2",
+    "eventId": "bbfl-002",
+    "fighter1Id": "ivy-caine",
+    "fighter2Id": "malcolm-mccoy",
+    "divisionId": "feather",
+    "rounds": 5,
+    "order": 2,
+    "forChampionship": false
+  },
+  {
+    "id": "bbfl-002-bout-3",
+    "eventId": "bbfl-002",
+    "fighter1Id": "winston-james",
+    "fighter2Id": "buffalo-man",
+    "divisionId": "heavy",
+    "rounds": 5,
+    "order": 3,
+    "forChampionship": false
+  },
+  {
+    "id": "bbfl-002-bout-4",
+    "eventId": "bbfl-002",
+    "fighter1Id": "tustanagee-thlucco",
+    "fighter2Id": "kyle-caper",
     "divisionId": "heavy",
     "rounds": 5,
     "order": 4,

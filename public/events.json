@@ -9,14 +9,15 @@
     "time": "18:00",
     "timezone": "Eastern Standard Time",
     "venueId": "warehouse",
-    "status": "upcoming",
+    "status": "completed",
     "posterImage": "/images/events/bbfl-002-poster.jpg.png",
     "description": "The inaugural Blood & Bourbon Fight League event. Deep beneath the cobblestone streets of Saint Denis lies the Underground Fight Arena - a place where the city's finest warriors test their mettle in brutal combat. This historic night marks the beginning of organized fighting in the frontier, where honor, blood, and bourbon flow in equal measure.",
     "bouts": [
       "bbfl-001-bout-1",
       "bbfl-001-bout-2",
       "bbfl-001-bout-3",
-      "bbfl-001-bout-4"
+      "bbfl-001-bout-4",
+      "bbfl-001-bout-5"
     ]
   },
   {
@@ -24,14 +25,34 @@
     "slug": "bbfl-002-rising-stars",
     "title": "BBFL 002: Rising Stars",
     "subtitle": "Tomorrow's Champions Begin Here",
-    "date": "1912-11-07",
-    "actualDate": "2025-11-07",
-    "time": "23:00",
-    "timezone": "UTC",
-    "venueId": "tumbleweed-arena",
-    "status": "upcoming",
+    "date": "1912-11-08",
+    "actualDate": "2025-11-08",
+    "time": "18:00",
+    "timezone": "America/New_York",
+    "venueId": "warehouse",
+    "status": "completed",
     "description": "TBC",
     "posterImage": "/images/events/bbfl-001-poster.jpg.png",
+    "bouts": [
+      "bbfl-002-bout-1",
+      "bbfl-002-bout-2",
+      "bbfl-002-bout-3",
+      "bbfl-002-bout-4"
+    ]
+  },
+  {
+    "id": "bbfl-003",
+    "slug": "bbfl-003-rhodes-backyard-brawling",
+    "title": "BBFL 003: Rhodes - Backyard Brawling",
+    "subtitle": "Fight Night in Rhodes",
+    "date": "1912-11-23",
+    "actualDate": "2025-11-23",
+    "time": "20:30",
+    "timezone": "America/New_York",
+    "venueId": "rhodes-arena",
+    "status": "upcoming",
+    "description": "TBC",
+    "posterImage": "/images/media/bbfl-002/caper1.png",
     "bouts": []
   }
 ]
