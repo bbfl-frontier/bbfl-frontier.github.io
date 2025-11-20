@@ -29,9 +29,9 @@
   },
   {
     "id": "rhodes-arena",
-    "name": "Rhodes Town Hall",
+    "name": "Rhodes",
     "location": "Rhodes",
-    "description": "The historic Rhodes Town Hall hosts fierce combat in the heart of the South",
+    "description": "Backyard brawling venue located near the clothing and general store in the heart of Rhodes",
     "capacity": 25
   }
 ]
