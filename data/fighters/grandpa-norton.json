@@ -1,0 +1,25 @@
+{
+  "id": "grandpa-norton",
+  "firstName": "Grandpa",
+  "lastName": "Norton",
+  "nickname": "The Dirty Dog of Lemoyne",
+  "weight": 192,
+  "height": "6'1\"",
+  "reach": "70",
+  "stance": "Orthodox",
+  "divisionId": "middle",
+  "fightingStyle": "Bruiser",
+  "age": 62,
+  "nationality": "American",
+  "country": "USA",
+  "debut": "1850-01-01",
+  "coach": "Veronica Salgado",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
