@@ -1,0 +1,10 @@
+{
+  "id": "bbfl-003-bout-2",
+  "eventId": "bbfl-003",
+  "fighter1Id": "jeremiah-thorne",
+  "fighter2Id": "kyle-caper",
+  "divisionId": "heavy",
+  "rounds": 3,
+  "order": 2,
+  "forChampionship": false
+}
