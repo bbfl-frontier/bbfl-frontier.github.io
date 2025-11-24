@@ -1,0 +1,10 @@
+{
+  "id": "bbfl-003-bout-1",
+  "eventId": "bbfl-003",
+  "fighter1Id": "buffalo-man",
+  "fighter2Id": "grandpa-norton",
+  "divisionId": "heavy",
+  "rounds": 3,
+  "order": 1,
+  "forChampionship": false
+}
