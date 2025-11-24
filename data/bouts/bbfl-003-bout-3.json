@@ -1,0 +1,10 @@
+{
+  "id": "bbfl-003-bout-3",
+  "eventId": "bbfl-003",
+  "fighter1Id": "evie-crane",
+  "fighter2Id": "sven-svensson",
+  "divisionId": "feather",
+  "rounds": 3,
+  "order": 3,
+  "forChampionship": false
+}
