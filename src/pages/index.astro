@@ -19,10 +19,6 @@ const divisions = JSON.parse(fs.readFileSync(divisionsPath, 'utf-8'));
 const settingsPath = path.join(process.cwd(), 'data/settings.json');
 const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf-8'));
 
-// Load sponsors
-const sponsorsPath = path.join(process.cwd(), 'data/sponsors.json');
-const sponsors = JSON.parse(fs.readFileSync(sponsorsPath, 'utf-8'));
-
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
@@ -85,17 +81,22 @@ const baseUrl = import.meta.env.BASE_URL;
     </div>
   </section>
 
-  <!-- Sponsors Section -->
+  <!-- Business Promotion Section -->
   <section class="py-16 bg-parchment">
     <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-black text-center mb-12 text-bourbon">Our Sponsors</h2>
-      <div class="flex flex-wrap justify-center items-center gap-8">
-        {sponsors.map((sponsor: any) => (
-          <div class="bg-white rounded-xl shadow p-6 hover:shadow-lg transition border-2 border-bourbon">
-            <p class="font-bold text-lg text-center text-gray-800">{sponsor.name}</p>
-            <p class="text-sm text-gray-600 text-center mt-1 capitalize">{sponsor.tier}</p>
-          </div>
-        ))}
+      <h2 class="text-3xl font-black text-center mb-6 text-bourbon">Bring Your Business to the Fight</h2>
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-white rounded-2xl shadow-lg p-8 border-2 border-bourbon">
+          <p class="text-lg text-gray-800 text-center mb-6">
+            We're looking to promote businesses across Lemoyne! Bring your wagon and sell your goods at Blood & Bourbon Fight League events.
+          </p>
+          <p class="text-md text-gray-700 text-center mb-4">
+            Reach a crowd of fight enthusiasts while supporting the frontier's premier fighting championship.
+          </p>
+          <p class="text-center text-bourbon font-bold text-xl">
+            Reach out to get involved.
+          </p>
+        </div>
       </div>
     </div>
   </section>
