@@ -1,16 +1,12 @@
 ---
 interface Props {
-  targetDate: string;
-  targetTime: string;
-  timezone: string;
+  targetISO: string;
 }
 
-const { targetDate, targetTime, timezone } = Astro.props;
-// Use EDT timezone offset (-04:00) for October 24th
-const targetISO = `${targetDate}T${targetTime}:00-04:00`;
+const { targetISO } = Astro.props;
 ---
 
-<div class="countdown-container text-center" data-target={targetISO} data-timezone={timezone}>
+<div class="countdown-container text-center" data-target={targetISO}>
   <div class="grid grid-cols-4 gap-4 max-w-lg mx-auto">
     <div class="bg-white rounded-xl shadow-lg p-4 border-2 border-bourbon">
       <div class="text-3xl md:text-4xl font-black text-bourbon countdown-days">00</div>
