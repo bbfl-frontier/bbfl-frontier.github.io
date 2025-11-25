@@ -862,8 +862,6 @@ function renderResults() {
               Winner: ${winner ? `${winner.firstName} ${winner.lastName}` : 'Draw'}
               • ${r.method}
               ${r.score ? ` • Score: ${r.score}` : ''}
-              ${r.round ? ` • Round ${r.round}` : ''}
-              ${r.time ? ` at ${r.time}` : ''}
               ${r.performanceBonus ? ' • <span style="color:gold;">⭐ BONUS</span>' : ''}
             </div>
           </div>
@@ -932,8 +930,6 @@ document.getElementById('result-form')?.addEventListener('submit', async (e) => 
     winnerId: winnerId === 'draw' ? null : winnerId,
     method,
     score,
-    round: parseInt(document.getElementById('result-round').value) || null,
-    time: document.getElementById('result-time').value || null,
     performanceBonus: document.getElementById('result-bonus').value === 'true'
   };
 
@@ -1014,11 +1010,6 @@ function calculatePoints(result, isWinner, bout) {
   // Performance bonus
   if (result.performanceBonus) {
     points += 5;
-  }
-
-  // Early finish bonus (finished before final round)
-  if (result.round && result.round < bout.rounds) {
-    points += 3;
   }
 
   // Score bonus (rounds won)
