@@ -4,14 +4,11 @@
   "tagline": "Where honor meets the dirt.",
   "schedule": {
     "frequency": "biweekly",
-    "dayOfWeek": 5,
-    "hour": 18,
-    "minute": 0,
+    "description": "Every 2 weeks on Friday, Saturday, or Sunday depending on fighter and organizer availability",
     "timezone": "America/New_York"
   },
   "purses": {
-    "prelim": 20,
-    "mainCard": 50,
+    "standard": 50,
     "title": 100,
     "koBonus": 25
   },
