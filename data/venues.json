@@ -29,9 +29,9 @@
   },
   {
     "id": "rhodes-arena",
-    "name": "Rhodes",
+    "name": "Rhodes Boxing Ring",
     "location": "Rhodes",
-    "description": "Backyard brawling venue located near the clothing and general store in the heart of Rhodes",
+    "description": "Professional boxing ring in the heart of Rhodes, hosting the historic Night of Champions where legends will be crowned across all three divisions",
     "capacity": 25
   }
 ]
