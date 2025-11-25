@@ -608,7 +608,7 @@ function renderBouts() {
                 <div class="item-info">
                   <strong>${f1?.firstName} ${f1?.lastName}</strong> vs <strong>${f2?.firstName} ${f2?.lastName}</strong>
                   <div class="item-meta">
-                    ${div?.name || b.divisionId} • ${b.rounds} rounds • Bout #${b.order}
+                    ${div?.name || b.divisionId} • Bout #${b.order}
                     ${b.forChampionship ? ' • <span style="color:gold;">CHAMPIONSHIP</span>' : ''}
                   </div>
                 </div>
@@ -661,7 +661,6 @@ document.getElementById('bout-form')?.addEventListener('submit', async (e) => {
     fighter1Id: document.getElementById('bout-fighter1').value,
     fighter2Id: document.getElementById('bout-fighter2').value,
     divisionId: document.getElementById('bout-division').value,
-    rounds: parseInt(document.getElementById('bout-rounds').value),
     order: boutOrder,
     forChampionship: document.getElementById('bout-championship').value === 'true'
   };
