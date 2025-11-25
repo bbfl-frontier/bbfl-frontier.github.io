@@ -67,6 +67,10 @@ const getInitials = (firstName: string, lastName: string) => {
   return `${firstName?.charAt(0) || ''}${lastName?.charAt(0) || ''}`;
 };
 
+// Construct ISO timestamp for countdown
+const eventDate = event.actualDate || event.date;
+const eventISO = `${eventDate}T${event.time}:00-05:00`; // EST offset
+
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
@@ -80,9 +84,7 @@ const baseUrl = import.meta.env.BASE_URL;
         <div class="bg-white rounded-2xl shadow-lg p-8 mb-8 border-2 border-bourbon">
           <h3 class="text-2xl font-bold text-bourbon text-center mb-6">Event Starts In</h3>
           <Countdown
-            targetDate={event.actualDate || event.date}
-            targetTime={event.time}
-            timezone={event.timezone}
+            targetISO={eventISO}
           />
         </div>
       )}
@@ -105,7 +107,7 @@ const baseUrl = import.meta.env.BASE_URL;
               </div>
               <div class="flex justify-between">
                 <dt class="text-gray-600">Time:</dt>
-                <dd class="font-semibold">{event.time} {event.timezone}</dd>
+                <dd class="font-semibold">{event.time} EST</dd>
               </div>
               <div class="flex justify-between">
                 <dt class="text-gray-600">Status:</dt>
@@ -152,7 +154,7 @@ const baseUrl = import.meta.env.BASE_URL;
                     {bout.forChampionship ? '🏆 Championship Bout' : `Bout #${bout.order}`}
                   </span>
                   <span class="text-xs text-gray-500">
-                    {bout.rounds} Rounds • {division?.name || bout.divisionId}
+                    {division?.name || bout.divisionId}
                   </span>
                 </div>
 
@@ -251,7 +253,7 @@ const baseUrl = import.meta.env.BASE_URL;
                       }
                     </p>
                     <p class="text-xs text-gray-500 mt-1">
-                      {result.method} • Round {result.round} at {result.time}
+                      {result.method}{result.score ? ` • ${result.score}` : ''}
                     </p>
                   </div>
                 )}
