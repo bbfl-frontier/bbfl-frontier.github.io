@@ -861,6 +861,7 @@ function renderResults() {
             <div class="item-meta">
               Winner: ${winner ? `${winner.firstName} ${winner.lastName}` : 'Draw'}
               • ${r.method}
+              ${r.score ? ` • Score: ${r.score}` : ''}
               ${r.round ? ` • Round ${r.round}` : ''}
               ${r.time ? ` at ${r.time}` : ''}
               ${r.performanceBonus ? ' • <span style="color:gold;">⭐ BONUS</span>' : ''}
@@ -918,6 +919,7 @@ document.getElementById('result-form')?.addEventListener('submit', async (e) => 
   const boutId = document.getElementById('result-bout').value;
   const method = document.getElementById('result-method').value;
   const winnerId = document.getElementById('result-winner').value;
+  const score = document.getElementById('result-score').value;
 
   const bout = bouts.find(b => b.id === boutId);
   if (!bout) {
@@ -929,6 +931,7 @@ document.getElementById('result-form')?.addEventListener('submit', async (e) => 
     boutId,
     winnerId: winnerId === 'draw' ? null : winnerId,
     method,
+    score,
     round: parseInt(document.getElementById('result-round').value) || null,
     time: document.getElementById('result-time').value || null,
     performanceBonus: document.getElementById('result-bonus').value === 'true'
@@ -1016,6 +1019,13 @@ function calculatePoints(result, isWinner, bout) {
   // Early finish bonus (finished before final round)
   if (result.round && result.round < bout.rounds) {
     points += 3;
+  }
+
+  // Score bonus (rounds won)
+  if (result.score === '2-0') {
+    points += 3; // Dominant win - 3 points
+  } else if (result.score === '2-1') {
+    points += 2; // Close win - 2 points
   }
 
   return points;
