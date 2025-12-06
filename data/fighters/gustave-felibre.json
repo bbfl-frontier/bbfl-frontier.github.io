@@ -1,0 +1,25 @@
+{
+  "id": "gustave-felibre",
+  "firstName": "Gustave",
+  "lastName": "Filibre",
+  "nickname": "The French Cowboy",
+  "weight": 198,
+  "height": "5\"9;",
+  "reach": "69",
+  "stance": "Orthodox",
+  "divisionId": "heavy",
+  "fightingStyle": "Strong Feminine",
+  "age": 30,
+  "nationality": "French",
+  "country": "France",
+  "debut": "1882-08-14",
+  "coach": "",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
