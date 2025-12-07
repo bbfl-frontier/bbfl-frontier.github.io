@@ -1,8 +1,8 @@
 {
   "id": "bbfl-004-bout-1",
   "eventId": "bbfl-004",
-  "fighter1Id": "octavia-nichols",
-  "fighter2Id": "sven-svensson",
+  "fighter1Id": "sven-svensson",
+  "fighter2Id": "octavia-nichols",
   "divisionId": "feather",
   "order": 1,
   "forChampionship": true
