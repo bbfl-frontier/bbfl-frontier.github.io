@@ -17,9 +17,9 @@
   "active": true,
   "image": "/images/fighters/buffalo-man.png",
   "record": {
-    "wins": 1,
-    "losses": 3,
+    "wins": 2,
+    "losses": 2,
     "draws": 0
   },
-  "rankingPoints": 18
+  "rankingPoints": 36
 }
