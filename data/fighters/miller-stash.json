@@ -1,0 +1,25 @@
+{
+  "id": "miller-stash",
+  "firstName": "Mo",
+  "lastName": "Stash",
+  "nickname": "The Creep",
+  "weight": 205,
+  "height": "6\"4'",
+  "reach": "70",
+  "stance": "Orthodox",
+  "divisionId": "heavy",
+  "fightingStyle": "Strong Feminine",
+  "age": null,
+  "nationality": "",
+  "country": "",
+  "debut": "1878-04-18",
+  "coach": "",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
