@@ -3,24 +3,24 @@
     "id": "feather-champion",
     "divisionId": "feather",
     "name": "Light Hands Championship",
-    "currentChampion": null,
-    "wonAt": null,
+    "currentChampion": "sven-svensson",
+    "wonAt": "bbfl-004",
     "defenses": 0
   },
   {
     "id": "middle-champion",
     "divisionId": "middle",
     "name": "Roughnecks Championship",
-    "currentChampion": null,
-    "wonAt": null,
+    "currentChampion": "veronica-salgado",
+    "wonAt": "bbfl-004",
     "defenses": 0
   },
   {
     "id": "heavy-champion",
     "divisionId": "heavy",
     "name": "Bone Crushers Championship",
-    "currentChampion": null,
-    "wonAt": null,
+    "currentChampion": "kyle-caper",
+    "wonAt": "bbfl-004",
     "defenses": 0
   }
 ]
