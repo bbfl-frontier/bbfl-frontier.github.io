@@ -89,6 +89,11 @@ const fightHistory = fighterBouts.map((bout: any) => {
     } else if (score === '2-1') {
       pointsEarned = 2; // Hard-fought victory
     }
+  } else {
+    // Losers can earn points for valiant effort
+    if (score === '2-1') {
+      pointsEarned = 1; // Valiant effort (1-2 loss)
+    }
   }
 
   return {
@@ -164,12 +169,6 @@ const fightHistory = fighterBouts.map((bout: any) => {
                   <div class="flex justify-between">
                     <dt class="text-gray-600">Reach:</dt>
                     <dd class="font-semibold">{fighter.reach}"</dd>
-                  </div>
-                )}
-                {fighter.stance && (
-                  <div class="flex justify-between">
-                    <dt class="text-gray-600">Stance:</dt>
-                    <dd class="font-semibold">{fighter.stance}</dd>
                   </div>
                 )}
                 {fighter.fightingStyle && (

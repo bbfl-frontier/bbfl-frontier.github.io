@@ -84,23 +84,31 @@ export function computeRankingsAndRecords() {
     if (!bout) return;
 
     // New scoring system based on best-of-3 knockout format
-    const currentPoints = pointsMap.get(result.winnerId) || 0;
+    const winnerId = result.winnerId;
+    const loserId = bout.fighter1Id === winnerId ? bout.fighter2Id : bout.fighter1Id;
+
+    const currentWinnerPoints = pointsMap.get(winnerId) || 0;
+    const currentLoserPoints = pointsMap.get(loserId) || 0;
+
     let winPoints = 0;
+    let losePoints = 0;
 
     // Check the score field to determine points
     // @ts-ignore - score may not be in old type definition
     if (result.score === '2-0') {
       winPoints = 3; // Dominant victory (2-0)
+      losePoints = 0; // Shutout loss (0-2)
     } else if (result.score === '2-1') {
       winPoints = 2; // Hard-fought victory (2-1)
+      losePoints = 1; // Valiant effort (1-2 loss)
     } else {
       // Fallback for legacy results without score field
       winPoints = 3;
+      losePoints = 0;
     }
 
-    pointsMap.set(result.winnerId, currentPoints + winPoints);
-
-    // Loser gets 0 points (already initialized)
+    pointsMap.set(winnerId, currentWinnerPoints + winPoints);
+    pointsMap.set(loserId, currentLoserPoints + losePoints);
   });
 
   // Build rankings per division

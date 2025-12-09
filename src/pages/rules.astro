@@ -21,12 +21,11 @@ const settings = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/setti
           <h2 class="text-2xl font-black text-bourbon mb-4">Event Format</h2>
           <div class="prose prose-sm max-w-none">
             <ul class="space-y-2 text-gray-700">
-              <li><strong>Schedule:</strong> Events every other Saturday at 6:00 PM ET</li>
-              <li><strong>Card Structure:</strong> 1-3 preliminary bouts, 1-2 main card bouts, 1 title fight (optional)</li>
+              <li><strong>Schedule:</strong> Check the events page or reach out to Raymond</li>
               <li><strong>Competition Format:</strong> Best-of-3 knockout competition - fighters compete until one achieves 2 knockouts</li>
               <li><strong>No Time Limits:</strong> Rounds continue until one fighter is knocked out - no time limits or round durations</li>
               <li><strong>Medical Treatment:</strong> After each knockout, fighters are treated by league doctors and given time to recover before the next round</li>
-              <li><strong>Corner Time:</strong> Coaches may enter the ring between rounds to tend to fighters</li>
+              <li><strong>Corner Time:</strong> Coaches can talk to their fighter between rounds, but must remain on the edge/outside of the ring</li>
             </ul>
           </div>
         </div>
@@ -40,7 +39,8 @@ const settings = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/setti
               <ul class="space-y-2 text-sm text-gray-700">
                 <li><span class="font-semibold text-green-600">+3 points</span> for winning 2-0 (dominant victory)</li>
                 <li><span class="font-semibold text-green-600">+2 points</span> for winning 2-1 (hard-fought victory)</li>
-                <li><span class="font-semibold text-red-600">+0 points</span> for a loss (0-2 or 1-2)</li>
+                <li><span class="font-semibold text-yellow-600">+1 point</span> for a 2-1 loss (valiant effort)</li>
+                <li><span class="font-semibold text-red-600">+0 points</span> for a 2-0 loss</li>
               </ul>
               <p class="text-xs text-gray-500 mt-3">All fights end in knockout - no draws possible</p>
             </div>
@@ -62,15 +62,15 @@ const settings = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/setti
             <div>
               <h3 class="font-bold text-lg mb-3">Base Pay</h3>
               <ul class="space-y-2 text-sm text-gray-700">
-                <li><strong>Preliminary Bout:</strong> ${settings.purses.prelim}</li>
-                <li><strong>Main Card:</strong> ${settings.purses.mainCard}</li>
+                <li><strong>Preliminary Bout:</strong> $25</li>
+                <li><strong>Main Card:</strong> $50</li>
                 <li><strong>Title Fight:</strong> ${settings.purses.title}</li>
               </ul>
             </div>
             <div>
               <h3 class="font-bold text-lg mb-3">Bonuses</h3>
               <ul class="space-y-2 text-sm text-gray-700">
-                <li><strong>Fight of the Night:</strong> Awarded at discretion</li>
+                <li><strong>Fight of the Night:</strong> Additional $50 per fighter</li>
               </ul>
             </div>
           </div>
@@ -83,7 +83,7 @@ const settings = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/setti
             <ul class="space-y-2 text-gray-700">
               <li>All fighters must pass medical examination before competing</li>
               <li>Referee has authority to stop fight at any time for fighter safety</li>
-              <li><strong>Illegal strikes:</strong> groin strikes, eye pokes, back of head, spine attacks, striking a grounded opponent</li>
+              <li><strong>Illegal strikes:</strong> striking a grounded opponent, kicking opponents (pushing them back with your leg is considered okay)</li>
               <li>Unsportsmanlike conduct will result in disqualification</li>
               <li>Weight cuts must be done safely under medical supervision</li>
             </ul>

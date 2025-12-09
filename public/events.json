@@ -76,22 +76,24 @@
     "bouts": [
       "bbfl-004-bout-1",
       "bbfl-004-bout-2",
-      "bbfl-004-bout-3"
+      "bbfl-004-bout-3",
+      "bbfl-004-bout-4",
+      "bbfl-004-bout-5"
     ]
   },
   {
     "id": "bbfl-005",
     "slug": "bbfl-005-seasons-beatings",
     "title": "BBFL 005: Seasons Beatings",
-    "subtitle": "A Holiday Brawl",
+    "subtitle": "Seasons Beatings",
     "date": "1912-12-21",
     "actualDate": "2025-12-21",
     "time": "16:00",
     "timezone": "America/New_York",
     "venueId": "rhodes-arena",
     "status": "upcoming",
-    "description": "The holidays come early to Rhodes as BBFL returns with a festive night of fierce competition. Champions defend their titles and contenders battle for glory in a special holiday edition of Blood & Bourbon's finest fighting.",
-    "posterImage": "/images/media/bbfl-002/sven1.png",
+    "description": "The holidays come early to Rhodes as BBFL returns with a festive night of fierce competition. Champions defend their titles and contenders battle for glory. The ring is set up behind the Mayor's house on the very east side of Rhodes, where the town's finest warriors clash in brutal combat.",
+    "posterImage": "/images/media/bbfl-005/8.png",
     "bouts": []
   }
 ]
