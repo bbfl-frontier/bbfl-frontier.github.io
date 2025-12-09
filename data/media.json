@@ -28,5 +28,35 @@
     "caption": "Sven and Veronica at BBFL 002: Rising Stars",
     "eventId": "bbfl-002",
     "date": "1912-11-08"
+  },
+  {
+    "image": "/images/media/bbfl-005/1.png",
+    "caption": "Grandpa Norton vs Octavia Nichols - Granddaughter annoyed at Grandpa for not giving her Christmas gifts",
+    "eventId": "bbfl-005",
+    "date": "1912-12-21"
+  },
+  {
+    "image": "/images/media/bbfl-005/2.png",
+    "caption": "Grandpa Norton vs Octavia Nichols - The family feud continues",
+    "eventId": "bbfl-005",
+    "date": "1912-12-21"
+  },
+  {
+    "image": "/images/media/bbfl-005/3.png",
+    "caption": "Kyle Caper vs Buffalo Man - Champion Kyle wins by the skin of his teeth in this close battle",
+    "eventId": "bbfl-005",
+    "date": "1912-12-21"
+  },
+  {
+    "image": "/images/media/bbfl-005/4.png",
+    "caption": "Kyle Caper vs Buffalo Man - The intensity continues in the championship rematch",
+    "eventId": "bbfl-005",
+    "date": "1912-12-21"
+  },
+  {
+    "image": "/images/media/bbfl-005/5.png",
+    "caption": "Buffalo Man bravely accepts challenge from debut fighter Gustave Felibre",
+    "eventId": "bbfl-005",
+    "date": "1912-12-21"
   }
 ]
