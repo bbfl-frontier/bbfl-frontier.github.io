@@ -2,7 +2,7 @@
   {
     "id": "feather-champion",
     "divisionId": "feather",
-    "name": "Featherweight Championship",
+    "name": "Light Hands Championship",
     "currentChampion": null,
     "wonAt": null,
     "defenses": 0
@@ -10,7 +10,7 @@
   {
     "id": "middle-champion",
     "divisionId": "middle",
-    "name": "Middleweight Championship",
+    "name": "Roughnecks Championship",
     "currentChampion": null,
     "wonAt": null,
     "defenses": 0
@@ -18,7 +18,7 @@
   {
     "id": "heavy-champion",
     "divisionId": "heavy",
-    "name": "Heavyweight Championship",
+    "name": "Bone Crushers Championship",
     "currentChampion": null,
     "wonAt": null,
     "defenses": 0

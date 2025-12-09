@@ -24,6 +24,41 @@ const records = fs.existsSync(recordsPath)
 
 const recordsMap = new Map(records.map((r: any) => [r.fighterId, r]));
 
+// Load belts to identify champions
+const beltsPath = path.join(process.cwd(), 'data/belts.json');
+const belts = fs.existsSync(beltsPath)
+  ? JSON.parse(fs.readFileSync(beltsPath, 'utf-8'))
+  : [];
+
+// Create a map of fighter IDs to their championship status
+const championMap = new Map<string, any>();
+belts.forEach((belt: any) => {
+  if (belt.currentChampion) {
+    championMap.set(belt.currentChampion, belt);
+  }
+});
+
+// Separate champions from regular fighters
+const champions: any[] = [];
+const regularFighters: any[] = [];
+
+fighters.forEach((fighter: any) => {
+  if (championMap.has(fighter.id)) {
+    champions.push({
+      ...fighter,
+      belt: championMap.get(fighter.id)
+    });
+  } else {
+    regularFighters.push(fighter);
+  }
+});
+
+// Sort champions by division order: feather, middle, heavy
+const divisionOrder = ['feather', 'middle', 'heavy'];
+champions.sort((a, b) => {
+  return divisionOrder.indexOf(a.divisionId) - divisionOrder.indexOf(b.divisionId);
+});
+
 const baseUrl = import.meta.env.BASE_URL;
 ---
 
@@ -33,10 +68,80 @@ const baseUrl = import.meta.env.BASE_URL;
 >
   <PageHeader title="Fighters" subtitle="Meet the warriors of BBFL" />
 
+  <!-- Champions Section -->
+  {champions.length > 0 && (
+    <section class="py-8 bg-gradient-to-b from-yellow-50 to-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-8">
+          <h2 class="text-4xl font-black text-yellow-600 mb-2">Champions</h2>
+          <p class="text-gray-600">The current title holders of BBFL</p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {champions.map((fighter: any) => {
+            const record = recordsMap.get(fighter.id) || { wins: 0, losses: 0, draws: 0 };
+            const division = divisions.find((d: any) => d.id === fighter.divisionId);
+            const hasImage = fighter.image && fighter.image !== '/images/fighters/placeholder.jpg';
+            const initials = `${fighter.firstName[0]}${fighter.lastName[0]}`.toUpperCase();
+
+            return (
+              <a
+                href={`/fighters/${fighter.id}/`}
+                class="group bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition transform hover:scale-105 border-4 border-yellow-400"
+              >
+                <div class="aspect-[3/2] overflow-hidden relative bg-gray-100">
+                  {hasImage ? (
+                    <img
+                      src={fighter.image}
+                      alt={`${fighter.firstName} ${fighter.lastName}`}
+                      class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-yellow-400 to-yellow-600">
+                      <span class="text-6xl md:text-7xl font-black text-white opacity-90">{initials}</span>
+                    </div>
+                  )}
+                  <div class="absolute top-2 right-2 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-black border-2 border-yellow-600">
+                    CHAMPION
+                  </div>
+                </div>
+                <div class="p-6 bg-gradient-to-b from-yellow-50 to-white">
+                  <div class="flex items-start justify-between mb-2">
+                    <div>
+                      <h3 class="text-2xl font-black text-yellow-700 group-hover:text-yellow-800 transition">
+                        {fighter.firstName} {fighter.lastName}
+                      </h3>
+                      {fighter.nickname && (
+                        <p class="text-sm text-gray-600 italic">"{fighter.nickname}"</p>
+                      )}
+                    </div>
+                    <RecordBadge wins={record.wins} losses={record.losses} draws={record.draws} />
+                  </div>
+
+                  <div class="mt-4 flex items-center justify-between">
+                    <DivisionChip division={division?.nickname || fighter.divisionId} />
+                    <span class="text-sm text-gray-500">{fighter.weight} lbs</span>
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Regular Fighters Section -->
   <section class="py-16">
     <div class="container mx-auto px-4">
+      {champions.length > 0 && (
+        <div class="text-center mb-8">
+          <h2 class="text-3xl font-black text-bourbon mb-2">Roster</h2>
+          <p class="text-gray-600">All BBFL fighters</p>
+        </div>
+      )}
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {fighters.map((fighter: any) => {
+        {regularFighters.map((fighter: any) => {
           const record = recordsMap.get(fighter.id) || { wins: 0, losses: 0, draws: 0 };
           const division = divisions.find((d: any) => d.id === fighter.divisionId);
           const hasImage = fighter.image && fighter.image !== '/images/fighters/placeholder.jpg';

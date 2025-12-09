@@ -44,6 +44,70 @@ const bioPath = path.join(process.cwd(), 'data/fighters/bios', bioFileName);
 if (fs.existsSync(bioPath)) {
   bio = fs.readFileSync(bioPath, 'utf-8');
 }
+
+// Load fight history
+const boutsPath = path.join(process.cwd(), 'public/bouts.json');
+const bouts = fs.existsSync(boutsPath)
+  ? JSON.parse(fs.readFileSync(boutsPath, 'utf-8'))
+  : [];
+
+const resultsPath = path.join(process.cwd(), 'public/results.json');
+const results = fs.existsSync(resultsPath)
+  ? JSON.parse(fs.readFileSync(resultsPath, 'utf-8'))
+  : [];
+
+const eventsPath = path.join(process.cwd(), 'public/events.json');
+const events = fs.existsSync(eventsPath)
+  ? JSON.parse(fs.readFileSync(eventsPath, 'utf-8'))
+  : [];
+
+const fightersPath = path.join(process.cwd(), 'public/fighters.json');
+const allFighters = fs.existsSync(fightersPath)
+  ? JSON.parse(fs.readFileSync(fightersPath, 'utf-8'))
+  : [];
+
+// Get all bouts involving this fighter
+const fighterBouts = bouts.filter((bout: any) =>
+  bout.fighter1Id === fighter.id || bout.fighter2Id === fighter.id
+);
+
+// Build fight history with full details
+const fightHistory = fighterBouts.map((bout: any) => {
+  const result = results.find((r: any) => r.boutId === bout.id);
+  const event = events.find((e: any) => e.id === bout.eventId);
+  const opponentId = bout.fighter1Id === fighter.id ? bout.fighter2Id : bout.fighter1Id;
+  const opponent = allFighters.find((f: any) => f.id === opponentId);
+
+  const isWinner = result?.winnerId === fighter.id;
+  const score = result?.score || 'N/A';
+
+  // Calculate points earned based on scoring system
+  let pointsEarned = 0;
+  if (isWinner) {
+    if (score === '2-0') {
+      pointsEarned = 3; // Dominant victory
+    } else if (score === '2-1') {
+      pointsEarned = 2; // Hard-fought victory
+    }
+  }
+
+  return {
+    boutId: bout.id,
+    eventId: bout.eventId,
+    eventTitle: event?.title || 'Unknown Event',
+    eventDate: event?.date || '',
+    opponentName: opponent ? `${opponent.firstName} ${opponent.lastName}` : 'Unknown',
+    opponentNickname: opponent?.nickname,
+    isWinner,
+    score,
+    method: result?.method || 'N/A',
+    pointsEarned,
+    forChampionship: bout.forChampionship || false,
+  };
+}).sort((a: any, b: any) => {
+  // Sort by event date, most recent first
+  return new Date(b.eventDate).getTime() - new Date(a.eventDate).getTime();
+});
 ---
 
 <BaseLayout title={`${fighter.firstName} ${fighter.lastName}`} description={`Fighter profile for ${fighter.firstName} ${fighter.lastName}`}>
@@ -160,6 +224,71 @@ if (fs.existsSync(bioPath)) {
           )}
         </div>
       </div>
+
+      <!-- Fight History -->
+      {fightHistory.length > 0 && (
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden border-2 border-bourbon mt-8">
+          <div class="bg-gradient-to-r from-bourbon to-bourbon-dark text-white p-6">
+            <h2 class="text-2xl font-black">Fight History</h2>
+          </div>
+          <div class="p-6">
+            <div class="space-y-4">
+              {fightHistory.map((fight: any) => (
+                <div class="border-2 border-gray-200 rounded-xl p-4 hover:border-bourbon transition">
+                  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <!-- Event & Opponent Info -->
+                    <div class="flex-1">
+                      <div class="flex items-center gap-2 mb-2">
+                        <span class="text-sm font-semibold text-gray-600">{fight.eventTitle}</span>
+                        {fight.forChampionship && (
+                          <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-bold bg-yellow-100 text-yellow-800 border border-yellow-300">
+                            TITLE FIGHT
+                          </span>
+                        )}
+                      </div>
+                      <div class="text-lg font-bold text-gray-900">
+                        vs {fight.opponentName}
+                        {fight.opponentNickname && (
+                          <span class="text-sm text-gray-500 font-normal ml-2">"{fight.opponentNickname}"</span>
+                        )}
+                      </div>
+                      <div class="text-xs text-gray-500 mt-1">
+                        {new Date(fight.eventDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                      </div>
+                    </div>
+
+                    <!-- Result Details -->
+                    <div class="flex items-center gap-4">
+                      <!-- Result Badge -->
+                      <div class={`px-4 py-2 rounded-lg font-bold text-center min-w-[80px] ${
+                        fight.isWinner
+                          ? 'bg-green-100 text-green-800 border-2 border-green-300'
+                          : 'bg-red-100 text-red-800 border-2 border-red-300'
+                      }`}>
+                        {fight.isWinner ? 'WIN' : 'LOSS'}
+                      </div>
+
+                      <!-- Score & Method -->
+                      <div class="text-center">
+                        <div class="text-2xl font-black text-bourbon">{fight.score}</div>
+                        <div class="text-xs text-gray-600 uppercase">{fight.method}</div>
+                      </div>
+
+                      <!-- Points Earned -->
+                      <div class="text-center bg-gray-50 rounded-lg px-4 py-2 border-2 border-gray-200 min-w-[80px]">
+                        <div class={`text-2xl font-black ${fight.pointsEarned > 0 ? 'text-green-600' : 'text-gray-400'}`}>
+                          {fight.pointsEarned > 0 ? '+' : ''}{fight.pointsEarned}
+                        </div>
+                        <div class="text-xs text-gray-600 uppercase">Points</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   </section>
 </BaseLayout>
