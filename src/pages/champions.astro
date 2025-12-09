@@ -1,0 +1,210 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import DivisionChip from '../components/DivisionChip.astro';
+import RecordBadge from '../components/RecordBadge.astro';
+import fs from 'fs';
+import path from 'path';
+
+// Load belts data
+const beltsPath = path.join(process.cwd(), 'data/belts.json');
+const belts = JSON.parse(fs.readFileSync(beltsPath, 'utf-8'));
+
+// Load all fighters
+const fightersDir = path.join(process.cwd(), 'data/fighters');
+const fighterFiles = fs.readdirSync(fightersDir).filter(f => f.endsWith('.json'));
+const allFighters = fighterFiles.map(f =>
+  JSON.parse(fs.readFileSync(path.join(fightersDir, f), 'utf-8'))
+);
+
+// Load divisions
+const divisions = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data/divisions.json'), 'utf-8'));
+
+// Load records
+const recordsPath = path.join(process.cwd(), 'generated/records.json');
+const records = fs.existsSync(recordsPath)
+  ? JSON.parse(fs.readFileSync(recordsPath, 'utf-8'))
+  : [];
+const recordsMap = new Map(records.map((r: any) => [r.fighterId, r]));
+
+// Load events for championship details
+const eventsPath = path.join(process.cwd(), 'public/events.json');
+const events = fs.existsSync(eventsPath)
+  ? JSON.parse(fs.readFileSync(eventsPath, 'utf-8'))
+  : [];
+
+// Build champions data
+const divisionOrder = ['feather', 'middle', 'heavy'];
+const champions = divisionOrder.map(divisionId => {
+  const belt = belts.find((b: any) => b.divisionId === divisionId);
+  const division = divisions.find((d: any) => d.id === divisionId);
+
+  if (!belt?.currentChampion) {
+    return {
+      division,
+      belt,
+      fighter: null,
+      record: null,
+      championshipEvent: null
+    };
+  }
+
+  const fighter = allFighters.find((f: any) => f.id === belt.currentChampion);
+  const record = recordsMap.get(belt.currentChampion) || { wins: 0, losses: 0, draws: 0, koWins: 0 };
+  const championshipEvent = belt.wonAt ? events.find((e: any) => e.id === belt.wonAt) : null;
+
+  return {
+    division,
+    belt,
+    fighter,
+    record,
+    championshipEvent
+  };
+});
+
+const hasChampions = champions.some(c => c.fighter !== null);
+const baseUrl = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="Champions"
+  description="Meet the current champions of the Blood & Bourbon Fight League. View title holders across all three divisions: Light Hands, Roughnecks, and Bone Crushers."
+>
+  <PageHeader title="Champions" subtitle="The title holders of BBFL" />
+
+  <section class="py-16 bg-gradient-to-b from-yellow-50 via-white to-yellow-50">
+    <div class="container mx-auto px-4">
+      {hasChampions ? (
+        <div class="max-w-6xl mx-auto">
+          <div class="grid md:grid-cols-3 gap-8">
+            {champions.map((champion) => {
+              const { division, belt, fighter, record, championshipEvent } = champion;
+
+              if (!fighter) {
+                // Vacant title card
+                return (
+                  <div class="bg-white rounded-2xl shadow-xl overflow-hidden border-4 border-gray-300">
+                    <div class="aspect-[3/2] bg-gradient-to-br from-gray-300 to-gray-400 flex items-center justify-center relative">
+                      <span class="text-6xl font-black text-white opacity-50">VACANT</span>
+                      <div class="absolute top-2 right-2 bg-gray-400 text-gray-700 px-3 py-1 rounded-full text-xs font-black border-2 border-gray-500">
+                        NO CHAMPION
+                      </div>
+                    </div>
+                    <div class="p-6 bg-gradient-to-b from-gray-50 to-white">
+                      <h3 class="text-2xl font-black text-gray-600 mb-2">{belt.name}</h3>
+                      <DivisionChip division={division?.nickname || division?.name} />
+                      <p class="text-sm text-gray-500 mt-4 italic">Title currently vacant</p>
+                    </div>
+                  </div>
+                );
+              }
+
+              const hasImage = fighter.image && fighter.image !== '/images/fighters/placeholder.jpg';
+              const initials = `${fighter.firstName[0]}${fighter.lastName[0]}`.toUpperCase();
+
+              return (
+                <a
+                  href={`/fighters/${fighter.id}/`}
+                  class="group bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition transform hover:scale-105 border-4 border-yellow-400"
+                >
+                  <div class="aspect-[3/2] overflow-hidden relative bg-gray-100">
+                    {hasImage ? (
+                      <img
+                        src={fighter.image}
+                        alt={`${fighter.firstName} ${fighter.lastName}`}
+                        class="w-full h-full object-cover object-top group-hover:scale-110 transition-transform duration-300"
+                        loading="lazy"
+                      />
+                    ) : (
+                      <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-yellow-400 to-yellow-600">
+                        <span class="text-6xl md:text-7xl font-black text-white opacity-90">{initials}</span>
+                      </div>
+                    )}
+                    <div class="absolute top-2 right-2 bg-yellow-400 text-yellow-900 px-3 py-1 rounded-full text-xs font-black border-2 border-yellow-600">
+                      CHAMPION
+                    </div>
+                  </div>
+                  <div class="p-6 bg-gradient-to-b from-yellow-50 to-white">
+                    <div class="mb-4">
+                      <h3 class="text-2xl font-black text-yellow-700 group-hover:text-yellow-800 transition">
+                        {fighter.firstName} {fighter.lastName}
+                      </h3>
+                      {fighter.nickname && (
+                        <p class="text-sm text-gray-600 italic">"{fighter.nickname}"</p>
+                      )}
+                    </div>
+
+                    <div class="flex items-center justify-between mb-3">
+                      <RecordBadge wins={record.wins} losses={record.losses} draws={record.draws} />
+                      <span class="text-sm text-gray-500">{fighter.weight} lbs</span>
+                    </div>
+
+                    <DivisionChip division={division?.nickname || division?.name} />
+
+                    <div class="mt-4 pt-4 border-t border-yellow-200">
+                      <div class="text-xs text-gray-600">
+                        <div class="flex justify-between mb-1">
+                          <span class="font-semibold">Title Defenses:</span>
+                          <span>{belt.defenses}</span>
+                        </div>
+                        {championshipEvent && (
+                          <div class="flex justify-between">
+                            <span class="font-semibold">Won At:</span>
+                            <span class="truncate ml-2">{championshipEvent.title?.replace('BBFL ', '') || championshipEvent.id}</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      ) : (
+        <div class="max-w-2xl mx-auto text-center">
+          <div class="bg-white rounded-2xl shadow-lg p-12 border-2 border-yellow-400">
+            <div class="text-6xl mb-4">🏆</div>
+            <h2 class="text-3xl font-black text-bourbon mb-4">Championships Coming Soon</h2>
+            <p class="text-gray-600 mb-6">
+              The inaugural championship bouts are on the horizon. Soon, three warriors will be crowned
+              as the first champions across our three divisions.
+            </p>
+            <p class="text-sm text-gray-500 italic">
+              Check the events page for upcoming title fights.
+            </p>
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Championship History Section -->
+  {hasChampions && (
+    <section class="py-16 bg-white">
+      <div class="container mx-auto px-4 max-w-4xl">
+        <h2 class="text-3xl font-black text-center mb-8 text-bourbon">Championship Lineage</h2>
+        <div class="bg-parchment rounded-2xl shadow-lg p-8 border-2 border-bourbon">
+          <p class="text-gray-700 text-center">
+            The history of BBFL championships is written in blood and bourbon. Each title represents
+            the pinnacle of achievement in their respective division.
+          </p>
+          <div class="mt-6 grid md:grid-cols-3 gap-6">
+            {champions.map((champion) => {
+              const { division, belt } = champion;
+              return (
+                <div class="text-center">
+                  <h3 class="font-bold text-bourbon mb-2">{belt.name}</h3>
+                  <div class="text-sm text-gray-600">
+                    <p>Division: {division?.nickname}</p>
+                    <p class="text-xs mt-1 text-gray-500">{division?.description}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  )}
+</BaseLayout>
