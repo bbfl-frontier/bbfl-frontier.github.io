@@ -5,7 +5,8 @@
     "name": "Light Hands Championship",
     "currentChampion": "sven-svensson",
     "wonAt": "bbfl-004",
-    "defenses": 0
+    "defenses": 0,
+    "history": []
   },
   {
     "id": "middle-champion",
@@ -13,7 +14,8 @@
     "name": "Roughnecks Championship",
     "currentChampion": "veronica-salgado",
     "wonAt": "bbfl-004",
-    "defenses": 0
+    "defenses": 0,
+    "history": []
   },
   {
     "id": "heavy-champion",
@@ -21,6 +23,7 @@
     "name": "Bone Crushers Championship",
     "currentChampion": "kyle-caper",
     "wonAt": "bbfl-004",
-    "defenses": 0
+    "defenses": 0,
+    "history": []
   }
 ]
