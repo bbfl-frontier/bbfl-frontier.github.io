@@ -82,6 +82,11 @@ const champions = divisionOrder.map(divisionId => {
     if (isWinner) {
       if (score === '2-0') pointsEarned = 3;
       else if (score === '2-1') pointsEarned = 2;
+    } else {
+      // Losers can earn points for valiant effort
+      if (score === '2-1') {
+        pointsEarned = 1; // Valiant effort (1-2 loss)
+      }
     }
 
     return {
