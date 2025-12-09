@@ -27,22 +27,13 @@
     "image": "/images/officials/william-todd.png"
   },
   {
-    "id": "dr-bradford-manser",
-    "firstName": "Dr. Bradford Manser",
-    "lastName": "",
-    "role": "Doctor",
+    "id": "daniel-denham",
+    "firstName": "Daniel",
+    "lastName": "Denham",
+    "role": "Commentator",
     "active": true,
-    "bio": "Medical professional ensuring fighter safety",
-    "image": "/images/officials/dr-bradford-manser.png"
-  },
-  {
-    "id": "dr-megan-martinez",
-    "firstName": "Dr. Megan Martinez",
-    "lastName": "",
-    "role": "Doctor",
-    "active": true,
-    "bio": "Medical professional ensuring fighter safety",
-    "image": "/images/officials/dr-megan-martinez.png"
+    "bio": "Official BBFL commentator providing expert fight analysis and commentary",
+    "image": "/images/officials/daniel-denham.png"
   },
   {
     "id": "judge-2",
