@@ -1,0 +1,43 @@
+<svg width="80" height="120" viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+  <!-- Bottom snowball -->
+  <circle cx="40" cy="95" r="25" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+
+  <!-- Middle snowball -->
+  <circle cx="40" cy="60" r="20" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+
+  <!-- Top snowball (head) -->
+  <circle cx="40" cy="30" r="15" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1"/>
+
+  <!-- Carrot nose -->
+  <path d="M 40,30 L 50,30 L 40,32 Z" fill="#FF8C00"/>
+
+  <!-- Coal eyes (beaded) -->
+  <circle cx="35" cy="27" r="2" fill="#2C2C2C"/>
+  <circle cx="45" cy="27" r="2" fill="#2C2C2C"/>
+
+  <!-- Smile (coal pieces) -->
+  <circle cx="35" cy="35" r="1.5" fill="#2C2C2C"/>
+  <circle cx="38" cy="36" r="1.5" fill="#2C2C2C"/>
+  <circle cx="42" cy="36" r="1.5" fill="#2C2C2C"/>
+  <circle cx="45" cy="35" r="1.5" fill="#2C2C2C"/>
+
+  <!-- Scarf (red with pattern) -->
+  <ellipse cx="40" cy="45" rx="18" ry="4" fill="#DC143C"/>
+  <rect x="42" y="45" width="8" height="25" fill="#DC143C" rx="2"/>
+  <line x1="44" y1="50" x2="48" y2="50" stroke="#FFFFFF" stroke-width="1"/>
+  <line x1="44" y1="55" x2="48" y2="55" stroke="#FFFFFF" stroke-width="1"/>
+  <line x1="44" y1="60" x2="48" y2="60" stroke="#FFFFFF" stroke-width="1"/>
+
+  <!-- Stick arms -->
+  <line x1="20" y1="60" x2="5" y2="55" stroke="#8B4513" stroke-width="2" stroke-linecap="round"/>
+  <line x1="5" y1="55" x2="2" y2="50" stroke="#8B4513" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="5" y1="55" x2="8" y2="50" stroke="#8B4513" stroke-width="1.5" stroke-linecap="round"/>
+
+  <line x1="60" y1="60" x2="75" y2="55" stroke="#8B4513" stroke-width="2" stroke-linecap="round"/>
+  <line x1="75" y1="55" x2="72" y2="50" stroke="#8B4513" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="75" y1="55" x2="78" y2="50" stroke="#8B4513" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- Buttons (coal) -->
+  <circle cx="40" cy="55" r="2" fill="#2C2C2C"/>
+  <circle cx="40" cy="65" r="2" fill="#2C2C2C"/>
+</svg>
