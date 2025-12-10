@@ -1,0 +1,129 @@
+/* Snow Buildup at Bottom */
+.snow-buildup {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to top,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.7) 20%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+  z-index: 98;
+  animation: snowBuildupGrow 30s ease-in forwards;
+}
+
+@keyframes snowBuildupGrow {
+  0% {
+    height: 0px;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    height: 80px;
+    opacity: 1;
+  }
+}
+
+/* Snow mounds on buildup for texture */
+.snow-buildup::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background:
+    radial-gradient(ellipse 100px 30px at 10% 100%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(ellipse 120px 25px at 30% 100%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(ellipse 80px 20px at 50% 100%, rgba(255, 255, 255, 0.75), transparent),
+    radial-gradient(ellipse 110px 28px at 70% 100%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(ellipse 90px 22px at 90% 100%, rgba(255, 255, 255, 0.8), transparent);
+}
+
+/* Mouse cursor trail sparkles */
+.cursor-sparkle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  animation: sparkleFloat 1.5s ease-out forwards;
+}
+
+.cursor-sparkle.star {
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  box-shadow: 0 0 10px #FFD700;
+}
+
+.cursor-sparkle.snow {
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}
+
+.cursor-sparkle.red {
+  width: 7px;
+  height: 7px;
+  background: #DC143C;
+  box-shadow: 0 0 8px #DC143C;
+}
+
+.cursor-sparkle.green {
+  width: 7px;
+  height: 7px;
+  background: #228B22;
+  box-shadow: 0 0 8px #228B22;
+}
+
+@keyframes sparkleFloat {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) scale(0);
+  }
+}
+
+/* Responsive: Reduce snow buildup on mobile */
+@media (max-width: 767px) {
+  .snow-buildup {
+    height: 50px;
+  }
+
+  @keyframes snowBuildupGrow {
+    0% {
+      height: 0px;
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      height: 50px;
+      opacity: 1;
+    }
+  }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .snow-buildup {
+    animation: none;
+    height: 80px;
+  }
+
+  .cursor-sparkle {
+    display: none;
+  }
+}

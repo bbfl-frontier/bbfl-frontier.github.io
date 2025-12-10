@@ -8,6 +8,7 @@ import HollySVG from '../assets/christmas/holly.svg?raw';
 import '../styles/christmas-snow.css';
 import '../styles/christmas-lights.css';
 import '../styles/christmas-elements.css';
+import '../styles/christmas-interactive.css';
 ---
 
 <!-- Snow Container with 20 animated snowflakes -->
@@ -30,6 +31,9 @@ import '../styles/christmas-elements.css';
 
 <!-- Wreath in Header -->
 <div class="christmas-wreath" aria-hidden="true" set:html={WreathSVG} />
+
+<!-- Snow Buildup at Bottom -->
+<div class="snow-buildup" aria-hidden="true"></div>
 
 <!-- Holly decorations (will be injected via JavaScript) -->
 <script define:vars={{ HollySVG }}>
@@ -59,5 +63,44 @@ import '../styles/christmas-elements.css';
       footerText.insertBefore(hollyLeft, footerText.firstChild);
       footerText.appendChild(hollyRight);
     }
+  }
+
+  // Christmas cursor trail effect
+  let lastSparkleTime = 0;
+  const sparkleInterval = 50; // milliseconds between sparkles
+  const sparkleTypes = ['star', 'snow', 'red', 'green'];
+
+  // Check if user prefers reduced motion
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (!prefersReducedMotion) {
+    document.addEventListener('mousemove', (e) => {
+      const now = Date.now();
+
+      // Throttle sparkle creation
+      if (now - lastSparkleTime < sparkleInterval) return;
+      lastSparkleTime = now;
+
+      // Create sparkle
+      const sparkle = document.createElement('div');
+      sparkle.className = `cursor-sparkle ${sparkleTypes[Math.floor(Math.random() * sparkleTypes.length)]}`;
+
+      // Position at cursor
+      sparkle.style.left = e.pageX + 'px';
+      sparkle.style.top = e.pageY + 'px';
+
+      // Random drift direction
+      const tx = (Math.random() - 0.5) * 30;
+      const ty = (Math.random() - 0.5) * 30 - 15; // Slight upward bias
+      sparkle.style.setProperty('--tx', `${tx}px`);
+      sparkle.style.setProperty('--ty', `${ty}px`);
+
+      document.body.appendChild(sparkle);
+
+      // Remove after animation completes
+      setTimeout(() => {
+        sparkle.remove();
+      }, 1500);
+    });
   }
 </script>
