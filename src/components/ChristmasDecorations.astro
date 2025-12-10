@@ -32,16 +32,18 @@ import '../styles/christmas-interactive.css';
 <!-- Wreath in Header -->
 <div class="christmas-wreath" aria-hidden="true" set:html={WreathSVG} />
 
-<!-- Snow Buildup at Bottom -->
-<div class="snow-buildup" aria-hidden="true"></div>
-
-<!-- Holly decorations (will be injected via JavaScript) -->
+<!-- Holly decorations and snow buildup (will be injected via JavaScript) -->
 <script define:vars={{ HollySVG }}>
   // Wait for DOM to be ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', addHolly);
+    document.addEventListener('DOMContentLoaded', initChristmasElements);
   } else {
+    initChristmasElements();
+  }
+
+  function initChristmasElements() {
     addHolly();
+    addSnowBuildup();
   }
 
   function addHolly() {
@@ -62,6 +64,24 @@ import '../styles/christmas-interactive.css';
       // Insert holly elements
       footerText.insertBefore(hollyLeft, footerText.firstChild);
       footerText.appendChild(hollyRight);
+    }
+  }
+
+  function addSnowBuildup() {
+    // Find the hero section (first section on homepage with gradient background)
+    const heroSection = document.querySelector('section.relative.bg-gradient-to-br');
+
+    if (heroSection) {
+      // Make sure hero section has position relative
+      heroSection.style.position = 'relative';
+
+      // Create snow buildup element
+      const snowBuildup = document.createElement('div');
+      snowBuildup.className = 'snow-buildup';
+      snowBuildup.setAttribute('aria-hidden', 'true');
+
+      // Append to hero section
+      heroSection.appendChild(snowBuildup);
     }
   }
 

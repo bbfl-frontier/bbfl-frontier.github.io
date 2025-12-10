@@ -1,6 +1,6 @@
-/* Snow Buildup at Bottom */
+/* Snow Buildup at Bottom of Hero Section */
 .snow-buildup {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
@@ -11,7 +11,7 @@
     rgba(255, 255, 255, 0.4) 50%,
     rgba(255, 255, 255, 0) 100%);
   pointer-events: none;
-  z-index: 98;
+  z-index: 10;
   animation: snowBuildupGrow 30s ease-in forwards;
 }
 
