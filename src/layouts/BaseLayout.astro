@@ -1,5 +1,12 @@
 ---
 import '../styles/global.css';
+import ChristmasDecorations from '../components/ChristmasDecorations.astro';
+import fs from 'fs';
+import path from 'path';
+
+// Load settings for Christmas mode toggle
+const settingsPath = path.join(process.cwd(), 'data/settings.json');
+const settings = JSON.parse(fs.readFileSync(settingsPath, 'utf-8'));
 
 interface Props {
   title: string;
@@ -57,6 +64,7 @@ const canonicalUrl = new URL(Astro.url.pathname, siteUrl).toString();
     <meta name="theme-color" content="#7B2E2E" />
   </head>
   <body class="min-h-screen flex flex-col">
+    {settings.christmasMode && <ChristmasDecorations />}
     <header class="bg-bourbon-dark text-white shadow-lg sticky top-0 z-50">
       <nav class="container mx-auto px-4 py-4">
         <div class="flex items-center justify-between">

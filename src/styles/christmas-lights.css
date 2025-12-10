@@ -1,0 +1,78 @@
+/* Christmas Lights Animation */
+.christmas-lights {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 15px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  pointer-events: none;
+  z-index: 60;
+  padding: 0 2rem;
+}
+
+.christmas-lights .light {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px currentColor;
+  will-change: opacity;
+  animation: twinkle 2.5s ease-in-out infinite;
+}
+
+/* Bourbon-themed colors: amber, gold, burnt orange, bourbon red */
+.christmas-lights .light:nth-child(4n+1) {
+  background: radial-gradient(circle, #FFA500, #CC8400);
+  color: #FFA500;
+}
+
+.christmas-lights .light:nth-child(4n+2) {
+  background: radial-gradient(circle, #FFD700, #CCAC00);
+  color: #FFD700;
+  animation-delay: 0.6s;
+}
+
+.christmas-lights .light:nth-child(4n+3) {
+  background: radial-gradient(circle, #D2691E, #AA5518);
+  color: #D2691E;
+  animation-delay: 1.2s;
+}
+
+.christmas-lights .light:nth-child(4n) {
+  background: radial-gradient(circle, #7B2E2E, #5A2222);
+  color: #7B2E2E;
+  animation-delay: 1.8s;
+}
+
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* Responsive: Reduce number of lights on smaller screens */
+@media (max-width: 767px) {
+  .christmas-lights .light:nth-child(n+13) {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .christmas-lights .light:nth-child(n+16) {
+    display: none;
+  }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .christmas-lights .light {
+    animation: none;
+  }
+}

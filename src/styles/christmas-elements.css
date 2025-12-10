@@ -1,0 +1,102 @@
+/* Christmas Decorative Elements */
+
+/* Corner Christmas Trees */
+.christmas-tree {
+  position: fixed;
+  bottom: 20px;
+  width: 70px;
+  height: 90px;
+  opacity: 0.85;
+  z-index: 100;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  pointer-events: auto;
+}
+
+.christmas-tree-left {
+  left: 20px;
+}
+
+.christmas-tree-right {
+  right: 20px;
+}
+
+.christmas-tree:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+/* Wreath in header */
+.christmas-wreath {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  opacity: 0.9;
+  z-index: 60;
+  pointer-events: none;
+}
+
+/* Holly decorations */
+.christmas-holly {
+  display: inline-block;
+  width: 25px;
+  height: 20px;
+  margin: 0 8px;
+  vertical-align: middle;
+  opacity: 0.85;
+}
+
+.christmas-holly-left {
+  margin-right: 10px;
+}
+
+.christmas-holly-right {
+  margin-left: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .christmas-tree {
+    width: 50px;
+    height: 65px;
+    bottom: 10px;
+  }
+
+  .christmas-tree-left {
+    left: 10px;
+  }
+
+  .christmas-tree-right {
+    right: 10px;
+  }
+
+  .christmas-wreath {
+    display: none;
+  }
+
+  .christmas-holly {
+    width: 20px;
+    height: 16px;
+    margin: 0 5px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .christmas-tree {
+    width: 60px;
+    height: 77px;
+  }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .christmas-tree {
+    transition: none;
+  }
+
+  .christmas-tree:hover {
+    transform: none;
+  }
+}

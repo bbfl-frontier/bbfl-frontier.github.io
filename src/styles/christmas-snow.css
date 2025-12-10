@@ -1,0 +1,92 @@
+/* Christmas Snow Animation */
+.christmas-snow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 999;
+  overflow: hidden;
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  background-color: rgba(245, 241, 232, 0.6);
+  border-radius: 50%;
+  will-change: transform, opacity;
+}
+
+.snowflake:nth-child(1) {
+  left: 10%;
+  width: 4px;
+  height: 4px;
+  animation: snowfall 20s linear infinite;
+  animation-delay: 0s;
+}
+
+.snowflake:nth-child(2) {
+  left: 30%;
+  width: 6px;
+  height: 6px;
+  animation: snowfall 25s linear infinite;
+  animation-delay: 5s;
+}
+
+.snowflake:nth-child(3) {
+  left: 50%;
+  width: 3px;
+  height: 3px;
+  animation: snowfall 18s linear infinite;
+  animation-delay: 2s;
+}
+
+.snowflake:nth-child(4) {
+  left: 70%;
+  width: 5px;
+  height: 5px;
+  animation: snowfall 22s linear infinite;
+  animation-delay: 8s;
+}
+
+.snowflake:nth-child(5) {
+  left: 85%;
+  width: 4px;
+  height: 4px;
+  animation: snowfall 19s linear infinite;
+  animation-delay: 4s;
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translateY(-10px) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.7;
+  }
+  90% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100vh) translateX(50px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Responsive: Reduce snow on mobile */
+@media (max-width: 767px) {
+  .snowflake:nth-child(4),
+  .snowflake:nth-child(5) {
+    display: none;
+  }
+}
+
+/* Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .snowflake {
+    animation: none;
+    display: none;
+  }
+}

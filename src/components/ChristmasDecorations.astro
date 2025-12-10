@@ -1,0 +1,65 @@
+---
+// Import SVG assets as raw strings
+import TreeSVG from '../assets/christmas/tree-corner.svg?raw';
+import WreathSVG from '../assets/christmas/wreath.svg?raw';
+import HollySVG from '../assets/christmas/holly.svg?raw';
+
+// Import Christmas CSS
+import '../styles/christmas-snow.css';
+import '../styles/christmas-lights.css';
+import '../styles/christmas-elements.css';
+---
+
+<!-- Snow Container with 5 animated snowflakes -->
+<div class="christmas-snow" aria-hidden="true">
+  <div class="snowflake"></div>
+  <div class="snowflake"></div>
+  <div class="snowflake"></div>
+  <div class="snowflake"></div>
+  <div class="snowflake"></div>
+</div>
+
+<!-- Christmas Lights String (positioned in header via CSS) -->
+<div class="christmas-lights" aria-hidden="true">
+  {Array.from({ length: 18 }).map((_, i) => (
+    <span class="light" style={`animation-delay: ${(i * 0.15).toFixed(2)}s`}></span>
+  ))}
+</div>
+
+<!-- Corner Christmas Trees -->
+<div class="christmas-tree christmas-tree-left" aria-hidden="true" set:html={TreeSVG} />
+<div class="christmas-tree christmas-tree-right" aria-hidden="true" set:html={TreeSVG} />
+
+<!-- Wreath in Header -->
+<div class="christmas-wreath" aria-hidden="true" set:html={WreathSVG} />
+
+<!-- Holly decorations (will be injected via JavaScript) -->
+<script define:vars={{ HollySVG }}>
+  // Wait for DOM to be ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', addHolly);
+  } else {
+    addHolly();
+  }
+
+  function addHolly() {
+    const footerText = document.querySelector('footer p:first-child');
+    if (footerText && HollySVG) {
+      // Create left holly
+      const hollyLeft = document.createElement('span');
+      hollyLeft.className = 'christmas-holly christmas-holly-left';
+      hollyLeft.innerHTML = HollySVG;
+      hollyLeft.setAttribute('aria-hidden', 'true');
+
+      // Create right holly
+      const hollyRight = document.createElement('span');
+      hollyRight.className = 'christmas-holly christmas-holly-right';
+      hollyRight.innerHTML = HollySVG;
+      hollyRight.setAttribute('aria-hidden', 'true');
+
+      // Insert holly elements
+      footerText.insertBefore(hollyLeft, footerText.firstChild);
+      footerText.appendChild(hollyRight);
+    }
+  }
+</script>

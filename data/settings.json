@@ -2,6 +2,7 @@
   "leagueName": "Blood & Bourbon Fight League",
   "abbreviation": "BBFL",
   "tagline": "Where honor meets the dirt.",
+  "christmasMode": true,
   "schedule": {
     "frequency": "biweekly",
     "description": "Every 2 weeks on Friday, Saturday, or Sunday depending on fighter and organizer availability",
