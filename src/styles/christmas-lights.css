@@ -22,28 +22,25 @@
   animation: twinkle 2.5s ease-in-out infinite;
 }
 
-/* Bourbon-themed colors: amber, gold, burnt orange, bourbon red */
-.christmas-lights .light:nth-child(4n+1) {
-  background: radial-gradient(circle, #FFA500, #CC8400);
-  color: #FFA500;
+/* Traditional Christmas colors: red, green, white */
+.christmas-lights .light:nth-child(3n+1) {
+  background: radial-gradient(circle, #DC143C, #A0111F);
+  color: #DC143C;
+  box-shadow: 0 0 8px #DC143C;
 }
 
-.christmas-lights .light:nth-child(4n+2) {
-  background: radial-gradient(circle, #FFD700, #CCAC00);
-  color: #FFD700;
-  animation-delay: 0.6s;
+.christmas-lights .light:nth-child(3n+2) {
+  background: radial-gradient(circle, #228B22, #1A6B1A);
+  color: #228B22;
+  animation-delay: 0.8s;
+  box-shadow: 0 0 8px #228B22;
 }
 
-.christmas-lights .light:nth-child(4n+3) {
-  background: radial-gradient(circle, #D2691E, #AA5518);
-  color: #D2691E;
-  animation-delay: 1.2s;
-}
-
-.christmas-lights .light:nth-child(4n) {
-  background: radial-gradient(circle, #7B2E2E, #5A2222);
-  color: #7B2E2E;
-  animation-delay: 1.8s;
+.christmas-lights .light:nth-child(3n) {
+  background: radial-gradient(circle, #FFFFFF, #E0E0E0);
+  color: #FFFFFF;
+  animation-delay: 1.6s;
+  box-shadow: 0 0 8px #FFFFFF;
 }
 
 @keyframes twinkle {

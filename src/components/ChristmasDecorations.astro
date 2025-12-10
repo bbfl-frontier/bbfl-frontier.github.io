@@ -10,13 +10,11 @@ import '../styles/christmas-lights.css';
 import '../styles/christmas-elements.css';
 ---
 
-<!-- Snow Container with 5 animated snowflakes -->
+<!-- Snow Container with 20 animated snowflakes -->
 <div class="christmas-snow" aria-hidden="true">
-  <div class="snowflake"></div>
-  <div class="snowflake"></div>
-  <div class="snowflake"></div>
-  <div class="snowflake"></div>
-  <div class="snowflake"></div>
+  {Array.from({ length: 20 }).map(() => (
+    <div class="snowflake"></div>
+  ))}
 </div>
 
 <!-- Christmas Lights String (positioned in header via CSS) -->
