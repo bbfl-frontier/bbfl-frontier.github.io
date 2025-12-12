@@ -1,0 +1,25 @@
+{
+  "id": "pearl-hayes",
+  "firstName": "Pearl",
+  "lastName": "Hayes",
+  "nickname": "The Miscreant",
+  "weight": 132,
+  "height": "5\"4'",
+  "reach": "68",
+  "stance": "Orthodox",
+  "divisionId": "feather",
+  "fightingStyle": "Strong Feminine",
+  "age": 35,
+  "nationality": "American",
+  "country": "USA",
+  "debut": "1887-08-25",
+  "coach": "",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
