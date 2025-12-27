@@ -1,0 +1,25 @@
+{
+  "id": "chenoa-vega",
+  "firstName": "Chenoa",
+  "lastName": "Vega",
+  "nickname": "",
+  "weight": 120,
+  "height": "5'5\"",
+  "reach": "66",
+  "stance": "Orthodox",
+  "divisionId": "feather",
+  "fightingStyle": "Cowboy",
+  "age": 25,
+  "nationality": "Navajo American",
+  "country": "USA",
+  "debut": "1887-01-01",
+  "coach": "",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
