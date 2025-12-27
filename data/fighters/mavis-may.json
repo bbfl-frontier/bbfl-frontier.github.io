@@ -1,0 +1,25 @@
+{
+  "id": "mavis-may",
+  "firstName": "Mavis",
+  "lastName": "May",
+  "nickname": "Mayhem",
+  "weight": 122,
+  "height": "5'8\"",
+  "reach": "67",
+  "stance": "Orthodox",
+  "divisionId": "feather",
+  "fightingStyle": "Cowboy",
+  "age": 28,
+  "nationality": "American",
+  "country": "USA",
+  "debut": "1885-12-12",
+  "coach": "",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
