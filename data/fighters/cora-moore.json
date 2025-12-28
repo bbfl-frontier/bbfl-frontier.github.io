@@ -1,0 +1,25 @@
+{
+  "id": "cora-moore",
+  "firstName": "Cora",
+  "lastName": "Moore",
+  "nickname": "#1",
+  "weight": 0,
+  "height": "0",
+  "reach": "0",
+  "stance": "",
+  "divisionId": "feather",
+  "fightingStyle": "Bruiser",
+  "age": 99,
+  "nationality": "American",
+  "country": "USA",
+  "debut": "9999-09-09",
+  "coach": "",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
