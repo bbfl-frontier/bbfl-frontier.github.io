@@ -1,0 +1,25 @@
+{
+  "id": "primrose-vernon",
+  "firstName": "Primrose",
+  "lastName": "Vernon",
+  "nickname": "The Last Bell",
+  "weight": 165,
+  "height": "4'9\"",
+  "reach": "65",
+  "stance": "Orthodox",
+  "divisionId": "middle",
+  "fightingStyle": "Bruiser",
+  "age": 26,
+  "nationality": "American",
+  "country": "USA",
+  "debut": "1887-06-15",
+  "coach": "",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
