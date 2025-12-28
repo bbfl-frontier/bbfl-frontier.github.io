@@ -1,0 +1,25 @@
+{
+  "id": "natasha-pearson-gray",
+  "firstName": "Natasha",
+  "lastName": "Pearson-Gray",
+  "nickname": "",
+  "weight": 159,
+  "height": "6'0\"",
+  "reach": "69",
+  "stance": "Orthodox",
+  "divisionId": "middle",
+  "fightingStyle": "Strong Feminine",
+  "age": 27,
+  "nationality": "American",
+  "country": "USA",
+  "debut": "1886-07-03",
+  "coach": "",
+  "active": true,
+  "image": "/images/fighters/placeholder.jpg",
+  "record": {
+    "wins": 0,
+    "losses": 0,
+    "draws": 0
+  },
+  "rankingPoints": 0
+}
