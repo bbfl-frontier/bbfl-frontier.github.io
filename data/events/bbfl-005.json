@@ -11,5 +11,7 @@
   "status": "upcoming",
   "description": "The holidays come early to Rhodes as BBFL returns with a festive night of fierce competition. Champions defend their titles and contenders battle for glory. The ring is set up behind the Mayor's house on the very east side of Rhodes, where the town's finest warriors clash in brutal combat.",
   "posterImage": "/images/media/bbfl-005/8.png",
-  "bouts": []
+  "bouts": [
+    "bbfl-005-bout-1"
+  ]
 }
